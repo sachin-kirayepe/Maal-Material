@@ -1,0 +1,3 @@
+
+We've detected multiple projects inside your repository
+ ›   Error: Projects detected: @constructos/api, mobile, @constructos/web, @constructos/config, @constructos/types, @constructos/ui, @constructos/utils. Configure the project you want to work with and try again. Refer to https://ntl.fyi/configure-site for more information.
