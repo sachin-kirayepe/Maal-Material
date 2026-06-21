@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance | ConstructOS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    keyframes: {
+                        shimmer: {
+                            '100%': { transform: 'translateX(100%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0D0D12; color: white; }
+        .bg-grid {
+            background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .animate-shimmer {
+            animation: shimmer 2s infinite;
+        }
+        .lucide {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden m-0">
+    <!-- Background Industrial Grid -->
+    <div class="absolute inset-0 z-0 opacity-20 pointer-events-none bg-grid"></div>
+
+    <!-- Decorative Glows -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-orange-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="z-10 flex flex-col items-center text-center max-w-2xl">
+        <div class="relative mb-8">
+            <div class="absolute inset-0 animate-ping opacity-20 bg-orange-500 rounded-full"></div>
+            <div class="w-24 h-24 bg-[#1A1D24] border border-white/10 rounded-2xl flex items-center justify-center relative z-10 shadow-2xl">
+                <svg class="lucide w-12 h-12 text-orange-500" viewBox="0 0 24 24"><path d="M2 18.254V22h20v-3.746"/><path d="M10 14v4"/><path d="M14 14v4"/><path d="M12 14v4"/><path d="M4 14v4"/><path d="M20 14v4"/><path d="M12 2a6.002 6.002 0 0 0-5.908 5.056C4.301 7.42 3 8.922 3 10.596 3 12.476 4.524 14 6.404 14h11.192C19.476 14 21 12.476 21 10.596c0-1.674-1.301-3.176-3.092-3.54A6.002 6.002 0 0 0 12 2Z"/></svg>
+            </div>
+            
+            <!-- Floating Tools -->
+            <svg class="lucide absolute -left-8 top-0 w-8 h-8 text-slate-500 animate-bounce" style="animation-delay: 0.2s" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            <svg class="lucide absolute -right-8 top-4 w-8 h-8 text-blue-500 animate-spin" style="animation-duration: 4s" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="lucide absolute -left-4 bottom-0 w-8 h-8 text-slate-400 animate-pulse" viewBox="0 0 24 24"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H11.2l-2.06 2.06"/><path d="m5 15 2-2"/></svg>
+        </div>
+
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+            System <span class="text-orange-500">Upgrades</span> in Progress
+        </h1>
+        
+        <p class="text-lg md:text-xl text-slate-400 mb-10 leading-relaxed max-w-xl">
+            ConstructOS is currently undergoing scheduled industrial-grade maintenance. 
+            We are deploying powerful new enterprise features to improve your supply chain experience.
+        </p>
+
+        <div class="bg-[#1A1D24] border border-white/10 rounded-xl p-6 mb-10 w-full max-w-md backdrop-blur-sm">
+            <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Maintenance Status</h3>
+            
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-400 text-sm flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-green-500"></div> Core Systems
+                    </span>
+                    <span class="text-slate-200 text-sm font-medium">Secured</span>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <span class="text-slate-400 text-sm flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></div> Network Upgrade
+                    </span>
+                    <span class="text-orange-500 text-sm font-medium">Deploying...</span>
+                </div>
+            </div>
+
+            <div class="w-full bg-slate-800 h-1.5 rounded-full mt-6 overflow-hidden">
+                <div class="bg-orange-500 h-full w-2/3 rounded-full relative">
+                    <div class="absolute inset-0 bg-white/20 w-full animate-shimmer"></div>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-sm text-slate-500">
+            Expected completion shortly. Please check back later.
+        </p>
+    </div>
+</body>
+</html>

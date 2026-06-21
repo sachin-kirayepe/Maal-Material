@@ -12,11 +12,11 @@ package = "@netlify/plugin-nextjs"
 [plugins.inputs]
 
 [build]
-publish = "C:\\Users\\asus\\OneDrive\\Desktop\\ConstructOs\\apps\\web\\apps\\web\\.next"
+publish = "C:\\Users\\asus\\OneDrive\\Desktop\\ConstructOs\\apps\\web\\.next"
 publishOrigin = "config"
 commandOrigin = "config"
 base = "C:\\Users\\asus\\OneDrive\\Desktop\\ConstructOs\\apps\\web"
-command = "pnpm --filter @constructos/web build"
+command = "cd ../.. && pnpm --filter @constructos/web build"
 
 [build.environment]
 

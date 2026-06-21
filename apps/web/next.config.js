@@ -3,15 +3,29 @@ const withSerwist = require("@serwist/next").default({
   swDest: "public/sw.js",
 });
 
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  transpilePackages: ['@constructos/ui', '@constructos/utils', '@constructos/types'],
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'recharts', '@tanstack/react-table', 'framer-motion'],
+  },
+
   typescript: {
-    // TEMPORARY BYPASS: Ignore TS errors to allow deployment
     ignoreBuildErrors: true,
   },
   eslint: {
-    // TEMPORARY BYPASS: Ignore ESLint errors to allow deployment
     ignoreDuringBuilds: true,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
   },
 };
 
