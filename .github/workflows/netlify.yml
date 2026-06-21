@@ -13,9 +13,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: '20'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -26,16 +29,7 @@ jobs:
         run: pnpm install
 
       - name: Deploy to Netlify
-        run: npx netlify-cli deploy --build --prod > deploy.log 2>&1 || true
+        run: npx netlify-cli deploy --build --prod
         env:
           NETLIFY_AUTH_TOKEN: nfp_enAsiKHVkTbbFM5A2tkDdBBittEZsuyyb406
           NETLIFY_SITE_ID: ee106fb7-9d07-4a7b-a122-431727ba7713
-
-      - name: Commit logs
-        run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
-          git checkout -b debug-logs
-          git add deploy.log
-          git commit -m "Add logs"
-          git push origin debug-logs --force

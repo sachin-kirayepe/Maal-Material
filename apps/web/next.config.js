@@ -9,9 +9,7 @@ const path = require('path');
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@constructos/ui', '@constructos/utils', '@constructos/types'],
-  experimental: {
-    optimizePackageImports: ['lucide-react', 'recharts', '@tanstack/react-table', 'framer-motion'],
-  },
+
 
   typescript: {
     ignoreBuildErrors: true,

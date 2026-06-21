@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect } from "react";
 import { Canvas as R3FCanvas } from "@react-three/fiber";
 import {
