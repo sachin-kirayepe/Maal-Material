@@ -8,7 +8,7 @@
 [36m[1m​[22m[39m
 [36m[1m❯ Flags[22m[39m
   accountId: 69e79ae93fe86937ea872935
-  deployId: 6a379f7deeb403fd761ccb2c
+  deployId: 6a37a0b26a5a1fca7db3452f
   packagePath: apps/web
 [36m[1m​[22m[39m
 [36m[1m❯ Current directory[22m[39m
@@ -35,38 +35,286 @@
 
    Creating an optimized production build ...
  [32m[1m✓[22m[39m (serwist) Bundling the service worker script with the URL '/sw.js' and the scope '/'...
-Failed to compile.
+ ⚠ Compiled with warnings
 
-./src/components/ui/LanguageToggle.tsx
-Module not found: Can't resolve '@constructos/ui'
-
-https://nextjs.org/docs/messages/module-not-found
+./src/store/live-commerce-state.ts
+Attempted import error: 'apiClient' is not exported from '@/lib/api-client' (imported as 'apiClient').
 
 Import trace for requested module:
-./src/pages/smb-dashboard.tsx
+./src/store/live-commerce-state.ts
+./src/hooks/useInventoryStream.ts
+./src/app/(dashboard)/marketplace/page.tsx
 
-./src/pages/smb-dashboard.tsx
-Module not found: Can't resolve '@constructos/ui'
+./src/store/live-commerce-state.ts
+Attempted import error: 'apiClient' is not exported from '@/lib/api-client' (imported as 'apiClient').
 
-https://nextjs.org/docs/messages/module-not-found
+Import trace for requested module:
+./src/store/live-commerce-state.ts
+./src/hooks/useInventoryStream.ts
+./src/app/(dashboard)/marketplace/page.tsx
 
-./src/pages/smb/sync-dashboard.tsx
-Module not found: Can't resolve '@constructos/ui'
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+Failed to fetch forecasts from API TypeError: fetch failed
+    at node:internal/deps/undici/undici:14976:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/ai-commerce.js:1:12560)
+    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/ai-commerce.js:1:10845) {
+  [cause]: AggregateError [ECONNREFUSED]: 
+      at internalConnectMultiple (node:net:1122:18)
+      at afterConnectMultiple (node:net:1689:7) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Failed to fetch forecasts from API TypeError: fetch failed
+    at node:internal/deps/undici/undici:14976:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/b2b-exchange.js:1:18617)
+    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/b2b-exchange.js:1:14882) {
+  [cause]: AggregateError [ECONNREFUSED]: 
+      at internalConnectMultiple (node:net:1122:18)
+      at afterConnectMultiple (node:net:1689:7) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+   Generating static pages (0/195) ...
+Failed to fetch forecasts from API TypeError: fetch failed
+    at node:internal/deps/undici/undici:14976:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/b2b-exchange.js:1:18617)
+    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/b2b-exchange.js:1:14882) {
+  [cause]: AggregateError [ECONNREFUSED]: 
+      at internalConnectMultiple (node:net:1122:18)
+      at afterConnectMultiple (node:net:1689:7) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Missing Supabase Environment Variables. Storage features will not work.
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/settings/page.js:5:7482)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 39620 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/compliance/page.js:1:3682)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875 {
+  digest: '1491187849'
+}
 
-https://nextjs.org/docs/messages/module-not-found
+Error occurred prerendering page "/compliance". Read more: https://nextjs.org/docs/messages/prerender-error
 
-./src/pages/smb/whatsapp-operations.tsx
-Module not found: Can't resolve '@constructos/ui'
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/settings/page.js:5:7482)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 39620 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/compliance/page.js:1:3682)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875
+Missing Supabase Environment Variables. Storage features will not work.
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/construction/boq/page.js:1:11686)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 65439 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/construction/boq/page.js:1:4584)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875 {
+  digest: '3990714021'
+}
 
-https://nextjs.org/docs/messages/module-not-found
+Error occurred prerendering page "/construction/boq". Read more: https://nextjs.org/docs/messages/prerender-error
 
-./src/app/(auth)/login/page.tsx
-Module not found: Can't resolve '@constructos/ui'
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/construction/boq/page.js:1:11686)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 65439 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/construction/boq/page.js:1:4584)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875
+   Generating static pages (48/195) 
+Missing Supabase Environment Variables. Storage features will not work.
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/construction/site-operations/page.js:1:12099)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 67253 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/construction/site-operations/page.js:1:4976)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875 {
+  digest: '1408833575'
+}
 
-https://nextjs.org/docs/messages/module-not-found
+Error occurred prerendering page "/construction/site-operations". Read more: https://nextjs.org/docs/messages/prerender-error
 
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/construction/site-operations/page.js:1:12099)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 67253 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/construction/site-operations/page.js:1:4976)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875
+   Generating static pages (97/195) 
+Missing Supabase Environment Variables. Storage features will not work.
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/finance/reconciliation/page.js:1:8176)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 70382 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/finance/reconciliation/page.js:1:3574)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875 {
+  digest: '925203838'
+}
 
-> Build failed because of webpack errors
+Error occurred prerendering page "/finance/reconciliation". Read more: https://nextjs.org/docs/messages/prerender-error
+
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/finance/reconciliation/page.js:1:8176)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 70382 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/finance/reconciliation/page.js:1:3574)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875
+Failed to fetch forecasts from API TypeError: fetch failed
+    at node:internal/deps/undici/undici:14976:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/2068.js:1:38164)
+    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/marketplace/page.js:1:13013) {
+  [cause]: AggregateError [ECONNREFUSED]: 
+      at internalConnectMultiple (node:net:1122:18)
+      at afterConnectMultiple (node:net:1689:7)
+      at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+Missing Supabase Environment Variables. Storage features will not work.
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/settings/page.js:5:7482)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 19245 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/platform/page.js:1:3671)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875 {
+  digest: '555758818'
+}
+
+Error occurred prerendering page "/platform". Read more: https://nextjs.org/docs/messages/prerender-error
+
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/settings/page.js:5:7482)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 19245 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/platform/page.js:1:3671)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875
+   Generating static pages (146/195) 
+Missing Supabase Environment Variables. Storage features will not work.
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/settings/page.js:5:7482)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 53768 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/settings/page.js:1:3513)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875 {
+  digest: '4005553595'
+}
+
+Error occurred prerendering page "/settings". Read more: https://nextjs.org/docs/messages/prerender-error
+
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/settings/page.js:5:7482)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 53768 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/settings/page.js:1:3513)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875
+Missing Supabase Environment Variables. Storage features will not work.
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/smb-onboarding/page.js:1:12480)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 81968 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/smb-onboarding/page.js:1:3746)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875 {
+  digest: '1473018858'
+}
+
+Error occurred prerendering page "/smb-onboarding". Read more: https://nextjs.org/docs/messages/prerender-error
+
+Error: supabaseUrl is required.
+    at /home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57135
+    at new rz (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:57386)
+    at rY (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/3906.js:37:61657)
+    at 62421 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/smb-onboarding/page.js:1:12480)
+    at t (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at 81968 (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/smb-onboarding/page.js:1:3746)
+    at Object.t [as require] (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/webpack-runtime.js:1:128)
+    at require (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:17:18811)
+    at s (/home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88330)
+    at /home/runner/work/Maal-Material/Maal-Material/node_modules/.pnpm/next@14.2.35_@opentelemetry+api@1.9.1_@playwright+test@1.61.0_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98875
+ ✓ Generating static pages (195/195)
+
+> Export encountered errors on following paths:
+	/(dashboard)/compliance/page: /compliance
+	/(dashboard)/construction/boq/page: /construction/boq
+	/(dashboard)/construction/site-operations/page: /construction/site-operations
+	/(dashboard)/finance/reconciliation/page: /finance/reconciliation
+	/(dashboard)/platform/page: /platform
+	/(dashboard)/settings/page: /settings
+	/(dashboard)/smb-onboarding/page: /smb-onboarding
  ELIFECYCLE  Command failed with exit code 1.
 [91m[1m​[22m[39m
 [91m[1m"build.command" failed                                        [22m[39m
