@@ -31,5 +31,11 @@ jobs:
           NETLIFY_AUTH_TOKEN: nfp_enAsiKHVkTbbFM5A2tkDdBBittEZsuyyb406
           NETLIFY_SITE_ID: ee106fb7-9d07-4a7b-a122-431727ba7713
 
-      - name: Upload logs
-        run: curl --upload-file deploy.log https://transfer.sh/deploy.log
+      - name: Commit logs
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git checkout -b debug-logs
+          git add deploy.log
+          git commit -m "Add logs"
+          git push origin debug-logs --force
