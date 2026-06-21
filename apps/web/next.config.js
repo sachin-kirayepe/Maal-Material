@@ -13,9 +13,6 @@ const nextConfig = {
     // TEMPORARY BYPASS: Ignore ESLint errors to allow deployment
     ignoreDuringBuilds: true,
   },
-  experimental: {
-    outputFileTracing: false,
-  },
 };
 
 module.exports = withSerwist(nextConfig);
