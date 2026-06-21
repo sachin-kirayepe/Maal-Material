@@ -19,6 +19,7 @@
     "test": "turbo run test"
   },
   "devDependencies": {
+    "netlify-cli": "^26.1.0",
     "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
     "turbo": "^1.13.0",
