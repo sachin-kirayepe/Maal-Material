@@ -27,7 +27,8 @@ export function middleware(request: NextRequest) {
   }
 
   // --- MAINTENANCE MODE LOGIC ---
-  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
+  // DISABLED: Set to false to allow public deployment
+  const isMaintenanceMode = false;
   const bypassSecret = process.env.MAINTENANCE_BYPASS_SECRET || 'construct2026';
   
   // 1. Check if user is trying to bypass
