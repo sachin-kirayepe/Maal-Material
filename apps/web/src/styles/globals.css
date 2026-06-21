@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 224 71.4% 4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4%;
+
+    --primary: 38 92% 50%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 220.9 39.3% 11%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom sidebar tokens */
+    --sidebar-background: 220 15% 10%;
+    --sidebar-foreground: 220 10% 90%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 15% 16%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 15% 14%;
+    --sidebar-ring: 38 92% 50%;
+  }
+
+  /* CIVILIZATION-GRADE ENTERPRISE DARK MODE */
+  .dark {
+    /* Abyssal Blacks & Deep Slates */
+    --background: 225 30% 3%;
+    --foreground: 210 20% 98%;
+
+    /* Glassmorphic Panel Core */
+    --card: 222 47% 6%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 224 71.4% 4%;
+    --popover-foreground: 210 20% 98%;
+
+    /* Industrial High-Visibility Accent */
+    --primary: 191 97% 50%; /* Electric Cyan */
+    --primary-foreground: 225 30% 3%;
+
+    --secondary: 215 27.9% 12.9%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+
+    /* Warning/Amber Highlights for telemetry */
+    --accent: 38 92% 50%;
+    --accent-foreground: 225 30% 3%;
+
+    --destructive: 0 62.8% 40.6%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 191 97% 50%;
+
+    /* Ultra-sleek Sidebar */
+    --sidebar-background: 225 30% 2%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 191 97% 50%;
+    --sidebar-primary-foreground: 225 30% 3%;
+    --sidebar-accent: 215 27.9% 10%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 215 27.9% 8%;
+    --sidebar-ring: 191 97% 50%;
+    --sidebar-ring: 191 97% 50%;
+  }
+
+  /* NEO-BRUTALISM THEME */
+  .theme-neo-brutalism {
+    --background: 49 100% 96%; /* #fffbeb */
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 153 60% 53%; /* Green */
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 33 100% 50%; /* Orange */
+    --secondary-foreground: 0 0% 0%;
+
+    --border: 0 0% 0%;
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
+
+    --radius: 0px; /* Brutalism has no rounded corners */
+  }
+
+  /* CYBERPUNK THEME */
+  .theme-cyberpunk {
+    --background: 280 50% 10%;
+    --foreground: 60 100% 50%; /* Neon Yellow text */
+
+    --card: 280 50% 15%;
+    --card-foreground: 60 100% 50%;
+
+    --popover: 280 50% 15%;
+    --popover-foreground: 60 100% 50%;
+
+    --primary: 320 100% 50%; /* Neon Pink */
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 190 100% 50%; /* Neon Blue */
+    --secondary-foreground: 0 0% 0%;
+
+    --border: 320 100% 50%;
+    --input: 320 100% 50%;
+    --ring: 60 100% 50%;
+
+    --radius: 0.25rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+    /* Force smooth dark mode scrolling */
+    color-scheme: dark;
+  }
+}
+
+/* 
+  Civilization-Grade UX Utilities 
+*/
+
+.glass-panel {
+  @apply bg-card/60 backdrop-blur-xl border border-white/5 shadow-2xl;
+}
+
+.holographic-text {
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.industrial-glow {
+  position: relative;
+}
+
+.industrial-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.05), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Telemetry Grid Background */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* Fluid Keyframes */
+@keyframes pulse-cyan {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 15px 5px rgba(0, 255, 255, 0);
+  }
+}
+
+.animate-pulse-cyan {
+  animation: pulse-cyan 2s infinite;
+}
+
+/* i18n Typography overrides */
+html.font-devanagari body {
+  font-family: var(--font-devanagari), var(--font-inter), sans-serif !important;
+}

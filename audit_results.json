@@ -1,0 +1,27 @@
+{
+  "Architecture": {
+    "FrontendScreensCount": 193,
+    "BackendEndpointsCount": 374,
+    "StateStoresCount": 92,
+    "DatabaseModelsCount": 622
+  },
+  "Traceability": {
+    "UnconnectedStores": [
+      "uploadStore.ts",
+      "websocketStore.ts"
+    ]
+  },
+  "FakeData": [],
+  "EndpointsFound": [
+    "Get /accounting/chart-of-accounts",
+    "Get /accounting/ledgers",
+    "Get /accounting/journals",
+    "Post /accounting/journals",
+    "Get /activity",
+    "Get /ai/action-logs",
+    "Get /ai/context",
+    "Post /ai/command",
+    "Get /analytics/overview",
+    "Get /analytics/trends"
+  ]
+}

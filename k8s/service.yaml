@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: constructos-api-service
+  namespace: production
+spec:
+  selector:
+    app: constructos-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3001
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: constructos-web-service
+  namespace: production
+spec:
+  selector:
+    app: constructos-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP

@@ -1,0 +1,34 @@
+{
+  "name": "constructos-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "ConstructOS: Enterprise Industrial Commerce Operating System Foundation",
+  "author": "ConstructOS Architecture Team",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
+    "clean": "turbo run clean && rimraf node_modules **/node_modules **/dist **/.next **/yarn.lock **/pnpm-lock.yaml",
+    "db:generate": "turbo run db:generate",
+    "db:push": "turbo run db:push",
+    "db:seed": "pnpm --filter @constructos/api db:seed",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "rimraf": "^5.0.5",
+    "turbo": "^1.13.0",
+    "typescript": "^5.4.5"
+  },
+  "packageManager": "pnpm@9.1.0",
+  "pnpm": {
+    "overrides": {
+      "@types/react": "18.3.3",
+      "@types/react-dom": "18.3.0"
+    }
+  }
+}

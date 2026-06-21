@@ -1,0 +1,63 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "staging" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+    - run: npm i -g pnpm
+    - run: pnpm install --frozen-lockfile
+    - run: npx prisma generate
+      working-directory: ./apps/api
+    - run: pnpm --filter @constructos/api run build
+    - run: pnpm --filter @constructos/web run build
+
+  build-and-push:
+    needs: test
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Build and Push API Image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        target: api-runner
+        push: false # Set to true when registry is configured
+        tags: constructos/api:latest
+        
+    - name: Build and Push Web Image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        target: web-runner
+        push: false
+        tags: constructos/web:latest
+
+  deploy:
+    needs: build-and-push
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v3
+    - name: Deploy to Kubernetes
+      run: |
+        echo "Deploying to production cluster..."
+        # kubectl apply -f k8s/
+        # kubectl rollout status deployment/constructos-api -n production
+        # kubectl rollout status deployment/constructos-web -n production

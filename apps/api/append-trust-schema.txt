@@ -1,0 +1,112 @@
+
+// ==========================================
+// TRUST INFRASTRUCTURE & FRAUD PREVENTION
+// ==========================================
+
+model TrustProfile {
+  id               String   @id @default(uuid())
+  tenantId         String
+  entityType       String   // VENDOR, CUSTOMER, CONTRACTOR
+  entityId         String
+  trustScore       Float    @default(500) // 0-1000 scale
+  gstVerified      Boolean  @default(false)
+  kycStatus        String   @default("PENDING") // PENDING, VERIFIED, REJECTED
+  operationalScore Float    @default(0) // Operational consistency metric
+  status           String   @default("ACTIVE") // ACTIVE, SUSPENDED, BLOCKED
+  lastEvaluatedAt  DateTime @default(now())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@unique([tenantId, entityType, entityId])
+}
+
+model FraudSignal {
+  id               String   @id @default(uuid())
+  tenantId         String
+  entityId         String
+  signalType       String   // DUPLICATE_BILLING, ABNORMAL_STOCK, PRICE_MANIPULATION
+  severity         String   // LOW, MEDIUM, HIGH, CRITICAL
+  description      String
+  contextData      String?
+  status           String   @default("OPEN") // OPEN, INVESTIGATING, RESOLVED, FALSE_POSITIVE
+  detectedAt       DateTime @default(now())
+  resolvedAt       DateTime?
+  
+  @@index([tenantId, status, severity])
+}
+
+model ReputationScore {
+  id                 String   @id @default(uuid())
+  tenantId           String
+  vendorId           String
+  deliveryConsistency Float   // 0-100
+  fulfillmentQuality Float    // 0-100
+  paymentReliability Float    // 0-100
+  disputeFrequency   Float    // Frequency per 100 orders
+  lastUpdated        DateTime @default(now())
+  
+  @@unique([tenantId, vendorId])
+}
+
+model VerificationWorkflow {
+  id               String   @id @default(uuid())
+  tenantId         String
+  entityId         String
+  workflowType     String   // BUSINESS_VERIFICATION, GST_VERIFICATION
+  step             Int      @default(1)
+  status           String   @default("IN_PROGRESS")
+  evidenceUrls     String?
+  assignedTo       String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model DisputeCase {
+  id               String   @id @default(uuid())
+  tenantId         String
+  referenceId      String   // Order ID, Invoice ID, etc.
+  disputeType      String   // DELIVERY, QUALITY, INVOICE, PAYMENT
+  raisedBy         String
+  againstEntityId  String
+  description      String
+  status           String   @default("OPEN") // OPEN, MEDIATION, SETTLED, ESCALATED
+  resolution       String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@index([tenantId, status])
+}
+
+model RiskAssessment {
+  id               String   @id @default(uuid())
+  tenantId         String
+  entityId         String
+  riskType         String   // BAD_DEBT, PAYMENT_DELAY, OPERATIONAL_RISK
+  riskScore        Float
+  flagged          Boolean  @default(false)
+  analysisDetails  String?
+  evaluatedAt      DateTime @default(now())
+
+  @@index([tenantId, riskType])
+}
+
+model TrustAuditLog {
+  id               String   @id @default(uuid())
+  tenantId         String
+  action           String   // OVERRIDE, SUSPENSION, VERIFICATION_APPROVED
+  entityId         String
+  performedBy      String
+  reason           String?
+  timestamp        DateTime @default(now())
+  
+  @@index([tenantId, entityId])
+}
+
+model BehaviorPattern {
+  id               String   @id @default(uuid())
+  tenantId         String
+  userId           String
+  patternType      String
+  anomalyScore     Float
+  detectedAt       DateTime @default(now())
+}

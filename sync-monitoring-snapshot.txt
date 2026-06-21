@@ -1,0 +1,24 @@
+uid=11_0 RootWebArea url="http://localhost:3000/admin/sync-monitoring"
+  uid=11_1 heading "Offline Sync Monitoring" level="1"
+  uid=11_2 heading "Offline Sync Queue (Pending & Processed)" level="2"
+  uid=11_3 heading "CONSUME_MATERIAL on Material" level="4"
+  uid=11_4 StaticText "Server Recv: "
+  uid=11_5 StaticText "5/30/2026, 6:35:00 PM"
+  uid=11_6 StaticText "SUCCESS"
+  uid=11_7 heading "UPDATE_INVENTORY on StockItem" level="4"
+  uid=11_8 StaticText "Server Recv: "
+  uid=11_9 StaticText "5/30/2026, 6:35:00 PM"
+  uid=11_10 StaticText "CONFLICT"
+  uid=11_11 heading "Sync Conflicts Requiring Resolution" level="2"
+  uid=11_12 heading "Conflict on StockItem (item-991)" level="4"
+  uid=11_13 StaticText "Server (Live):"
+  uid=11_14 StaticText "{
+  "quantity": 12
+}"
+  uid=11_15 StaticText "Client (Offline Update):"
+  uid=11_16 StaticText "{
+  "quantity": 45
+}"
+  uid=11_17 button "Keep Server (Reject)"
+  uid=11_18 button "Force Client (Overwrite)"
+  uid=11_19 alert atomic live="assertive" relevant="additions text"

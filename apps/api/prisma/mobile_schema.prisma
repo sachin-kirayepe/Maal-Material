@@ -1,0 +1,179 @@
+
+// ============================================================================
+// ENTERPRISE MOBILE & OFFLINE-FIRST SYNCHRONIZATION INFRASTRUCTURE
+// ============================================================================
+
+model MobileDevice {
+  id           String   @id @default(uuid())
+  tenantId     String?
+  deviceUuid   String   @unique // Hardware identifier (IMEI, MAC, or generated UUID)
+  name         String? // e.g., "Warehouse Scanner 04"
+  os           String? // "Android", "iOS"
+  osVersion    String?
+  appVersion   String?
+  status       String   @default("ACTIVE") // ACTIVE, LOST, WIPED, INACTIVE
+  batteryLevel Float?
+  latitude     Float?
+  longitude    Float?
+  lastSyncAt   DateTime?
+  registeredAt DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  tenant       Tenant?         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  sessions     MobileSession[]
+  events       DeviceEvent[]
+
+  @@index([tenantId])
+  @@index([status])
+  @@index([deviceUuid])
+  @@map("mobile_devices")
+}
+
+model MobileSession {
+  id           String   @id @default(uuid())
+  tenantId     String?
+  deviceId     String
+  userId       String
+  sessionToken String   @unique
+  status       String   @default("ACTIVE") // ACTIVE, EXPIRED, REVOKED
+  ipAddress    String?
+  loginAt      DateTime @default(now())
+  expiresAt    DateTime
+  lastActiveAt DateTime @default(now())
+
+  tenant Tenant?      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  device MobileDevice @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  user   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([deviceId])
+  @@index([userId])
+  @@map("mobile_sessions")
+}
+
+model FieldTask {
+  id           String   @id @default(uuid())
+  tenantId     String?
+  assignedTo   String?  // UserId
+  taskType     String   // e.g., "DELIVERY", "INVENTORY_COUNT", "SITE_INSPECTION"
+  referenceId  String?  // ID of the related business object (Invoice, Order)
+  status       String   @default("PENDING") // PENDING, IN_PROGRESS, COMPLETED, CANCELLED
+  priority     String   @default("NORMAL") // LOW, NORMAL, HIGH, URGENT
+  payload      String?  // JSON blob containing task-specific details/instructions
+  resultData   String?  // JSON blob containing field worker's submitted data
+  scheduledFor DateTime?
+  startedAt    DateTime?
+  completedAt  DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  assignee User?   @relation(fields: [assignedTo], references: [id], onDelete: SetNull)
+
+  @@index([tenantId])
+  @@index([assignedTo])
+  @@index([status])
+  @@map("field_tasks")
+}
+
+model OfflineSyncQueue {
+  id            String   @id @default(uuid())
+  tenantId      String?
+  deviceId      String?
+  userId        String?
+  operationType String   // e.g., "CREATE_DELIVERY", "UPDATE_INVENTORY"
+  entityName    String
+  entityId      String?
+  payload       String   // JSON of the mutated offline data
+  status        String   @default("PENDING") // PENDING, PROCESSING, SUCCESS, FAILED, CONFLICT
+  retryCount    Int      @default(0)
+  errorMessage  String?
+  clientTime    DateTime // Time the action occurred on the device
+  serverTime    DateTime @default(now()) // Time it was received
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([tenantId])
+  @@index([deviceId])
+  @@index([status])
+  @@map("offline_sync_queues")
+}
+
+model SyncConflict {
+  id               String   @id @default(uuid())
+  tenantId         String?
+  queueId          String   @unique
+  entityName       String
+  entityId         String
+  clientPayload    String   // JSON from the device
+  serverPayload    String   // JSON of the current live server state
+  resolutionMethod String?  // e.g., "MANUAL", "CLIENT_WINS", "SERVER_WINS"
+  status           String   @default("UNRESOLVED") // UNRESOLVED, RESOLVED
+  resolvedBy       String?  // UserId of the supervisor who fixed it
+  createdAt        DateTime @default(now())
+  resolvedAt       DateTime?
+
+  tenant   Tenant?           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  queue    OfflineSyncQueue  @relation(fields: [queueId], references: [id], onDelete: Cascade)
+  resolver User?             @relation(fields: [resolvedBy], references: [id], onDelete: SetNull)
+
+  @@index([tenantId])
+  @@index([status])
+  @@map("sync_conflicts")
+}
+
+model OfflineOperation {
+  id            String   @id @default(uuid())
+  tenantId      String?
+  deviceId      String?
+  operationName String   // e.g., "CONSUME_MATERIAL", "SCAN_BARCODE"
+  localId       String   // UUID generated on device before sync
+  payload       String   // JSON blob
+  synced        Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([deviceId])
+  @@index([synced])
+  @@map("offline_operations")
+}
+
+model DeviceEvent {
+  id        String   @id @default(uuid())
+  tenantId  String?
+  deviceId  String
+  eventType String   // e.g., "BARCODE_SCANNED", "GPS_PING", "NFC_TAP", "BATTERY_LOW"
+  eventData String?  // JSON blob (e.g. { "barcode": "12345" })
+  createdAt DateTime @default(now())
+
+  tenant Tenant?      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  device MobileDevice @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([deviceId])
+  @@index([eventType])
+  @@map("device_events")
+}
+
+model SyncAuditLog {
+  id             String   @id @default(uuid())
+  tenantId       String?
+  deviceId       String?
+  userId         String?
+  syncSessionId  String
+  recordsPushed  Int
+  recordsPulled  Int
+  conflictsFound Int
+  durationMs     Int
+  status         String   @default("SUCCESS") // SUCCESS, PARTIAL, FAILED
+  createdAt      DateTime @default(now())
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([syncSessionId])
+  @@map("sync_audit_logs")
+}

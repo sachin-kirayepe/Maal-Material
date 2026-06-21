@@ -1,0 +1,4 @@
+uid=1_0 RootWebArea url="http://localhost:3000/admin/security-dashboard"
+  uid=1_1 StaticText "Error: "
+  uid=1_2 StaticText "Cannot read properties of undefined (reading 'get')"
+  uid=1_3 alert atomic live="assertive" relevant="additions text"

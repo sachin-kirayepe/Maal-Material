@@ -1,0 +1,143 @@
+"use client";
+
+import React, { useEffect } from "react";
+import { PieChart, TrendingUp, TrendingDown, Users, Package, Banknote, Activity, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { ApiClient } from "@/lib/api-client";
+import { useBIStore } from "../../../stores/biStore";
+
+export default function BusinessIntelligence() {
+  const { isLoading, fetchInsights, fetchAnomalies } = useBIStore();
+
+  useEffect(() => {
+    fetchInsights("tenant-1");
+    fetchAnomalies("tenant-1");
+  }, [fetchInsights, fetchAnomalies]);
+
+  const handleExport = async () => {
+    try {
+      toast.info("Queueing BI export...");
+      await ApiClient.post("/reports/generate", { templateId: "bi-report", tenantId: "tenant-1" });
+      toast.success("Job Queued: You will be notified when the export is ready.");
+    } catch (e) {
+      toast.error("Failed to queue export job.");
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0a0a0a] text-white p-8 font-sans">
+      <div className="flex justify-between items-start mb-6">
+        <div>
+          <h1 className="text-2xl font-medium tracking-tight text-white mb-1 flex items-center gap-2">
+            <PieChart className="text-blue-500" size={24} /> Executive BI Dashboard
+          </h1>
+          <p className="text-zinc-400 text-sm">Real-time macro metrics aggregated across all modules.</p>
+        </div>
+        <div className="flex gap-2">
+          <select className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 text-sm focus:outline-none">
+            <option>Last 30 Days</option>
+            <option>This Quarter</option>
+            <option>Year to Date</option>
+          </select>
+          <button onClick={handleExport} className="bg-blue-600 text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-blue-500 transition-colors active:scale-95">
+            Export PDF
+          </button>
+        </div>
+      </div>
+
+      {/* Top KPIs */}
+      {isLoading ? (
+        <div className="flex justify-center p-12">
+          <Loader2 className="animate-spin text-blue-500" size={32} />
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            {[
+              { title: "Total Capex", value: insights?.[0]?.totalCapex || "₹0", trend: insights?.[0]?.capexTrend || "0%", isUp: true, icon: Banknote },
+              { title: "Active Vendors", value: insights?.[0]?.activeVendors || "0", trend: insights?.[0]?.vendorTrend || "0%", isUp: true, icon: Users },
+              { title: "Avg Material Cost", value: insights?.[0]?.avgMaterialCost || "₹0", trend: insights?.[0]?.costTrend || "0%", isUp: false, icon: Package },
+              { title: "Project Delays", value: insights?.[0]?.projectDelays || "0%", trend: insights?.[0]?.delayTrend || "0%", isUp: false, icon: Activity },
+            ].map((kpi, i) => (
+              <div key={i} className="bg-zinc-900 border border-zinc-800 p-5 rounded-xl">
+                <div className="flex justify-between items-start mb-4">
+                  <p className="text-zinc-400 text-sm font-medium">{kpi.title}</p>
+                  <kpi.icon size={16} className="text-zinc-500" />
+                </div>
+                <h3 className="text-3xl font-medium text-white mb-2">{kpi.value}</h3>
+                <div className="flex items-center gap-1 text-sm">
+                  {kpi.isUp ? <TrendingUp size={14} className={kpi.title.includes('Delays') ? 'text-red-400' : 'text-green-400'}/> : <TrendingDown size={14} className={kpi.title.includes('Delays') || kpi.title.includes('Cost') ? 'text-green-400' : 'text-red-400'}/>}
+                  <span className={kpi.isUp ? (kpi.title.includes('Delays') ? 'text-red-400' : 'text-green-400') : (kpi.title.includes('Delays') || kpi.title.includes('Cost') ? 'text-green-400' : 'text-red-400')}>
+                    {kpi.trend} from last month
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+      {/* Main Charts Area */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Spend by Category (Donut Mock) */}
+        <div className="lg:col-span-1 bg-zinc-900 border border-zinc-800 rounded-xl p-6 flex flex-col">
+          <h3 className="text-white font-medium mb-6">Spend Distribution</h3>
+          <div className="flex-1 flex flex-col items-center justify-center relative min-h-[250px]">
+            {/* SVG Donut Chart Mock */}
+            <svg viewBox="0 0 100 100" className="w-48 h-48 transform -rotate-90">
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#3b82f6" strokeWidth="20" strokeDasharray="251.2" strokeDashoffset="0" />
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#8b5cf6" strokeWidth="20" strokeDasharray="251.2" strokeDashoffset="100" />
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#10b981" strokeWidth="20" strokeDasharray="251.2" strokeDashoffset="180" />
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f59e0b" strokeWidth="20" strokeDasharray="251.2" strokeDashoffset="220" />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-2xl font-medium">₹45.2</span>
+              <span className="text-xs text-zinc-500 uppercase">Crores</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-y-3 mt-6 text-sm">
+              {(insights?.[0]?.categories || []).map((cat: any, i: number) => (
+                 <div key={i} className="flex items-center gap-2"><div className="w-3 h-3 bg-blue-500 rounded-sm"></div> <span className="text-zinc-300">{cat.name || 'Unknown'}</span></div>
+              ))}
+              {(!insights?.[0]?.categories || insights[0].categories.length === 0) && <span className="text-zinc-500 text-xs">No category data available.</span>}
+          </div>
+        </div>
+
+        {/* Burn Rate over Time (Area Chart Mock) */}
+        <div className="lg:col-span-2 bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-white font-medium">Capital Burn Rate vs Budget</h3>
+            <div className="flex gap-4 text-xs font-medium">
+              <span className="flex items-center gap-1"><div className="w-2 h-2 bg-blue-500 rounded-full"></div> Actual Burn</span>
+              <span className="flex items-center gap-1"><div className="w-2 h-2 bg-zinc-600 rounded-full"></div> Projected Budget</span>
+            </div>
+          </div>
+          <div className="h-[250px] relative w-full flex items-end pt-4">
+            {/* Grid */}
+            <div className="absolute inset-0 flex flex-col justify-between pt-4 pb-6">
+              {[...Array(5)].map((_, i) => <div key={i} className="w-full h-px bg-zinc-800/50"></div>)}
+            </div>
+            
+            {/* Budget Area */}
+            <svg className="absolute inset-0 w-full h-full pb-6" preserveAspectRatio="none">
+              <path d="M0,200 L100,180 L200,190 L300,150 L400,160 L500,120 L600,130 L700,90 L800,100 L900,60 L1000,70 L1000,250 L0,250 Z" fill="rgba(63, 63, 70, 0.1)" />
+              <path d="M0,200 L100,180 L200,190 L300,150 L400,160 L500,120 L600,130 L700,90 L800,100 L900,60 L1000,70" fill="none" stroke="#52525b" strokeWidth="2" strokeDasharray="5,5" />
+            </svg>
+
+            {/* Actual Area */}
+            <svg className="absolute inset-0 w-[70%] h-full pb-6" preserveAspectRatio="none">
+              <path d="M0,210 L100,190 L200,200 L300,140 L400,170 L500,110 L600,150 L700,100 L700,250 L0,250 Z" fill="rgba(59, 130, 246, 0.2)" />
+              <path d="M0,210 L100,190 L200,200 L300,140 L400,170 L500,110 L600,150 L700,100" fill="none" stroke="#3b82f6" strokeWidth="3" />
+            </svg>
+
+            {/* X Axis */}
+            <div className="absolute bottom-0 left-0 w-full flex justify-between text-[10px] text-zinc-500">
+              <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </>)}
+    </div>
+  );
+}

@@ -1,0 +1,153 @@
+
+// ============================================================================
+// HYPERSCALE & DISTRIBUTED SYSTEMS INFRASTRUCTURE
+// ============================================================================
+
+model PlatformService {
+  id              String   @id @default(uuid())
+  tenantId        String?
+  serviceName     String   @unique // e.g., "logistics-engine", "finance-core"
+  version         String   @default("1.0.0")
+  status          String   @default("HEALTHY") // HEALTHY, DEGRADED, OFFLINE
+  endpointBaseUrl String?  // URL when eventually extracted to microservice
+  isInternal      Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  tenant    Tenant?           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  contracts ServiceContract[]
+
+  @@index([tenantId])
+  @@index([status])
+  @@map("platform_services")
+}
+
+model ServiceContract {
+  id            String   @id @default(uuid())
+  tenantId      String?
+  serviceId     String
+  contractName  String   // e.g., "CreateInvoiceEvent"
+  contractType  String   // "API", "EVENT"
+  payloadSchema String   // JSON Schema of the contract
+  version       String   @default("v1")
+  createdAt     DateTime @default(now())
+
+  tenant  Tenant?         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  service PlatformService @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([serviceId])
+  @@map("service_contracts")
+}
+
+model InfrastructureNode {
+  id             String   @id @default(uuid())
+  tenantId       String?
+  region         String   // e.g., "us-east-1", "eu-central-1"
+  nodeId         String   @unique
+  nodeType       String   // "WORKER", "API", "DATABASE", "CACHE"
+  status         String   @default("ACTIVE") // ACTIVE, DRAINING, TERMINATED
+  cpuUsage       Float?
+  memoryUsage    Float?
+  lastHeartbeat  DateTime @default(now())
+  createdAt      DateTime @default(now())
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([region])
+  @@index([status])
+  @@map("infrastructure_nodes")
+}
+
+model DistributedTask {
+  id               String   @id @default(uuid())
+  tenantId         String?
+  taskType         String   // e.g., "SYNC_ERP", "CALCULATE_AGGREGATES"
+  payload          String   // JSON payload
+  status           String   @default("PENDING") // PENDING, RUNNING, COMPLETED, FAILED, RETRYING
+  retryCount       Int      @default(0)
+  maxRetries       Int      @default(5)
+  nextRetryAt      DateTime?
+  errorMessage     String?
+  workerNodeId     String?  // The node currently processing this task
+  createdAt        DateTime @default(now())
+  completedAt      DateTime?
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([status])
+  @@index([nextRetryAt])
+  @@map("distributed_tasks")
+}
+
+model CacheEntry {
+  id           String   @id @default(uuid())
+  tenantId     String?
+  cacheKey     String   @unique
+  cacheValue   String   // JSON blob
+  ttlSeconds   Int?
+  expiresAt    DateTime?
+  invalidated  Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([expiresAt])
+  @@index([cacheKey])
+  @@map("cache_entries")
+}
+
+model GatewayPolicy {
+  id               String   @id @default(uuid())
+  tenantId         String?
+  routeMatch       String   // e.g., "/api/v1/logistics/*"
+  forwardTo        String   // e.g., "logistics-engine"
+  rateLimitRate    Int      @default(100) // requests per window
+  rateLimitWindow  Int      @default(60)  // seconds
+  authRequired     Boolean  @default(true)
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("gateway_policies")
+}
+
+model RegionConfig {
+  id              String   @id @default(uuid())
+  tenantId        String?
+  regionCode      String   @unique // e.g., "us-east-1"
+  regionName      String
+  dataResidency   Boolean  @default(false) // strict data borders
+  primaryDatabase String   // connection string or identifier
+  readReplicas    String?  // JSON array
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("region_configs")
+}
+
+model PlatformExtension {
+  id             String   @id @default(uuid())
+  tenantId       String?
+  extensionName  String
+  publisher      String
+  version        String
+  manifest       String   // JSON string defining hooks and UI slots
+  status         String   @default("INSTALLED") // INSTALLED, DISABLED, PENDING_UPDATE
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("platform_extensions")
+}

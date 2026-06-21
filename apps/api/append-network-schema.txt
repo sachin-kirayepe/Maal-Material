@@ -1,0 +1,127 @@
+
+// ==========================================
+// COMMERCE NETWORK & SUPPLY CHAIN
+// ==========================================
+
+model CommerceGraphNode {
+  id               String   @id @default(uuid())
+  tenantId         String
+  nodeType         String   // VENDOR, CONTRACTOR, WAREHOUSE, DISTRIBUTOR
+  entityId         String
+  region           String
+  reputationScore  Float    @default(500)
+  active           Boolean  @default(true)
+  lastActiveAt     DateTime @default(now())
+  createdAt        DateTime @default(now())
+  
+  @@unique([tenantId, entityId])
+}
+
+model CommerceRelationship {
+  id               String   @id @default(uuid())
+  tenantId         String
+  sourceNodeId     String
+  targetNodeId     String
+  relationshipType String   // PREFERRED_SUPPLIER, COMPETITOR, STRATEGIC_PARTNER
+  strength         Float    @default(1.0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@unique([tenantId, sourceNodeId, targetNodeId])
+}
+
+model RFQExchange {
+  id               String   @id @default(uuid())
+  tenantId         String
+  buyerId          String
+  title            String
+  requirements     String
+  targetRegion     String?
+  status           String   @default("OPEN") // OPEN, NEGOTIATING, CLOSED, CANCELLED
+  bidsReceived     Int      @default(0)
+  expiresAt        DateTime
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model MarketplaceNegotiation {
+  id               String   @id @default(uuid())
+  tenantId         String
+  rfqId            String
+  vendorId         String
+  proposedPrice    Float
+  counterOffer     Float?
+  status           String   @default("PENDING") // PENDING, ACCEPTED, REJECTED
+  remarks          String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@index([tenantId, rfqId])
+}
+
+model InventoryTransfer {
+  id               String   @id @default(uuid())
+  tenantId         String
+  sourceEntityId   String
+  targetEntityId   String
+  itemId           String
+  quantity         Float
+  price            Float
+  status           String   @default("INTENT_REGISTERED") // INTENT_REGISTERED, IN_TRANSIT, COMPLETED, CANCELLED
+  logisticsMethod  String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model VendorDiscovery {
+  id               String   @id @default(uuid())
+  tenantId         String
+  searcherId       String
+  searchCriteria   String
+  matchedVendors   String   // JSON array of vendor IDs
+  timestamp        DateTime @default(now())
+}
+
+model LogisticsCoordination {
+  id               String   @id @default(uuid())
+  tenantId         String
+  referenceId      String   // Order ID or Transfer ID
+  transporterId    String?
+  origin           String
+  destination      String
+  status           String   @default("PENDING") // PENDING, DISPATCHED, DELIVERED
+  eta              DateTime?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model RegionalDemandInsight {
+  id               String   @id @default(uuid())
+  tenantId         String
+  region           String
+  productCategory  String
+  demandScore      Float
+  supplyScore      Float
+  trend            String   // RISING, STABLE, DECLINING
+  lastUpdated      DateTime @default(now())
+  
+  @@unique([tenantId, region, productCategory])
+}
+
+model SupplyChainExchange {
+  id               String   @id @default(uuid())
+  tenantId         String
+  exchangeType     String   // B2B_BULK, P2P_TRANSFER
+  valueTransferred Float
+  originId         String
+  destinationId    String
+  timestamp        DateTime @default(now())
+}
+
+model CommerceNetworkMetric {
+  id               String   @id @default(uuid())
+  tenantId         String
+  metricKey        String
+  metricValue      Float
+  recordedAt       DateTime @default(now())
+}
