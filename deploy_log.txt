@@ -1,3 +1,93 @@
+ ›   Warning: --build is now the default and can safely be omitted.
+[96m[1m​[22m[39m
+[96m[1mNetlify Build                                                 [22m[39m
+[96m[1m────────────────────────────────────────────────────────────────[22m[39m
+[36m[1m​[22m[39m
+[36m[1m❯ Version[22m[39m
+  @netlify/build 35.15.0
+[36m[1m​[22m[39m
+[36m[1m❯ Flags[22m[39m
+  accountId: 69e79ae93fe86937ea872935
+  deployId: 6a379f7deeb403fd761ccb2c
+  packagePath: apps/web
+[36m[1m​[22m[39m
+[36m[1m❯ Current directory[22m[39m
+  /home/runner/work/Maal-Material/Maal-Material/apps/web
+[36m[1m​[22m[39m
+[36m[1m❯ Config file[22m[39m
+  /home/runner/work/Maal-Material/Maal-Material/netlify.toml
+[36m[1m​[22m[39m
+[36m[1m❯ Context[22m[39m
+  production
+[36m[1m​[22m[39m
+[36m[1m❯ Using Next.js Runtime - v5.15.12[22m[39m
+[96m[1m​[22m[39m
+[96m[1mbuild.command from netlify.toml                               [22m[39m
+[96m[1m────────────────────────────────────────────────────────────────[22m[39m
+​
+[36m$ pnpm run build[39m
 
-We've detected multiple projects inside your repository
- ›   Error: Projects detected: @constructos/api, mobile, @constructos/web, @constructos/config, @constructos/types, @constructos/ui, @constructos/utils. Configure the project you want to work with and try again. Refer to https://ntl.fyi/configure-site for more information.
+> @constructos/web@1.0.0 build /home/runner/work/Maal-Material/Maal-Material/apps/web
+> next build
+
+⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+  ▲ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ [32m[1m✓[22m[39m (serwist) Bundling the service worker script with the URL '/sw.js' and the scope '/'...
+Failed to compile.
+
+./src/components/ui/LanguageToggle.tsx
+Module not found: Can't resolve '@constructos/ui'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./src/pages/smb-dashboard.tsx
+
+./src/pages/smb-dashboard.tsx
+Module not found: Can't resolve '@constructos/ui'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./src/pages/smb/sync-dashboard.tsx
+Module not found: Can't resolve '@constructos/ui'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./src/pages/smb/whatsapp-operations.tsx
+Module not found: Can't resolve '@constructos/ui'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./src/app/(auth)/login/page.tsx
+Module not found: Can't resolve '@constructos/ui'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+ ELIFECYCLE  Command failed with exit code 1.
+[91m[1m​[22m[39m
+[91m[1m"build.command" failed                                        [22m[39m
+[91m[1m────────────────────────────────────────────────────────────────[22m[39m
+​
+  [31m[1mError message[22m[39m
+  Command failed with exit code 1: pnpm run build
+​
+  [31m[1mError location[22m[39m
+  In build.command from netlify.toml:
+  pnpm run build
+​
+  [31m[1mResolved config[22m[39m
+  build:
+    base: /home/runner/work/Maal-Material/Maal-Material/apps/web
+    command: pnpm run build
+    commandOrigin: config
+    publish: /home/runner/work/Maal-Material/Maal-Material/apps/web/.next
+    publishOrigin: config
+  plugins:
+    - inputs: {}
+      origin: default
+      package: "@netlify/plugin-nextjs"
+ ›   Error: Error while running build
