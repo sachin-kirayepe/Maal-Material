@@ -34,6 +34,7 @@ export class ApiClient {
 
     const config: RequestInit = {
       ...customConfig,
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         // H-07 FIX: CSRF-safe header — custom headers prevent simple CORS requests
