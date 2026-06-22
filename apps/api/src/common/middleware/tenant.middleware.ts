@@ -1,5 +1,5 @@
 import { Injectable, NestMiddleware, UnauthorizedException } from "@nestjs/common";
-import { Request, Response, NextFunction } from "express";
+import type { Request, Response, NextFunction } from "express";
 import { PrismaService } from "@database/prisma.service";
 import { tenantContext } from "../context/tenant.context";
 

@@ -7,7 +7,7 @@ import {
   Res,
   UnauthorizedException,
 } from "@nestjs/common";
-import { Response } from "express";
+import type { Response } from "express";
 import { TelemetryProcessor } from "./telemetry.processor";
 
 @Controller("api/v1/iot/webhook")

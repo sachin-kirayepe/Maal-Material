@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Query, Res, HttpStatus } from "@nestjs/common";
 import { ReconciliationService } from "./reconciliation.service";
-import { Response } from "express";
+import type { Response } from "express";
 
 @Controller("api/v1/reconciliation")
 export class ReconciliationController {

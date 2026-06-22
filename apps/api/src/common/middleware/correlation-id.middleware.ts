@@ -1,5 +1,5 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
-import { Request, Response, NextFunction } from "express";
+import type { Request, Response, NextFunction } from "express";
 import { correlationContext } from "../context/correlation.context";
 import { randomUUID } from "crypto";
 

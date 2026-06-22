@@ -1,6 +1,6 @@
 import { Controller, Get, Query, HttpStatus, Res, Put, Body, Param } from "@nestjs/common";
 import { DisputesService } from "./disputes.service";
-import { Response } from "express";
+import type { Response } from "express";
 
 @Controller("api/v1/disputes")
 export class DisputesController {

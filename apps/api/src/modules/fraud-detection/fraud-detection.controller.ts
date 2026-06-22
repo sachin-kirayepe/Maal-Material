@@ -1,6 +1,6 @@
 import { Controller, Get, Query, HttpStatus, Res, Put, Body, Param } from "@nestjs/common";
 import { FraudDetectionService } from "./fraud-detection.service";
-import { Response } from "express";
+import type { Response } from "express";
 
 @Controller("api/v1/fraud-detection")
 export class FraudDetectionController {

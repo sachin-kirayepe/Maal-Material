@@ -1,6 +1,6 @@
 import { Controller, Get, Query, HttpStatus, Res } from "@nestjs/common";
 import { TrustService } from "./trust.service";
-import { Response } from "express";
+import type { Response } from "express";
 
 @Controller("api/v1/trust")
 export class TrustController {

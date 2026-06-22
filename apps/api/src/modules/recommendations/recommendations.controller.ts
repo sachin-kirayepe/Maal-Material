@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Query, HttpStatus, Res } from "@nestjs/common";
 import { RecommendationsService } from "./recommendations.service";
-import { Response } from "express";
+import type { Response } from "express";
 
 @Controller("api/v1/recommendations")
 export class RecommendationsController {

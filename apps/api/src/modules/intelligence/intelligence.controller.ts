@@ -1,6 +1,6 @@
 import { Controller, Get, Query, HttpStatus, Res, Post, Body } from "@nestjs/common";
 import { IntelligenceService } from "./intelligence.service";
-import { Response } from "express";
+import type { Response } from "express";
 
 @Controller("api/v1/intelligence")
 export class IntelligenceController {

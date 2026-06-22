@@ -1,6 +1,6 @@
 import { Controller, Get, Query, HttpStatus, Res } from "@nestjs/common";
 import { RiskAnalysisService } from "./risk-analysis.service";
-import { Response } from "express";
+import type { Response } from "express";
 
 @Controller("api/v1/risk-analysis")
 export class RiskAnalysisController {

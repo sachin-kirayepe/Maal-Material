@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Res, HttpStatus } from "@nestjs/common";
 import { NetworkResilienceService } from "./network-resilience.service";
-import { Response } from "express";
+import type { Response } from "express";
 
 @Controller("api/v1/network-resilience")
 export class NetworkResilienceController {

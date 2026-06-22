@@ -1,6 +1,6 @@
 import { Controller, Get, Query, HttpStatus, Res } from "@nestjs/common";
 import { OperationalAnalyticsService } from "./operational-analytics.service";
-import { Response } from "express";
+import type { Response } from "express";
 
 @Controller("api/v1/operational-analytics")
 export class OperationalAnalyticsController {

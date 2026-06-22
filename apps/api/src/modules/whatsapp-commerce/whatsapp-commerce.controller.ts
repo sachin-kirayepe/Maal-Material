@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Get, Query, Res, HttpStatus } from "@nestjs/common";
 import { WhatsappCommerceService } from "./whatsapp-commerce.service";
-import { Response } from "express";
+import type { Response } from "express";
 
 @Controller("api/v1/whatsapp-commerce")
 export class WhatsappCommerceController {

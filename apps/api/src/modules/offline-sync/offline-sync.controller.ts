@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Get, Query, Req, Res, HttpStatus } from "@nestjs/common";
 import { OfflineSyncService } from "./offline-sync.service";
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 
 @Controller("api/v1/offline-sync")
 export class OfflineSyncController {

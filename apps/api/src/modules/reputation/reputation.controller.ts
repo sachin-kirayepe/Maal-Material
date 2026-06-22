@@ -1,6 +1,6 @@
 import { Controller, Get, Query, HttpStatus, Res } from "@nestjs/common";
 import { ReputationService } from "./reputation.service";
-import { Response } from "express";
+import type { Response } from "express";
 
 @Controller("api/v1/reputation")
 export class ReputationController {
