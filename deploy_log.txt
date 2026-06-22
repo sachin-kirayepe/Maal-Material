@@ -8,7 +8,7 @@
 [36m[1m​[22m[39m
 [36m[1m❯ Flags[22m[39m
   accountId: 69e79ae93fe86937ea872935
-  deployId: 6a38b2f53457d302e78b38a5
+  deployId: 6a38b8ef442f7d29df64274b
   packagePath: apps/web
 [36m[1m​[22m[39m
 [36m[1m❯ Current directory[22m[39m
@@ -81,13 +81,25 @@ Failed to fetch forecasts from API TypeError: fetch failed
   }
 }
    Generating static pages (0/195) ...
+Failed to fetch forecasts from API TypeError: fetch failed
+    at node:internal/deps/undici/undici:14976:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/b2b-exchange.js:1:18617)
+    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/b2b-exchange.js:1:14882) {
+  [cause]: AggregateError [ECONNREFUSED]: 
+      at internalConnectMultiple (node:net:1122:18)
+      at afterConnectMultiple (node:net:1689:7) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
    Generating static pages (48/195) 
    Generating static pages (97/195) 
 Failed to fetch forecasts from API TypeError: fetch failed
     at node:internal/deps/undici/undici:14976:13
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/2068.js:1:38164)
-    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/predictive-intelligence/page.js:1:19038) {
+    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/marketplace/page.js:1:13013) {
   [cause]: AggregateError [ECONNREFUSED]: 
       at internalConnectMultiple (node:net:1122:18)
       at afterConnectMultiple (node:net:1689:7)
@@ -97,19 +109,6 @@ Failed to fetch forecasts from API TypeError: fetch failed
   }
 }
    Generating static pages (146/195) 
-Failed to fetch forecasts from API TypeError: fetch failed
-    at node:internal/deps/undici/undici:14976:13
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/chunks/2068.js:1:38164)
-    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/app/(dashboard)/predictive-intelligence/page.js:1:19038) {
-  [cause]: AggregateError [ECONNREFUSED]: 
-      at internalConnectMultiple (node:net:1122:18)
-      at afterConnectMultiple (node:net:1689:7)
-      at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17) {
-    code: 'ECONNREFUSED',
-    [errors]: [ [Error], [Error] ]
-  }
-}
  ✓ Generating static pages (195/195)
    Finalizing page optimization ...
    Collecting build traces ...
@@ -329,7 +328,7 @@ Route (pages)                             Size     First Load JS
 ƒ  (Dynamic)  server-rendered on demand
 
 ​
-[90m(build.command completed in 1m 27.3s)[39m
+[90m(build.command completed in 1m 29s)[39m
 [96m[1m​[22m[39m
 [96m[1mFunctions bundling                                            [22m[39m
 [96m[1m────────────────────────────────────────────────────────────────[22m[39m
@@ -338,7 +337,7 @@ Packaging Functions from [36mapps/web/.netlify/functions-internal[39m director
  - ___netlify-server-handler/___netlify-server-handler.mjs
 ​
 ​
-[90m(Functions bundling completed in 4.1s)[39m
+[90m(Functions bundling completed in 3.8s)[39m
 [96m[1m​[22m[39m
 [96m[1mEdge Functions bundling                                       [22m[39m
 [96m[1m────────────────────────────────────────────────────────────────[22m[39m
@@ -346,7 +345,7 @@ Packaging Functions from [36mapps/web/.netlify/functions-internal[39m director
 Packaging Edge Functions from [36mapps/web/.netlify/edge-functions[39m directory:
  - ___netlify-edge-handler-src-middleware
 ​
-[90m(Edge Functions bundling completed in 4.3s)[39m
+[90m(Edge Functions bundling completed in 3s)[39m
 
 Deploying to Netlify
 ────────────────────────────────────────────────────────────────
@@ -371,14 +370,14 @@ Configuration path: /home/runner/work/Maal-Material/Maal-Material/netlify.toml
 [96m[1mNetlify Build Complete                                        [22m[39m
 [96m[1m────────────────────────────────────────────────────────────────[22m[39m
 ​
-[90m(Netlify Build completed in 2m 3.8s)[39m
+[90m(Netlify Build completed in 2m 1.3s)[39m
 
 🚀 Deploy complete
 ────────────────────────────────────────────────────────────────
 
 Production URL: <https://maal-material.netlify.app>
-Unique deploy URL: <https://6a38b2f53457d302e78b38a5--maal-material.netlify.app>
+Unique deploy URL: <https://6a38b8ef442f7d29df64274b--maal-material.netlify.app>
 
-Build logs: <https://app.netlify.com/projects/maal-material/deploys/6a38b2f53457d302e78b38a5>
+Build logs: <https://app.netlify.com/projects/maal-material/deploys/6a38b8ef442f7d29df64274b>
 Function logs: <https://app.netlify.com/projects/maal-material/logs/functions>
 Edge function logs: <https://app.netlify.com/projects/maal-material/logs/edge-functions>
