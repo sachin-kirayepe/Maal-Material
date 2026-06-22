@@ -21,7 +21,7 @@ export class AuthController {
     const cookieOptions = {
       httpOnly: true,
       secure: isProd,
-      sameSite: "strict" as const,
+      sameSite: isProd ? "none" as const : "lax" as const,
       path: "/",
     };
     
