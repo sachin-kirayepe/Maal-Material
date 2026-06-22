@@ -1,5 +1,5 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import * as Razorpay from 'razorpay';
+import Razorpay from 'razorpay';
 import { PrismaService } from '@database/prisma.service';
 import * as crypto from 'crypto';
 
