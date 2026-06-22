@@ -37,6 +37,7 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: nfp_enAsiKHVkTbbFM5A2tkDdBBittEZsuyyb406
           NETLIFY_SITE_ID: ee106fb7-9d07-4a7b-a122-431727ba7713
+          NEXT_PUBLIC_API_URL: "https://maal-material.onrender.com/api/v1"
           NEXT_PUBLIC_SUPABASE_URL: "https://tuhgxhggnuhojucuisbx.supabase.com"
           NEXT_PUBLIC_SUPABASE_ANON_KEY: "sb_publishable_6M1vkF697LV5U_m9Vx_0RA_AAAKx8zw"
           NEXT_PUBLIC_MAINTENANCE_MODE: "false"
