@@ -32,7 +32,7 @@ async function bootstrap() {
   const isDev = (process.env.NODE_ENV || "development") !== "production";
   const corsOrigins = isDev
     ? ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"]
-    : [process.env.FRONTEND_URL].filter(Boolean) as string[];
+    : [process.env.FRONTEND_URL || "https://maal-material.netlify.app"].filter(Boolean) as string[];
 
   app.enableCors({
     origin: corsOrigins,
