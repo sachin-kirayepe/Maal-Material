@@ -8,7 +8,7 @@
 [36m[1m​[22m[39m
 [36m[1m❯ Flags[22m[39m
   accountId: 69e79ae93fe86937ea872935
-  deployId: 6a38d7cdaa88e27db912a4d2
+  deployId: 6a3b9efc7cea9746ba2bf01b
   packagePath: apps/web
 [36m[1m​[22m[39m
 [36m[1m❯ Current directory[22m[39m
@@ -35,39 +35,10 @@
 
    Creating an optimized production build ...
  [32m[1m✓[22m[39m (serwist) Bundling the service worker script with the URL '/sw.js' and the scope '/'...
- ⚠ Compiled with warnings
-
-./src/store/live-commerce-state.ts
-Attempted import error: 'apiClient' is not exported from '@/lib/api-client' (imported as 'apiClient').
-
-Import trace for requested module:
-./src/store/live-commerce-state.ts
-./src/hooks/useInventoryStream.ts
-./src/app/(dashboard)/marketplace/page.tsx
-
-./src/store/live-commerce-state.ts
-Attempted import error: 'apiClient' is not exported from '@/lib/api-client' (imported as 'apiClient').
-
-Import trace for requested module:
-./src/store/live-commerce-state.ts
-./src/hooks/useInventoryStream.ts
-./src/app/(dashboard)/marketplace/page.tsx
-
+ ✓ Compiled successfully
    Skipping validation of types
    Skipping linting
    Collecting page data ...
-Failed to fetch forecasts from API TypeError: fetch failed
-    at node:internal/deps/undici/undici:14976:13
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/ai-commerce.js:1:12560)
-    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/ai-commerce.js:1:10845) {
-  [cause]: AggregateError [ECONNREFUSED]: 
-      at internalConnectMultiple (node:net:1122:18)
-      at afterConnectMultiple (node:net:1689:7) {
-    code: 'ECONNREFUSED',
-    [errors]: [ [Error], [Error] ]
-  }
-}
 Failed to fetch forecasts from API TypeError: fetch failed
     at node:internal/deps/undici/undici:14976:13
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
@@ -80,7 +51,6 @@ Failed to fetch forecasts from API TypeError: fetch failed
     [errors]: [ [Error], [Error] ]
   }
 }
-   Generating static pages (0/195) ...
 Failed to fetch forecasts from API TypeError: fetch failed
     at node:internal/deps/undici/undici:14976:13
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
@@ -93,6 +63,7 @@ Failed to fetch forecasts from API TypeError: fetch failed
     [errors]: [ [Error], [Error] ]
   }
 }
+   Generating static pages (0/195) ...
    Generating static pages (48/195) 
    Generating static pages (97/195) 
 Failed to fetch forecasts from API TypeError: fetch failed
@@ -341,7 +312,7 @@ Route (pages)                             Size     First Load JS
 ƒ  (Dynamic)  server-rendered on demand
 
 ​
-[90m(build.command completed in 1m 27s)[39m
+[90m(build.command completed in 1m 29.5s)[39m
 [96m[1m​[22m[39m
 [96m[1mFunctions bundling                                            [22m[39m
 [96m[1m────────────────────────────────────────────────────────────────[22m[39m
@@ -350,7 +321,7 @@ Packaging Functions from [36mapps/web/.netlify/functions-internal[39m director
  - ___netlify-server-handler/___netlify-server-handler.mjs
 ​
 ​
-[90m(Functions bundling completed in 3.8s)[39m
+[90m(Functions bundling completed in 3.9s)[39m
 [96m[1m​[22m[39m
 [96m[1mEdge Functions bundling                                       [22m[39m
 [96m[1m────────────────────────────────────────────────────────────────[22m[39m
@@ -374,23 +345,23 @@ Configuration path: /home/runner/work/Maal-Material/Maal-Material/netlify.toml
 [32m✔[39m Deploying functions from cache (use --skip-functions-cache to override)
 [32m✔[39m Finished hashing 285 files and 1 functions
 [33m⠋[39m CDN diffing files...
-[32m✔[39m CDN requesting 89 files and 1 functions
-[33m⠋[39m Uploading 90 files
-[32m✔[39m Finished uploading 90 assets
+[32m✔[39m CDN requesting 3 files and 1 functions
+[33m⠋[39m Uploading 4 files
+[32m✔[39m Finished uploading 4 assets
 [33m⠋[39m Waiting for deploy to go live...
 [32m✔[39m Deploy is live!
 [96m[1m​[22m[39m
 [96m[1mNetlify Build Complete                                        [22m[39m
 [96m[1m────────────────────────────────────────────────────────────────[22m[39m
 ​
-[90m(Netlify Build completed in 1m 59.1s)[39m
+[90m(Netlify Build completed in 5m 34.5s)[39m
 
 🚀 Deploy complete
 ────────────────────────────────────────────────────────────────
 
 Production URL: <https://maal-material.netlify.app>
-Unique deploy URL: <https://6a38d7cdaa88e27db912a4d2--maal-material.netlify.app>
+Unique deploy URL: <https://6a3b9efc7cea9746ba2bf01b--maal-material.netlify.app>
 
-Build logs: <https://app.netlify.com/projects/maal-material/deploys/6a38d7cdaa88e27db912a4d2>
+Build logs: <https://app.netlify.com/projects/maal-material/deploys/6a3b9efc7cea9746ba2bf01b>
 Function logs: <https://app.netlify.com/projects/maal-material/logs/functions>
 Edge function logs: <https://app.netlify.com/projects/maal-material/logs/edge-functions>
