@@ -2,3 +2,6 @@
   base = "apps/web"
   command = "pnpm run build"
   publish = ".next"
+
+[build.environment]
+  NEXT_PUBLIC_API_URL = "https://maal-material.onrender.com/api/v1"

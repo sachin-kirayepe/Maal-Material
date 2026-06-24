@@ -41,7 +41,7 @@ interface LiveCommerceState {
   setCheckoutOpen: (isOpen: boolean) => void;
 }
 
-import { apiClient } from "@/lib/api-client";
+import { ApiClient } from "@/lib/api-client";
 
 // MOCK_PRODUCTS removed. Data will be fetched from API.
 
@@ -51,7 +51,7 @@ export const useLiveCommerceStore = create<LiveCommerceState & { fetchProducts: 
     set({ products: products.reduce((acc, p) => ({ ...acc, [p.id]: p }), {}) }),
   fetchProducts: async () => {
     try {
-      const response = await apiClient.get('/products');
+      const response = await ApiClient.get<Product[]>('/products');
       const apiProducts = response.data.data.items || response.data.data;
       if (Array.isArray(apiProducts)) {
         const mappedProducts: IndustrialProduct[] = apiProducts.map((p: any) => ({

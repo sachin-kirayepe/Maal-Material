@@ -15,8 +15,8 @@ package = "@netlify/plugin-nextjs"
 publish = "C:\\Users\\asus\\OneDrive\\Desktop\\ConstructOs\\apps\\web\\.next"
 publishOrigin = "config"
 commandOrigin = "config"
+command = "pnpm run build"
 base = "C:\\Users\\asus\\OneDrive\\Desktop\\ConstructOs\\apps\\web"
-command = "cd ../.. && pnpm --filter @constructos/web build"
 
 [build.environment]
 
