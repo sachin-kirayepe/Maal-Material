@@ -37,6 +37,10 @@ import {
   Orbit as OrbitIcon,
   TerminalSquare as TerminalSquareIcon,
   Crown as CrownIcon,
+  Tractor as TractorIcon,
+  CalendarDays as CalendarDaysIcon,
+  FileText as FileTextIcon,
+  Scan as ScanIcon,
 } from "lucide-react";
 
 const Link = LinkImport as any;
@@ -73,7 +77,10 @@ const Compass = CompassIcon as any;
 const Orbit = OrbitIcon as any;
 const TerminalSquare = TerminalSquareIcon as any;
 const Crown = CrownIcon as any;
-
+const Tractor = TractorIcon as any;
+const CalendarDays = CalendarDaysIcon as any;
+const FileText = FileTextIcon as any;
+const Scan = ScanIcon as any;
 
 import { LanguageToggle } from "../../components/LanguageToggle";
 import { ThemeConfigurator } from "../../components/ThemeConfigurator";
@@ -155,6 +162,13 @@ const navigationItems = [
   { name: "Manage Users", href: "/users", icon: UsersIcon, permission: "users:read", isChild: true },
   { name: "Permissions", href: "/roles", icon: ShieldCheck, permission: "users:manage", isChild: true },
   { name: "Support & Disputes", href: "/disputes", icon: Activity, permission: "users:read" },
+
+  // 8. Equipment Marketplace
+  { name: "Equipment Rentals", href: "/equipment", icon: Tractor, permission: "equipment:read" },
+  { name: "My Rentals", href: "/rentals/contractor", icon: CalendarDays, permission: "equipment:read" },
+  { name: "Rental RFQs", href: "/rental-rfq/new", icon: FileText, permission: "equipment:read" },
+  { name: "Fleet Dashboard", href: "/equipment-owner/dashboard", icon: LayoutDashboard, permission: "equipment:manage" },
+  { name: "Gate Pass", href: "/equipment-owner/gate-pass", icon: Scan, permission: "equipment:manage" },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -206,12 +220,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
     // Specific role mappings based on Phase 2 requirements
     const roleMap: Record<string, string[]> = {
-      LOCAL_BUYER: ["Dashboard", "Buy Materials", "Categories", "Cart", "Orders"],
+      LOCAL_BUYER: ["Dashboard", "Buy Materials", "Categories", "Cart", "Orders", "Equipment Rentals", "My Rentals"],
       SHOP_OWNER: ["Dashboard", "My Shop Overview", "Manage Listings", "Stock & Inventory", "Order Management", "Invoices & Billing", "Finance", "Reports & Analytics", "Online Store", "Catalog", "Categories", "Cart"],
       SUPPLIER: ["Dashboard", "Manage Listings", "Order Management", "Invoices & Billing", "Finance", "Reports & Analytics"],
-      CONTRACTOR: ["Dashboard", "Active Projects", "Work Sites", "Purchase Orders", "Field Operations", "Staff & Workers", "Attendance Tracking", "Material Costs", "Project Expenses", "Reports & Analytics", "Contractor Tools", "My Projects"],
+      CONTRACTOR: ["Dashboard", "Active Projects", "Work Sites", "Purchase Orders", "Field Operations", "Staff & Workers", "Attendance Tracking", "Material Costs", "Project Expenses", "Reports & Analytics", "Contractor Tools", "My Projects", "Equipment Rentals", "My Rentals", "Rental RFQs"],
       WORKER: ["Dashboard", "Attendance Tracking"],
-      MACHINE_OWNER: ["Dashboard", "Manage Listings", "Invoices & Billing"]
+      MACHINE_OWNER: ["Dashboard", "Fleet Dashboard", "Gate Pass", "Manage Listings", "Invoices & Billing", "Finance", "Reports & Analytics"]
     };
 
     if (roleMap[roleName] && roleMap[roleName].includes(item.name)) return true;

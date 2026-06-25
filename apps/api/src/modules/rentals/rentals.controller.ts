@@ -14,10 +14,11 @@ export class RentalsController {
   @Get()
   async getBookings(
     @Query("tenantId") tenantId: string,
+    @Query("contractorId") contractorId: string,
     @Query("page") page: string = "1",
     @Query("limit") limit: string = "10"
   ) {
-    return this.rentalsService.getBookings(tenantId || "tenant-1", Number(page), Number(limit));
+    return this.rentalsService.getBookings(tenantId || "tenant-1", contractorId, Number(page), Number(limit));
   }
 
   @Post("intent")

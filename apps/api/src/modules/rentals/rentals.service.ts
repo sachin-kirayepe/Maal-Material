@@ -6,9 +6,12 @@ import { RealtimeGateway } from "@modules/realtime/realtime.gateway";
 export class RentalsService {
   constructor(private prisma: PrismaService, private readonly realtimeGateway: RealtimeGateway) {}
 
-  async getBookings(tenantId: string, page: number = 1, limit: number = 10) {
+  async getBookings(tenantId: string, contractorId?: string, page: number = 1, limit: number = 10) {
     const skip = (page - 1) * limit;
-    const whereClause = { tenantId };
+    const whereClause: any = { tenantId };
+    if (contractorId) {
+      whereClause.contractorId = contractorId;
+    }
 
     const [items, total] = await Promise.all([
       this.prisma.rentalBooking.findMany({

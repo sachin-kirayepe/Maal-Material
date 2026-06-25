@@ -41,4 +41,38 @@ export class RentalRfqService {
                 }
               
   }
+
+  async getRfqById(id: string) {
+    return this.prisma.rentalRFQ.findUnique({
+      where: { id },
+      // Since RentalRFQ doesn't natively have a quotes relation, we'll fetch them from MarketplaceQuotation based on rfqId string match
+    });
+  }
+
+  async getQuotesForRfq(rfqId: string) {
+    return this.prisma.marketplaceQuotation.findMany({
+      where: { rfqId },
+      include: { vendor: true }
+    });
+  }
+
+  async submitQuote(rfqId: string, vendorId: string, quoteAmount: number, terms: string) {
+    const quote = await this.prisma.marketplaceQuotation.create({
+      data: {
+        rfqId,
+        vendorId,
+        quoteAmount,
+        termsAndConditions: terms,
+        validUntil: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
+      }
+    });
+
+    // Update bids received count
+    await this.prisma.rentalRFQ.update({
+      where: { id: rfqId },
+      data: { bidsReceived: { increment: 1 } }
+    });
+
+    return quote;
+  }
 }

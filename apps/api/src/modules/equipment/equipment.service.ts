@@ -30,6 +30,31 @@ export class EquipmentService {
     };
   }
 
+  async getEquipmentById(id: string) {
+    return this.prisma.equipmentAsset.findUnique({
+      where: { id },
+      include: { pricing: true, availability: true }
+    });
+  }
+
+  async createEquipment(tenantId: string, ownerId: string, payload: any) {
+    const { pricing, metadata, ...assetData } = payload;
+    
+    return this.prisma.equipmentAsset.create({
+      data: {
+        ...assetData,
+        tenantId,
+        ownerId,
+        pricing: pricing ? {
+          create: pricing
+        } : undefined
+      },
+      include: {
+        pricing: true
+      }
+    });
+  }
+
   async getAvailableEquipment(tenantId: string, startDate: Date, endDate: Date) {
     // Advanced filtering to ensure no overlapping blocks
     return this.prisma.equipmentAsset.findMany({
