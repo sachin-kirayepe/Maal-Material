@@ -8,7 +8,7 @@
 [36m[1m​[22m[39m
 [36m[1m❯ Flags[22m[39m
   accountId: 69e79ae93fe86937ea872935
-  deployId: 6a3cb66d071fef0a81f73e1a
+  deployId: 6a3cbf5ae0273f50a26fbeb6
   packagePath: apps/web
 [36m[1m​[22m[39m
 [36m[1m❯ Current directory[22m[39m
@@ -33,17 +33,8 @@
 ⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
   ▲ Next.js 14.2.35
 
-   Creating an optimized production build ...
- [32m[1m✓[22m[39m (serwist) Bundling the service worker script with the URL '/sw.js' and the scope '/'...
-Failed to compile.
-
-./src/app/(dashboard)/shops/onboard/page.tsx
-Module not found: Can't resolve '../../../stores/uploadStore'
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-> Build failed because of webpack errors
+ ⨯ Conflicting app and page file was found, please remove the conflicting files to continue:
+ ⨯   "pages/smb-dashboard.tsx" - "app/(dashboard)/smb-dashboard/page.tsx"
  ELIFECYCLE  Command failed with exit code 1.
 [91m[1m​[22m[39m
 [91m[1m"build.command" failed                                        [22m[39m
