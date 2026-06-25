@@ -8,7 +8,7 @@
 [36m[1m​[22m[39m
 [36m[1m❯ Flags[22m[39m
   accountId: 69e79ae93fe86937ea872935
-  deployId: 6a3cad4365ceb5f1506c40b6
+  deployId: 6a3cb66d071fef0a81f73e1a
   packagePath: apps/web
 [36m[1m​[22m[39m
 [36m[1m❯ Current directory[22m[39m
@@ -37,18 +37,8 @@
  [32m[1m✓[22m[39m (serwist) Bundling the service worker script with the URL '/sw.js' and the scope '/'...
 Failed to compile.
 
-./src/app/(dashboard)/error.tsx
-Module not found: Can't resolve '@/components/ui/button'
-
-https://nextjs.org/docs/messages/module-not-found
-
 ./src/app/(dashboard)/shops/onboard/page.tsx
 Module not found: Can't resolve '../../../stores/uploadStore'
-
-https://nextjs.org/docs/messages/module-not-found
-
-./src/app/not-found.tsx
-Module not found: Can't resolve '@/components/ui/button'
 
 https://nextjs.org/docs/messages/module-not-found
 
