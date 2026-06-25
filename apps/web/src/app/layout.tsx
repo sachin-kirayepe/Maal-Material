@@ -4,6 +4,7 @@ import { NetworkIndicator } from "../components/ui/NetworkIndicator";
 import { GlobalErrorBoundary } from "../components/infrastructure/GlobalErrorBoundary";
 import { AppI18nProvider } from "../components/I18nProvider";
 import { RealtimeProvider } from "../components/providers/RealtimeProvider";
+import { Toaster } from "sonner";
 import "../styles/globals.css";
 
 import { Inter, Noto_Sans_Devanagari } from "next/font/google";
@@ -46,6 +47,7 @@ export default function RootLayout({
               <RealtimeProvider>
                 {children}
                 <NetworkIndicator />
+                <Toaster theme="system" richColors position="bottom-right" />
               </RealtimeProvider>
             </GlobalErrorBoundary>
           </ThemeProvider>

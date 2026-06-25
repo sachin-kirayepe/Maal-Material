@@ -4,6 +4,8 @@
  * and CSRF-safe headers for all requests.
  */
 
+import { toast } from "sonner";
+
 // H-04 FIX: Read API base URL from environment variable, fallback to localhost for dev
 const API_BASE_URL = (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_API_URL)
   ? process.env.NEXT_PUBLIC_API_URL
@@ -73,7 +75,11 @@ export class ApiClient {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `API Error: ${response.status}`);
+        const errorMessage = errorData.message || `API Error: ${response.status}`;
+        if (typeof window !== "undefined") {
+          toast.error(errorMessage, { description: "Network request failed. Please try again or contact support." });
+        }
+        throw new Error(errorMessage);
       }
 
       // Handle 204 No Content
