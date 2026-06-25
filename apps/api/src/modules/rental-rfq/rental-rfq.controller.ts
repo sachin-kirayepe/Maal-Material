@@ -1,6 +1,12 @@
-import { Controller, Get, Post, Body, Query } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Query, UseGuards } from '@nestjs/common';
 import { RentalRfqService } from "./rental-rfq.service";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("api/v1/rental-rfq")
 export class RentalRfqController {
   constructor(private readonly rfqService: RentalRfqService) {}

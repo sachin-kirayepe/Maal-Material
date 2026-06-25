@@ -1,6 +1,12 @@
-import { Controller, Get, Post, Body, Param, Query } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { RfqExchangeService } from "./rfq-exchange.service";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("v1/rfq-exchange")
 export class RfqExchangeController {
   constructor(private readonly rfqService: RfqExchangeService) {}

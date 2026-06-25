@@ -1,6 +1,12 @@
-import { Controller, Get, Post, Body, Param, Put, Query } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Param, Put, Query, UseGuards } from '@nestjs/common';
 import { ConstructionSiteOperationsService } from "./construction-site-operations.service";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("construction/site-operations")
 export class ConstructionSiteOperationsController {
   constructor(private readonly service: ConstructionSiteOperationsService) {}

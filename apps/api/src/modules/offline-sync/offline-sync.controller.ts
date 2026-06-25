@@ -1,7 +1,13 @@
-import { Controller, Post, Body, Get, Query, Req, Res, HttpStatus } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Post, Body, Get, Query, Req, Res, HttpStatus, UseGuards } from '@nestjs/common';
 import { OfflineSyncService } from "./offline-sync.service";
 import type { Request, Response } from "express";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("api/v1/offline-sync")
 export class OfflineSyncController {
   constructor(private readonly syncService: OfflineSyncService) {}

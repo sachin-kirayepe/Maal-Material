@@ -1,7 +1,13 @@
-import { Controller, Get, Query, HttpStatus, Res, Put, Body, Param } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, Query, HttpStatus, Res, Put, Body, Param, UseGuards } from '@nestjs/common';
 import { FraudDetectionService } from "./fraud-detection.service";
 import type { Response } from "express";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("api/v1/fraud-detection")
 export class FraudDetectionController {
   constructor(private readonly fraudService: FraudDetectionService) {}

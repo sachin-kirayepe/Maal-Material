@@ -86,9 +86,24 @@ export class RentalsService {
                   const booking = await this.prisma.rentalBooking.findUnique({ where: { id: bookingId } });
       if (!booking) throw new BadRequestException("Booking not found");
 
-      // Lock availability calendar transactionally
-      await this.prisma.$transaction([
-        this.prisma.equipmentAvailability.create({
+      await this.prisma.$transaction(async (tx) => {
+        // Pessimistic Lock on the Equipment to prevent concurrent approvals
+        await tx.$executeRaw`SELECT id FROM "Equipment" WHERE id = ${booking.equipmentId} FOR UPDATE`;
+
+        // Re-check overlaps inside the locked transaction
+        const overlaps = await tx.equipmentAvailability.findMany({
+          where: {
+            tenantId: booking.tenantId,
+            equipmentId: booking.equipmentId,
+            OR: [{ startDate: { lte: booking.endDate }, endDate: { gte: booking.startDate } }],
+          },
+        });
+
+        if (overlaps.length > 0) {
+          throw new BadRequestException("Equipment is already booked for these dates");
+        }
+
+        await tx.equipmentAvailability.create({
           data: {
             tenantId: booking.tenantId,
             equipmentId: booking.equipmentId,
@@ -97,12 +112,13 @@ export class RentalsService {
             status: "BLOCKED",
             reason: "BOOKED",
           },
-        }),
-        this.prisma.rentalBooking.update({
+        });
+
+        await tx.rentalBooking.update({
           where: { id: bookingId },
           data: { status: "APPROVED" },
-        }),
-      ]);
+        });
+      });
 
       return { message: "Booking Approved and Calendar Locked" };
                 } finally {

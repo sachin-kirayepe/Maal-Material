@@ -1,10 +1,16 @@
-import { Controller, Post, Get, Body, Logger } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Post, Get, Body, Logger, UseGuards } from '@nestjs/common';
 import { EnterpriseDigitalTwinEngine } from "../../common/engines/enterprise-digital-twin.engine";
 import { PredictiveSimulationOrchestratorEngine } from "../../common/engines/predictive-simulation-orchestrator.engine";
 import { GlobalInfrastructureObservabilityEngine } from "../../common/engines/global-infrastructure-observability.engine";
 import { AutonomousMachineFleetOrchestratorEngine } from "../../common/engines/autonomous-machine-fleet-orchestrator.engine";
 import { MachineToMachineEconomyEngine } from "../../common/engines/machine-to-machine-economy.engine";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("api/v1/civilization")
 export class UniversalApiController {
   private readonly logger = new Logger(UniversalApiController.name);

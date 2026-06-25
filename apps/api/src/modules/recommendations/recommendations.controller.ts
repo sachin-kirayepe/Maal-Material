@@ -1,7 +1,13 @@
-import { Controller, Get, Post, Body, Query, HttpStatus, Res } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Query, HttpStatus, Res, UseGuards } from '@nestjs/common';
 import { RecommendationsService } from "./recommendations.service";
 import type { Response } from "express";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("api/v1/recommendations")
 export class RecommendationsController {
   constructor(private readonly recommendationsService: RecommendationsService) {}

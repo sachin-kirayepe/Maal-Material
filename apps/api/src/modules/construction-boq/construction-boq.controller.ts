@@ -1,6 +1,12 @@
-import { Controller, Get, Post, Body, Param, Put, Query } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Param, Put, Query, UseGuards } from '@nestjs/common';
 import { ConstructionBoqService } from "./construction-boq.service";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("construction/boq")
 export class ConstructionBoqController {
   constructor(private readonly service: ConstructionBoqService) {}

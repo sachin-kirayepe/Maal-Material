@@ -1,7 +1,13 @@
-import { Controller, Post, Body, Res, HttpStatus } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Post, Body, Res, HttpStatus, UseGuards } from '@nestjs/common';
 import { NetworkResilienceService } from "./network-resilience.service";
 import type { Response } from "express";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("api/v1/network-resilience")
 export class NetworkResilienceController {
   constructor(private readonly resilienceService: NetworkResilienceService) {}

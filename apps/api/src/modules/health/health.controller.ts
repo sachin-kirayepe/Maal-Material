@@ -1,8 +1,14 @@
-import { Controller, Get, HttpCode, HttpStatus } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
 import { PrismaService } from "@database/prisma.service";
 import { createApiResponse } from "@constructos/utils";
 import { Public } from "@common/decorators/is-public.decorator";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("health")
 export class HealthController {
   constructor(private readonly prisma: PrismaService) {}

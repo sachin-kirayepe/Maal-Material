@@ -1,7 +1,13 @@
-import { Controller, Get, Post, Body, Query, Res, HttpStatus } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Query, Res, HttpStatus, UseGuards } from '@nestjs/common';
 import { ReconciliationService } from "./reconciliation.service";
 import type { Response } from "express";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("api/v1/reconciliation")
 export class ReconciliationController {
   constructor(private readonly reconciliationService: ReconciliationService) {}

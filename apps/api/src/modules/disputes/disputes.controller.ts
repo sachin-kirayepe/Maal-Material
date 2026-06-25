@@ -1,7 +1,13 @@
-import { Controller, Get, Query, HttpStatus, Res, Put, Body, Param } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, Query, HttpStatus, Res, Put, Body, Param, UseGuards } from '@nestjs/common';
 import { DisputesService } from "./disputes.service";
 import type { Response } from "express";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("api/v1/disputes")
 export class DisputesController {
   constructor(private readonly disputesService: DisputesService) {}

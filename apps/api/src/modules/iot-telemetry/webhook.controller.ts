@@ -1,15 +1,19 @@
-import {
-  Controller,
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller,
   Post,
   Body,
   Headers,
   HttpStatus,
   Res,
-  UnauthorizedException,
-} from "@nestjs/common";
+  UnauthorizedException, UseGuards } from '@nestjs/common';
 import type { Response } from "express";
 import { TelemetryProcessor } from "./telemetry.processor";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("api/v1/iot/webhook")
 export class WebhookController {
   constructor(private readonly telemetryProcessor: TelemetryProcessor) {}

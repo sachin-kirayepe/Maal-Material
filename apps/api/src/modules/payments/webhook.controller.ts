@@ -1,8 +1,14 @@
-import { Controller, Post, Body, Req, Headers, BadRequestException } from '@nestjs/common';
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Post, Body, Req, Headers, BadRequestException, UseGuards } from '@nestjs/common';
 import { GatewayService } from './gateway.service';
 import { PaymentsService } from './payments.service';
 import { PrismaService } from '@database/prisma.service';
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller('webhooks/razorpay')
 export class WebhookController {
   constructor(

@@ -1,6 +1,12 @@
-import { Controller, Post, Body, Put, Param } from "@nestjs/common";
+import { AuthGuard } from '@common/guards/auth.guard';
+import { RolesGuard } from '@common/guards/roles.guard';
+import { TenantGuard } from '@common/guards/tenant.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Post, Body, Put, Param, UseGuards } from '@nestjs/common';
 import { SmbOnboardingService } from "./smb-onboarding.service";
 
+@ApiBearerAuth()
+@UseGuards(AuthGuard, RolesGuard, TenantGuard)
 @Controller("smb-onboarding")
 export class SmbOnboardingController {
   constructor(private readonly smbOnboardingService: SmbOnboardingService) {}
