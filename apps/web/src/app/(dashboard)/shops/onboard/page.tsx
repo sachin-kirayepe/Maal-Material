@@ -3,12 +3,26 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Store, User, FileCheck, MapPin, ArrowRight, ShieldCheck, Check, Loader2, CheckCircle2 } from "lucide-react";
-import { useUploadStore } from "../../../stores/uploadStore";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "../../../../stores/authStore";
 
 export default function SMBOnboarding() {
   const uploadState = useUploadStore();
+  const router = useRouter();
+  const { user, token } = useAuthStore();
+  
   const [step, setStep] = useState(1);
   const [uploadedDocs, setUploadedDocs] = useState({ pan: false, aadhar: false });
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    name: "",
+    category: "Heavy Building Materials",
+    gstin: "",
+    pincode: "",
+    city: "Mumbai",
+    address: ""
+  });
 
   const handleDocUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: 'pan' | 'aadhar') => {
     if (e.target.files && e.target.files[0]) {
@@ -16,6 +30,69 @@ export default function SMBOnboarding() {
       if (url) {
         setUploadedDocs(prev => ({ ...prev, [type]: true }));
       }
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!formData.name) return;
+    setIsLoading(true);
+    
+    try {
+      // 1. Create Shop record first
+      const shopRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/shops`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          registrationNumber: formData.gstin || `SMB-${Date.now()}`,
+          isActive: true
+        }),
+      });
+
+      if (!shopRes.ok) throw new Error("Failed to create shop");
+      const shopData = await shopRes.json();
+      
+      // 2. Add address
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/shops/${shopData.id}/address`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          addressLine1: formData.address,
+          city: formData.city,
+          state: "Maharashtra",
+          postalCode: formData.pincode,
+          country: "India",
+          latitude: 19.0760,
+          longitude: 72.8777
+        }),
+      });
+
+      // 3. Initialize Onboarding
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/smb-onboarding/initialize`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          tenantId: user?.tenantId || shopData.tenantId,
+          shopId: shopData.id,
+          businessCategory: formData.category === "Heavy Building Materials" ? "CEMENT" : "HARDWARE"
+        }),
+      });
+
+      // Navigate to Shop Dashboard
+      router.push("/smb-dashboard");
+    } catch (err) {
+      console.error("Onboarding failed", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -72,11 +149,11 @@ export default function SMBOnboarding() {
                 <div className="space-y-5">
                   <div>
                     <label className="block text-sm text-zinc-400 mb-2">Shop/Company Name</label>
-                    <input type="text" placeholder="e.g. Metro Hardware Supply" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
+                    <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="e.g. Metro Hardware Supply" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
                   </div>
                   <div>
                     <label className="block text-sm text-zinc-400 mb-2">Primary Category</label>
-                    <select className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white">
+                    <select value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white">
                       <option>Electrical & Lighting</option>
                       <option>Plumbing & Sanitary</option>
                       <option>Paints & Chemicals</option>
@@ -85,7 +162,7 @@ export default function SMBOnboarding() {
                   </div>
                   <div>
                     <label className="block text-sm text-zinc-400 mb-2">GSTIN (Optional for turnover &lt; ₹40L)</label>
-                    <input type="text" placeholder="22AAAAA0000A1Z5" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white font-mono uppercase" />
+                    <input type="text" value={formData.gstin} onChange={e => setFormData({...formData, gstin: e.target.value})} placeholder="22AAAAA0000A1Z5" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white font-mono uppercase" />
                   </div>
                 </div>
 
@@ -106,16 +183,16 @@ export default function SMBOnboarding() {
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <label className="block text-sm text-zinc-400 mb-2">Pincode</label>
-                      <input type="text" placeholder="400001" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
+                      <input type="text" value={formData.pincode} onChange={e => setFormData({...formData, pincode: e.target.value})} placeholder="400001" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
                     </div>
                     <div className="flex-1">
                       <label className="block text-sm text-zinc-400 mb-2">City</label>
-                      <input type="text" placeholder="Mumbai" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white bg-zinc-950" readOnly />
+                      <input type="text" value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} placeholder="Mumbai" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white bg-zinc-950" readOnly />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm text-zinc-400 mb-2">Complete Address</label>
-                    <textarea rows={3} placeholder="Shop No, Building, Street..." className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white resize-none"></textarea>
+                    <textarea value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} rows={3} placeholder="Shop No, Building, Street..." className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white resize-none"></textarea>
                   </div>
                 </div>
 
@@ -150,8 +227,8 @@ export default function SMBOnboarding() {
 
                 <div className="mt-10 flex justify-between">
                   <button onClick={() => setStep(2)} className="text-zinc-400 hover:text-white px-4 py-2 font-medium transition-colors">Back</button>
-                  <button className="bg-purple-500 text-white px-8 py-3 rounded-xl font-medium hover:bg-purple-400 transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-                    Submit Registration
+                  <button onClick={handleSubmit} disabled={isLoading} className="bg-purple-500 text-white px-8 py-3 rounded-xl font-medium hover:bg-purple-400 transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.3)] disabled:opacity-50">
+                    {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Submit Registration"}
                   </button>
                 </div>
               </motion.div>

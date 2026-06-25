@@ -1,7 +1,5 @@
-"use client";
+import { redirect } from 'next/navigation';
 
-import ConstructionDashboard from "../../../pages/ConstructionDashboard";
-
-export default function ConstructionPage() {
-  return <ConstructionDashboard />;
+export default function ConstructionRedirect() {
+  redirect('/projects');
 }

@@ -52,10 +52,31 @@ export default function LoginPage() {
 
     try {
       // Connect to secure back-end authentication controller
-      await login(data.email, data.password);
+      const authData = await login(data.email, data.password);
       setServerSuccess(true);
 
-      router.push("/");
+      // Phase 1 & 2: Role-Based Routing
+      // The authStore.login returns user object or we can get it from state shortly after
+      // We will read from the updated authStore state using a small timeout or returning it from login()
+      // Let's assume login() populates the store immediately
+      setTimeout(() => {
+        const currentUser = useAuthStore.getState().user;
+        const roleName = currentUser?.role?.name || "";
+        
+        if (roleName === "LOCAL_BUYER") {
+          router.push("/marketplace");
+        } else if (roleName === "SHOP_OWNER" || roleName === "SUPPLIER") {
+          router.push("/smb-dashboard");
+        } else if (roleName === "CONTRACTOR") {
+          router.push("/projects");
+        } else if (roleName === "MACHINE_OWNER") {
+          router.push("/equipment");
+        } else {
+          // Default Enterprise/Admin routing
+          router.push("/");
+        }
+      }, 100);
+
     } catch (err: any) {
       setServerError(err.message || "Authentication failed. Contact system administrator.");
     } finally {

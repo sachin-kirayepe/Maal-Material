@@ -200,9 +200,30 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     router.push("/login");
   };
 
-  const visibleNavItems = navigationItems.filter(
-    (item) => !item.permission || hasPermission(item.permission),
-  );
+  const visibleNavItems = navigationItems.filter((item) => {
+    const roleName = user?.role?.name || "SUPER_ADMIN";
+    if (roleName === "SUPER_ADMIN" || roleName === "ORG_ADMIN") return true;
+
+    // Specific role mappings based on Phase 2 requirements
+    const roleMap: Record<string, string[]> = {
+      LOCAL_BUYER: ["Dashboard", "Buy Materials", "Categories", "Cart", "Orders"],
+      SHOP_OWNER: ["Dashboard", "My Shop Overview", "Manage Listings", "Stock & Inventory", "Order Management", "Invoices & Billing", "Finance", "Reports & Analytics", "Online Store", "Catalog", "Categories", "Cart"],
+      SUPPLIER: ["Dashboard", "Manage Listings", "Order Management", "Invoices & Billing", "Finance", "Reports & Analytics"],
+      CONTRACTOR: ["Dashboard", "Active Projects", "Work Sites", "Purchase Orders", "Field Operations", "Staff & Workers", "Attendance Tracking", "Material Costs", "Project Expenses", "Reports & Analytics", "Contractor Tools", "My Projects"],
+      WORKER: ["Dashboard", "Attendance Tracking"],
+      MACHINE_OWNER: ["Dashboard", "Manage Listings", "Invoices & Billing"]
+    };
+
+    if (roleMap[roleName] && roleMap[roleName].includes(item.name)) return true;
+    
+    // Fallback to permission checks if not explicitly defined in the map (for sub-menus)
+    if (item.isChild && roleMap[roleName]) {
+       // if parent is allowed, allow child if permission passes
+       return !item.permission || hasPermission(item.permission);
+    }
+
+    return false; // Hide if not in role map
+  });
 
   return (
     <div className="min-h-screen bg-background flex text-foreground">
