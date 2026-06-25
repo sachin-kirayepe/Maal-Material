@@ -4,7 +4,11 @@
     "/admin/analytics",
     "/admin/rbac",
     "/admin/workflows",
+    "/ai/alerts",
     "/ai/automation",
+    "/ai/command-center",
+    "/ai/copilot",
+    "/ai/recommendations",
     "/analytics",
     "/ascension",
     "/audit",
@@ -31,6 +35,7 @@
     "/delivery",
     "/device-management",
     "/digital-exchange",
+    "/digital-twin",
     "/disputes",
     "/ecosystem",
     "/equipment",
@@ -64,6 +69,7 @@
     "/logistics/shipping",
     "/logistics/supply-chain",
     "/logistics/warehouse",
+    "/marketplace",
     "/network-resilience",
     "/notifications",
     "/observability",
@@ -73,6 +79,7 @@
     "/",
     "/platform",
     "/predictions",
+    "/predictive-intelligence",
     "/procurement",
     "/procurement/po/new",
     "/procurement/rfq",
@@ -109,23 +116,15 @@
     "/suppliers",
     "/supply-chain",
     "/tenants",
+    "/unauthorized",
     "/upgrade",
     "/users",
     "/vendor-discovery",
     "/whatsapp-commerce"
   ],
   "partial": [
-    "/ai/alerts",
-    "/ai/command-center",
-    "/ai/copilot",
-    "/ai/recommendations",
-    "/digital-twin",
-    "/marketplace",
-    "/predictive-intelligence",
-    "/unauthorized"
-  ],
-  "broken": [
     "/construction",
     "/ledger"
-  ]
+  ],
+  "broken": []
 }

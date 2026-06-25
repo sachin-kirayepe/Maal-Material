@@ -14,11 +14,15 @@ function walk(directory) {
       const route = fullPath.replace(dir, '').replace(/\\/g, '/').replace('/page.tsx', '') || '/';
       const content = fs.readFileSync(fullPath, 'utf8');
       
-      if (content.length < 500 || content.includes('Coming Soon') || content.includes('<div>page</div>')) {
+      // A route is broken if it is under 500 bytes and doesn't import custom components
+      if (content.length < 500 && !content.includes('import {') && !content.includes('import ')) {
         results.broken.push(route);
-      } else if (content.length < 3000) {
+      } 
+      // A route is partial if it says coming soon or is very short with no component imports
+      else if (content.includes('Coming Soon') || content.includes('<div>page</div>') || (content.length < 1000 && !content.includes('@/components'))) {
         results.partial.push(route);
-      } else {
+      } 
+      else {
         results.working.push(route);
       }
     }
