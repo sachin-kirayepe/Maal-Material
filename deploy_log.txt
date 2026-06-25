@@ -8,7 +8,7 @@
 [36m[1m​[22m[39m
 [36m[1m❯ Flags[22m[39m
   accountId: 69e79ae93fe86937ea872935
-  deployId: 6a3cc2c4f51cdc0a33c8c614
+  deployId: 6a3cc5e0bdf44457adc6e32a
   packagePath: apps/web
 [36m[1m​[22m[39m
 [36m[1m❯ Current directory[22m[39m
@@ -42,8 +42,8 @@
 Failed to fetch forecasts from API TypeError: fetch failed
     at node:internal/deps/undici/undici:14976:13
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/ai-commerce.js:1:12560)
-    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/ai-commerce.js:1:10845) {
+    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/b2b-exchange.js:1:18622)
+    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/b2b-exchange.js:1:14882) {
   [cause]: AggregateError [ECONNREFUSED]: 
       at internalConnectMultiple (node:net:1122:18)
       at afterConnectMultiple (node:net:1689:7) {
@@ -54,8 +54,8 @@ Failed to fetch forecasts from API TypeError: fetch failed
 Failed to fetch forecasts from API TypeError: fetch failed
     at node:internal/deps/undici/undici:14976:13
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/b2b-exchange.js:1:18617)
-    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/b2b-exchange.js:1:14882) {
+    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/ai-commerce.js:1:12568)
+    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/ai-commerce.js:1:10845) {
   [cause]: AggregateError [ECONNREFUSED]: 
       at internalConnectMultiple (node:net:1122:18)
       at afterConnectMultiple (node:net:1689:7) {
@@ -64,6 +64,18 @@ Failed to fetch forecasts from API TypeError: fetch failed
   }
 }
    Generating static pages (0/195) ...
+Failed to fetch forecasts from API TypeError: fetch failed
+    at node:internal/deps/undici/undici:14976:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.get (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/ai-commerce.js:1:12568)
+    at async Object.fetchForecastData (/home/runner/work/Maal-Material/Maal-Material/apps/web/.next/server/pages/admin/ai-commerce.js:1:10845) {
+  [cause]: AggregateError [ECONNREFUSED]: 
+      at internalConnectMultiple (node:net:1122:18)
+      at afterConnectMultiple (node:net:1689:7) {
+    code: 'ECONNREFUSED',
+    [errors]: [ [Error], [Error] ]
+  }
+}
    Generating static pages (48/195) 
    Generating static pages (97/195) 
 Failed to fetch forecasts from API TypeError: fetch failed
@@ -84,222 +96,223 @@ Failed to fetch forecasts from API TypeError: fetch failed
    Finalizing page optimization ...
    Collecting build traces ...
 
-Route (app)                               Size     First Load JS
-┌ ○ /                                     18.8 kB         228 kB
-├ ○ /_not-found                           159 B          89.2 kB
-├ ○ /activity                             8.58 kB         101 kB
-├ ○ /admin/analytics                      3.91 kB         139 kB
-├ ○ /admin/rbac                           1.98 kB         134 kB
-├ ○ /admin/workflows                      5.31 kB         135 kB
-├ ○ /ai/alerts                            3.49 kB        92.5 kB
-├ ○ /ai/automation                        3.67 kB        92.7 kB
-├ ○ /ai/command-center                    3.44 kB        92.5 kB
-├ ○ /ai/copilot                           3.69 kB        92.7 kB
-├ ○ /ai/recommendations                   3.57 kB        92.6 kB
-├ ○ /analytics                            2.6 kB          132 kB
-├ ○ /ascension                            5.87 kB        94.9 kB
-├ ○ /audit                                5.15 kB         135 kB
-├ ○ /billing                              7.28 kB         104 kB
-├ ○ /billing/invoices/new                 6.62 kB         134 kB
-├ ○ /business-intelligence                4.67 kB        99.7 kB
-├ ○ /cart                                 4.32 kB         104 kB
-├ ○ /categories                           6.58 kB         103 kB
-├ ○ /checkout                             4.13 kB        96.2 kB
-├ ○ /civilization-command                 6.27 kB        95.3 kB
-├ ○ /commerce-intelligence                2.84 kB        91.9 kB
-├ ○ /commerce-network                     3.03 kB         132 kB
-├ ○ /compliance                           5.62 kB         197 kB
-├ ○ /construction                         159 B          89.2 kB
-├ ○ /construction/analytics               2.39 kB        91.4 kB
-├ ○ /construction/boq                     5.86 kB         197 kB
-├ ○ /construction/equipment               4.73 kB         134 kB
-├ ○ /construction/field-operations        2.3 kB          132 kB
-├ ○ /construction/labor                   4.08 kB         139 kB
-├ ○ /construction/material-log            7.45 kB         137 kB
-├ ○ /construction/project-costing         2.16 kB         132 kB
-├ ○ /construction/projects                4.95 kB         134 kB
-├ ○ /construction/site-operations         6.68 kB         158 kB
-├ ○ /customers                            6.58 kB         103 kB
-├ ○ /delivery                             2.95 kB         132 kB
-├ ○ /device-management                    5.42 kB        94.5 kB
-├ ○ /digital-exchange                     4.84 kB         134 kB
-├ ○ /digital-twin                         6.19 kB        95.2 kB
-├ ○ /disputes                             6.58 kB         103 kB
-├ ○ /ecosystem                            4.93 kB          94 kB
-├ ○ /equipment                            5.21 kB         135 kB
-├ ○ /equipment-availability               3.62 kB         136 kB
-├ ○ /finance/accounting                   4 kB            139 kB
-├ ○ /finance/credit                       2.45 kB         132 kB
-├ ○ /finance/dashboard                    3 kB            132 kB
-├ ○ /finance/ledger                       4.89 kB         140 kB
-├ ○ /finance/payments                     4.96 kB         134 kB
-├ ○ /finance/purchase-payments            3.85 kB         139 kB
-├ ○ /finance/reconciliation               4.23 kB         195 kB
-├ ○ /finance/risk-assessment              3.7 kB          136 kB
-├ ○ /finance/settlements                  7.75 kB         137 kB
-├ ○ /finance/tax                          7.09 kB         136 kB
-├ ○ /finance/treasury                     4.92 kB         134 kB
-├ ○ /fraud-detection                      3.31 kB         136 kB
-├ ○ /insights                             2.85 kB         132 kB
-├ ○ /intelligence                         2.51 kB        91.6 kB
-├ ○ /inventory                            9.15 kB         130 kB
-├ ○ /inventory-sharing                    5.23 kB         135 kB
-├ ○ /iot-telemetry                        5.2 kB          135 kB
-├ ○ /jobs                                 2.24 kB        95.7 kB
-├ ○ /join                                 6.04 kB         135 kB
-├ ○ /kpi                                  4.23 kB         134 kB
-├ ○ /leads                                6.18 kB         139 kB
-├ ○ /ledger                               6.18 kB        95.2 kB
-├ ○ /login                                6.61 kB         128 kB
-├ ○ /logistics                            7.2 kB          113 kB
-├ ○ /logistics/deliveries                 6.09 kB         143 kB
-├ ○ /logistics/delivery-tracking          5.69 kB         135 kB
-├ ○ /logistics/dispatch                   1.75 kB         103 kB
-├ ○ /logistics/drivers                    1.51 kB         103 kB
-├ ○ /logistics/fleet                      1.58 kB         103 kB
-├ ○ /logistics/reports                    3.34 kB         100 kB
-├ ○ /logistics/shipping                   6.72 kB         103 kB
-├ ○ /logistics/supply-chain               4.63 kB         134 kB
-├ ○ /logistics/warehouse                  5.6 kB          135 kB
-├ ○ /maintenance                          159 B          89.2 kB
-├ ○ /marketplace                          6.49 kB         115 kB
-├ ○ /network-resilience                   2.81 kB        91.9 kB
-├ ○ /notifications                        4.29 kB        97.8 kB
-├ ○ /observability                        2.43 kB        91.5 kB
-├ ○ /order-fulfillment                    2.9 kB          132 kB
-├ ○ /order-items                          3.27 kB         133 kB
-├ ○ /orders                               6.34 kB         104 kB
-├ ○ /platform                             5.42 kB         156 kB
-├ ○ /predictions                          2.25 kB        91.3 kB
-├ ○ /predictive-intelligence              8.64 kB         198 kB
-├ ○ /procurement                          5.03 kB         114 kB
-├ ○ /procurement/po/new                   7.63 kB        96.7 kB
-├ ○ /procurement/rfq                      7.78 kB         146 kB
-├ ƒ /procurement/rfq/[rfqId]/cs           6.51 kB         148 kB
-├ ○ /products                             2.47 kB         118 kB
-├ ○ /projects                             7.37 kB         104 kB
-├ ƒ /projects/[id]                        7.54 kB         104 kB
-├ ○ /projects/attendance                  6.83 kB         103 kB
-├ ○ /projects/costing                     7.06 kB         104 kB
-├ ○ /projects/materials                   7.11 kB         104 kB
-├ ○ /projects/sites                       7.2 kB          104 kB
-├ ○ /projects/workers                     7.18 kB         104 kB
-├ ○ /purchase-intelligence                2.41 kB        91.5 kB
-├ ○ /purchases                            3.67 kB         139 kB
-├ ○ /rbac                                 2.44 kB        94.6 kB
-├ ○ /realtime                             2.36 kB        91.4 kB
-├ ○ /reminders                            2.32 kB        91.4 kB
-├ ○ /rental-rfq                           2.78 kB         132 kB
-├ ○ /rentals                              5.15 kB         135 kB
-├ ○ /reputation                           3.66 kB         136 kB
-├ ○ /resilience                           2.84 kB        91.9 kB
-├ ○ /rfq-exchange                         5.15 kB         135 kB
-├ ○ /risk-analysis                        3.61 kB         136 kB
-├ ○ /roles                                6.76 kB         103 kB
-├ ○ /rules-engine                         2.23 kB        91.3 kB
-├ ○ /security                             3.19 kB        92.2 kB
-├ ○ /settings                             5.76 kB         163 kB
-├ ○ /shop-users                           5.07 kB         134 kB
-├ ○ /shops                                7.47 kB         104 kB
-├ ○ /shops/onboard                        6.84 kB         136 kB
-├ ○ /simplified-workflows                 2.23 kB        91.3 kB
-├ ○ /sourcing                             2.6 kB         91.7 kB
-├ ○ /stock                                5.96 kB          95 kB
-├ ○ /storefront                           8.77 kB         147 kB
-├ ○ /storefront/checkout                  4.4 kB          140 kB
-├ ○ /storefront/equipment                 7.99 kB         137 kB
-├ ○ /storefront/suppliers                 4.5 kB          137 kB
-├ ○ /suppliers                            2.1 kB          135 kB
-├ ○ /supply-chain                         6.59 kB        95.6 kB
-├ ○ /tenants                              7.07 kB         104 kB
-├ ○ /unauthorized                         1.6 kB          131 kB
-├ ○ /upgrade                              3.63 kB        92.7 kB
-├ ○ /users                                2.26 kB         117 kB
-├ ○ /vendor-discovery                     2.43 kB         135 kB
-└ ○ /whatsapp-commerce                    2.93 kB         132 kB
-+ First Load JS shared by all             89.1 kB
-  ├ chunks/2478-1a3a0824a45157b2.js       33.3 kB
-  ├ chunks/7aa15689-91e3146807f4b067.js   53.6 kB
-  └ other shared chunks (total)           2.15 kB
+Route (app)                                Size     First Load JS
+┌ ○ /                                      18.8 kB         233 kB
+├ ○ /_not-found                            159 B          89.2 kB
+├ ○ /activity                              6.87 kB         110 kB
+├ ○ /admin/analytics                       4.42 kB         144 kB
+├ ○ /admin/rbac                            3.72 kB         144 kB
+├ ○ /admin/workflows                       4.21 kB         144 kB
+├ ○ /ai/alerts                             1.83 kB         102 kB
+├ ○ /ai/automation                         2 kB            102 kB
+├ ○ /ai/command-center                     1.77 kB         102 kB
+├ ○ /ai/copilot                            2.02 kB         102 kB
+├ ○ /ai/recommendations                    1.9 kB          102 kB
+├ ○ /analytics                             3.24 kB         132 kB
+├ ○ /ascension                             5.87 kB        94.9 kB
+├ ○ /audit                                 4.06 kB         144 kB
+├ ○ /billing                               5.32 kB         113 kB
+├ ○ /billing/invoices/new                  6.67 kB         139 kB
+├ ○ /business-intelligence                 4.54 kB         105 kB
+├ ○ /cart                                  5.36 kB         113 kB
+├ ○ /categories                            4.62 kB         112 kB
+├ ○ /checkout                              5.15 kB         105 kB
+├ ○ /civilization-command                  6.27 kB        95.3 kB
+├ ○ /commerce-intelligence                 2.84 kB        91.9 kB
+├ ○ /commerce-network                      3.67 kB         132 kB
+├ ○ /compliance                            4.11 kB         206 kB
+├ ○ /construction                          159 B          89.2 kB
+├ ○ /construction/analytics                2.39 kB        91.4 kB
+├ ○ /construction/boq                      4.34 kB         207 kB
+├ ○ /construction/equipment                3.64 kB         143 kB
+├ ○ /construction/field-operations         2.93 kB         132 kB
+├ ○ /construction/labor                    4.59 kB         144 kB
+├ ○ /construction/material-log             6.4 kB          146 kB
+├ ○ /construction/project-costing          2.79 kB         132 kB
+├ ○ /construction/projects                 3.87 kB         144 kB
+├ ○ /construction/site-operations          4.3 kB          167 kB
+├ ○ /customers                             4.62 kB         112 kB
+├ ○ /delivery                              3.59 kB         132 kB
+├ ○ /device-management                     3.5 kB          104 kB
+├ ○ /digital-exchange                      3.75 kB         144 kB
+├ ○ /digital-twin                          6.19 kB        95.2 kB
+├ ○ /disputes                              4.6 kB          112 kB
+├ ○ /ecosystem                             3.25 kB         103 kB
+├ ○ /equipment                             4.12 kB         144 kB
+├ ○ /equipment-availability                3.68 kB         145 kB
+├ ○ /finance/accounting                    4.5 kB          144 kB
+├ ○ /finance/credit                        3.08 kB         132 kB
+├ ○ /finance/dashboard                     3.64 kB         132 kB
+├ ○ /finance/ledger                        5.4 kB          145 kB
+├ ○ /finance/payments                      3.88 kB         144 kB
+├ ○ /finance/purchase-payments             4.35 kB         144 kB
+├ ○ /finance/reconciliation                4.39 kB         196 kB
+├ ○ /finance/risk-assessment               3.77 kB         145 kB
+├ ○ /finance/settlements                   6.69 kB         147 kB
+├ ○ /finance/tax                           6.03 kB         146 kB
+├ ○ /finance/treasury                      3.83 kB         144 kB
+├ ○ /fraud-detection                       3.38 kB         145 kB
+├ ○ /insights                              3.49 kB         132 kB
+├ ○ /intelligence                          2.51 kB        91.6 kB
+├ ○ /inventory                             7.67 kB         140 kB
+├ ○ /inventory-sharing                     4.14 kB         144 kB
+├ ○ /iot-telemetry                         4.12 kB         144 kB
+├ ○ /jobs                                  2.24 kB        95.7 kB
+├ ○ /join                                  6.63 kB         135 kB
+├ ○ /kpi                                   3.15 kB         143 kB
+├ ○ /leads                                 6.24 kB         148 kB
+├ ○ /ledger                                4.26 kB         104 kB
+├ ○ /login                                 5.14 kB         137 kB
+├ ○ /logistics                             5.24 kB         122 kB
+├ ○ /logistics/deliveries                  5.01 kB         152 kB
+├ ○ /logistics/delivery-tracking           4.61 kB         144 kB
+├ ○ /logistics/dispatch                    4.42 kB         112 kB
+├ ○ /logistics/drivers                     4.19 kB         112 kB
+├ ○ /logistics/fleet                       4.26 kB         112 kB
+├ ○ /logistics/reports                     3.34 kB         100 kB
+├ ○ /logistics/shipping                    4.75 kB         112 kB
+├ ○ /logistics/supply-chain                3.54 kB         143 kB
+├ ○ /logistics/warehouse                   4.52 kB         144 kB
+├ ○ /maintenance                           159 B          89.2 kB
+├ ○ /marketplace                           4.91 kB         120 kB
+├ ○ /network-resilience                    2.81 kB        91.9 kB
+├ ○ /notifications                         2.61 kB         107 kB
+├ ○ /observability                         2.43 kB        91.5 kB
+├ ○ /order-fulfillment                     3.53 kB         132 kB
+├ ○ /order-items                           3.92 kB         133 kB
+├ ○ /orders                                4.4 kB          113 kB
+├ ○ /platform                              4.81 kB         156 kB
+├ ○ /predictions                           2.25 kB        91.3 kB
+├ ○ /predictive-intelligence               8.16 kB         198 kB
+├ ○ /procurement                           3.34 kB         119 kB
+├ ○ /procurement/po/new                    5.71 kB         106 kB
+├ ○ /procurement/rfq                       6.71 kB         155 kB
+├ ƒ /procurement/rfq/[rfqId]/cs            6.57 kB         157 kB
+├ ○ /products                              2.47 kB         127 kB
+├ ○ /projects                              5.4 kB          113 kB
+├ ƒ /projects/[id]                         5.57 kB         113 kB
+├ ○ /projects/attendance                   4.85 kB         113 kB
+├ ○ /projects/costing                      5.1 kB          113 kB
+├ ○ /projects/materials                    5.15 kB         113 kB
+├ ○ /projects/sites                        5.22 kB         113 kB
+├ ○ /projects/workers                      5.23 kB         113 kB
+├ ○ /purchase-intelligence                 2.41 kB        91.5 kB
+├ ○ /purchases                             4.17 kB         144 kB
+├ ○ /rbac                                  3.56 kB         104 kB
+├ ○ /realtime                              2.36 kB        91.4 kB
+├ ○ /reminders                             2.32 kB        91.4 kB
+├ ○ /rental-rfq                            3.41 kB         132 kB
+├ ○ /rentals                               4.06 kB         144 kB
+├ ○ /reputation                            3.72 kB         145 kB
+├ ○ /resilience                            2.84 kB        91.9 kB
+├ ○ /rfq-exchange                          4.06 kB         144 kB
+├ ○ /risk-analysis                         3.67 kB         145 kB
+├ ○ /roles                                 4.79 kB         112 kB
+├ ○ /rules-engine                          2.23 kB        91.3 kB
+├ ○ /security                              3.19 kB        92.2 kB
+├ ○ /settings                              5.2 kB          168 kB
+├ ○ /shop-users                            3.98 kB         144 kB
+├ ○ /shops                                 2.62 kB         114 kB
+├ ○ /shops/onboard                         5.77 kB         146 kB
+├ ○ /simplified-workflows                  2.23 kB        91.3 kB
+├ ○ /sourcing                              2.6 kB         91.7 kB
+├ ○ /stock                                 4.05 kB         104 kB
+├ ○ /storefront                            7.7 kB          156 kB
+├ ○ /storefront/checkout                   4.9 kB          145 kB
+├ ○ /storefront/equipment                  6.93 kB         147 kB
+├ ○ /storefront/suppliers                  4.56 kB         146 kB
+├ ○ /suppliers                             3.79 kB         144 kB
+├ ○ /supply-chain                          4.65 kB         105 kB
+├ ○ /tenants                               2.02 kB         113 kB
+├ ○ /unauthorized                          2.23 kB         131 kB
+├ ○ /upgrade                               3.63 kB        92.7 kB
+├ ○ /users                                 2.27 kB         127 kB
+├ ○ /vendor-discovery                      4.12 kB         144 kB
+└ ○ /whatsapp-commerce                     3.57 kB         132 kB
++ First Load JS shared by all              89.1 kB
+  ├ chunks/2478-f4aba7914d2a9a47.js        33.3 kB
+  ├ chunks/7aa15689-91e3146807f4b067.js    53.6 kB
+  └ other shared chunks (total)            2.15 kB
 
-Route (pages)                             Size     First Load JS
-┌   /_app                                 0 B            89.2 kB
-├ ○ /admin/accounting-dashboard           1.48 kB        90.7 kB
-├ ○ /admin/ai-commerce                    5.77 kB          95 kB
-├ ○ /admin/audit-center                   1.06 kB        90.3 kB
-├ ○ /admin/b2b-exchange                   6.65 kB        95.9 kB
-├ ○ /admin/cache-management               1.11 kB        90.4 kB
-├ ○ /admin/cicd-pipeline                  1.16 kB        90.4 kB
-├ ○ /admin/compliance-center              1.33 kB        90.6 kB
-├ ○ /admin/deployments                    1.29 kB        90.5 kB
-├ ○ /admin/device-management              1.14 kB        90.4 kB
-├ ○ /admin/dispute-management             1.56 kB        90.8 kB
-├ ○ /admin/distributed-orchestration      1.19 kB        90.4 kB
-├ ○ /admin/environments                   1.16 kB        90.4 kB
-├ ○ /admin/equipment-availability         781 B            90 kB
-├ ○ /admin/equipment-marketplace          1.68 kB        90.9 kB
-├ ○ /admin/field-operations-center        1.14 kB        90.4 kB
-├ ○ /admin/finance-center                 1.19 kB        90.4 kB
-├ ○ /admin/financial-approvals            1.69 kB        90.9 kB
-├ ○ /admin/financial-command              1.41 kB        90.7 kB
-├ ○ /admin/fleet-analytics                733 B            90 kB
-├ ○ /admin/fleet-management               1.28 kB        90.5 kB
-├ ○ /admin/fraud-monitoring               2.97 kB        92.2 kB
-├ ○ /admin/gateway-monitoring             1.17 kB        90.4 kB
-├ ○ /admin/infrastructure-dashboard       1.21 kB        90.4 kB
-├ ○ /admin/infrastructure-health          1.23 kB        90.5 kB
-├ ○ /admin/inventory-intelligence         2.82 kB        92.1 kB
-├ ○ /admin/inventory-sharing              1.6 kB         90.8 kB
-├ ○ /admin/logistics-command              2.64 kB        91.9 kB
-├ ○ /admin/logistics-coordination         1.81 kB        91.1 kB
-├ ○ /admin/mobile-dashboard               1.09 kB        90.3 kB
-├ ○ /admin/observability                  941 B          90.2 kB
-├ ○ /admin/observability-dashboard        1.11 kB        90.3 kB
-├ ○ /admin/payment-risk                   2.81 kB          92 kB
-├ ○ /admin/platform-extensions            1.12 kB        90.4 kB
-├ ○ /admin/predictive-operations          2.71 kB        91.9 kB
-├ ○ /admin/procurement-dashboard          1.34 kB        90.6 kB
-├ ○ /admin/purchase-approvals             1.27 kB        90.5 kB
-├ ○ /admin/reconciliation-dashboard       1.6 kB         90.8 kB
-├ ○ /admin/regional-analytics             776 B            90 kB
-├ ○ /admin/releases                       1.14 kB        90.4 kB
-├ ○ /admin/rental-booking                 1.81 kB          91 kB
-├ ○ /admin/resilience-monitoring          1.36 kB        90.6 kB
-├ ○ /admin/rfq-management                 1.83 kB        91.1 kB
-├ ○ /admin/risk-intelligence              3.13 kB        92.4 kB
-├ ○ /admin/security-dashboard             1.16 kB        90.4 kB
-├ ○ /admin/sourcing-intelligence          910 B          90.1 kB
-├ ○ /admin/supplier-discovery             1.38 kB        90.6 kB
-├ ○ /admin/supply-chain-monitoring        1.2 kB         90.4 kB
-├ ○ /admin/sync-monitoring                3.08 kB        92.3 kB
-├ ○ /admin/system-command                 2.1 kB         95.7 kB
-├ ○ /admin/tax-center                     1.29 kB        90.5 kB
-├ ○ /admin/treasury-management            1.34 kB        90.6 kB
-├ ○ /admin/trust-intelligence             2.99 kB        92.2 kB
-├ ○ /admin/vendor-exchange                2.54 kB        91.8 kB
-├ ○ /admin/vendor-management              1.05 kB        90.3 kB
-├ ○ /ConstructionDashboard                2.31 kB        91.5 kB
-├ ○ /financial/LedgerDashboard            2.87 kB        92.1 kB
-├ ○ /intelligence/IntelligenceDashboard   105 kB          194 kB
-├ ○ /intelligence/ReportsCenter           2.08 kB        95.7 kB
-├ ○ /intelligence/RulesBuilder            2.03 kB        91.3 kB
-├ ○ /MarketplaceDashboard                 3.77 kB          93 kB
-├ ○ /smb-dashboard                        27 kB           124 kB
-├ ○ /smb/sync-dashboard                   4.86 kB         102 kB
-└ ○ /smb/whatsapp-operations              3.02 kB        99.8 kB
-+ First Load JS shared by all             110 kB
-  ├ chunks/framework-2c7975558ed09647.js  44.9 kB
-  ├ chunks/main-1dc66bcb7ca127ba.js       36.4 kB
-  ├ css/e0796087bfbb6b32.css              20.6 kB
-  └ other shared chunks (total)           7.9 kB
+Route (pages)                              Size     First Load JS
+┌   /_app                                  0 B            93.4 kB
+├ ○ /admin/accounting-dashboard            1.48 kB        94.9 kB
+├ ○ /admin/ai-commerce                     5.77 kB        99.2 kB
+├ ○ /admin/audit-center                    1.06 kB        94.5 kB
+├ ○ /admin/b2b-exchange                    6.65 kB         100 kB
+├ ○ /admin/cache-management                1.11 kB        94.5 kB
+├ ○ /admin/cicd-pipeline                   1.16 kB        94.6 kB
+├ ○ /admin/compliance-center               1.33 kB        94.7 kB
+├ ○ /admin/deployments                     1.29 kB        94.7 kB
+├ ○ /admin/device-management               1.14 kB        94.5 kB
+├ ○ /admin/dispute-management              1.56 kB          95 kB
+├ ○ /admin/distributed-orchestration       1.19 kB        94.6 kB
+├ ○ /admin/environments                    1.16 kB        94.6 kB
+├ ○ /admin/equipment-availability          781 B          94.2 kB
+├ ○ /admin/equipment-marketplace           1.68 kB        95.1 kB
+├ ○ /admin/field-operations-center         1.14 kB        94.5 kB
+├ ○ /admin/finance-center                  1.19 kB        94.6 kB
+├ ○ /admin/financial-approvals             1.69 kB        95.1 kB
+├ ○ /admin/financial-command               1.41 kB        94.8 kB
+├ ○ /admin/fleet-analytics                 733 B          94.1 kB
+├ ○ /admin/fleet-management                1.28 kB        94.7 kB
+├ ○ /admin/fraud-monitoring                2.97 kB        96.4 kB
+├ ○ /admin/gateway-monitoring              1.17 kB        94.6 kB
+├ ○ /admin/infrastructure-dashboard        1.21 kB        94.6 kB
+├ ○ /admin/infrastructure-health           1.23 kB        94.6 kB
+├ ○ /admin/inventory-intelligence          2.82 kB        96.2 kB
+├ ○ /admin/inventory-sharing               1.6 kB           95 kB
+├ ○ /admin/logistics-command               2.64 kB          96 kB
+├ ○ /admin/logistics-coordination          1.81 kB        95.2 kB
+├ ○ /admin/mobile-dashboard                1.09 kB        94.5 kB
+├ ○ /admin/observability                   941 B          94.3 kB
+├ ○ /admin/observability-dashboard         1.11 kB        94.5 kB
+├ ○ /admin/payment-risk                    2.81 kB        96.2 kB
+├ ○ /admin/platform-extensions             1.12 kB        94.5 kB
+├ ○ /admin/predictive-operations           2.71 kB        96.1 kB
+├ ○ /admin/procurement-dashboard           1.34 kB        94.7 kB
+├ ○ /admin/purchase-approvals              1.27 kB        94.7 kB
+├ ○ /admin/reconciliation-dashboard        1.6 kB           95 kB
+├ ○ /admin/regional-analytics              776 B          94.2 kB
+├ ○ /admin/releases                        1.14 kB        94.5 kB
+├ ○ /admin/rental-booking                  1.81 kB        95.2 kB
+├ ○ /admin/resilience-monitoring           1.36 kB        94.8 kB
+├ ○ /admin/rfq-management                  1.83 kB        95.2 kB
+├ ○ /admin/risk-intelligence               3.13 kB        96.5 kB
+├ ○ /admin/security-dashboard              1.16 kB        94.6 kB
+├ ○ /admin/sourcing-intelligence           910 B          94.3 kB
+├ ○ /admin/supplier-discovery              1.38 kB        94.8 kB
+├ ○ /admin/supply-chain-monitoring         1.2 kB         94.6 kB
+├ ○ /admin/sync-monitoring                 3.08 kB        96.5 kB
+├ ○ /admin/system-command                  2.1 kB         95.5 kB
+├ ○ /admin/tax-center                      1.29 kB        94.7 kB
+├ ○ /admin/treasury-management             1.34 kB        94.7 kB
+├ ○ /admin/trust-intelligence              2.99 kB        96.4 kB
+├ ○ /admin/vendor-exchange                 2.54 kB          96 kB
+├ ○ /admin/vendor-management               1.05 kB        94.5 kB
+├ ○ /ConstructionDashboard                 2.31 kB        95.7 kB
+├ ○ /financial/LedgerDashboard             2.87 kB        96.3 kB
+├ ○ /intelligence/IntelligenceDashboard    105 kB          198 kB
+├ ○ /intelligence/ReportsCenter            2.07 kB        95.5 kB
+├ ○ /intelligence/RulesBuilder             2.03 kB        95.4 kB
+├ ○ /MarketplaceDashboard                  3.77 kB        97.2 kB
+├ ○ /smb-dashboard                         27 kB           128 kB
+├ ○ /smb/sync-dashboard                    4.86 kB         106 kB
+└ ○ /smb/whatsapp-operations               3.02 kB         104 kB
++ First Load JS shared by all              114 kB
+  ├ chunks/framework-2c7975558ed09647.js   44.9 kB
+  ├ chunks/main-1dc66bcb7ca127ba.js        36.4 kB
+  ├ chunks/pages/_app-33323396db265faf.js  10.2 kB
+  ├ css/e0796087bfbb6b32.css               20.6 kB
+  └ other shared chunks (total)            1.91 kB
 
-ƒ Middleware                              25.4 kB
+ƒ Middleware                               25.4 kB
 
 ○  (Static)   prerendered as static content
 ƒ  (Dynamic)  server-rendered on demand
 
 ​
-[90m(build.command completed in 1m 27.6s)[39m
+[90m(build.command completed in 1m 11.9s)[39m
 [96m[1m​[22m[39m
 [96m[1mFunctions bundling                                            [22m[39m
 [96m[1m────────────────────────────────────────────────────────────────[22m[39m
@@ -308,7 +321,7 @@ Packaging Functions from [36mapps/web/.netlify/functions-internal[39m director
  - ___netlify-server-handler/___netlify-server-handler.mjs
 ​
 ​
-[90m(Functions bundling completed in 3.7s)[39m
+[90m(Functions bundling completed in 2.9s)[39m
 [96m[1m​[22m[39m
 [96m[1mEdge Functions bundling                                       [22m[39m
 [96m[1m────────────────────────────────────────────────────────────────[22m[39m
@@ -316,7 +329,7 @@ Packaging Functions from [36mapps/web/.netlify/functions-internal[39m director
 Packaging Edge Functions from [36mapps/web/.netlify/edge-functions[39m directory:
  - ___netlify-edge-handler-src-middleware
 ​
-[90m(Edge Functions bundling completed in 3.3s)[39m
+[90m(Edge Functions bundling completed in 3s)[39m
 
 Deploying to Netlify
 ────────────────────────────────────────────────────────────────
@@ -330,25 +343,25 @@ Configuration path: /home/runner/work/Maal-Material/Maal-Material/netlify.toml
 [33m⠋[39m Hashing files...
 [33m⠋[39m Looking for a functions cache...
 [32m✔[39m Deploying functions from cache (use --skip-functions-cache to override)
-[32m✔[39m Finished hashing 303 files and 1 functions
+[32m✔[39m Finished hashing 274 files and 1 functions
 [33m⠋[39m CDN diffing files...
-[32m✔[39m CDN requesting 91 files and 1 functions
-[33m⠋[39m Uploading 92 files
-[32m✔[39m Finished uploading 92 assets
+[32m✔[39m CDN requesting 132 files and 1 functions
+[33m⠋[39m Uploading 133 files
+[32m✔[39m Finished uploading 133 assets
 [33m⠋[39m Waiting for deploy to go live...
 [32m✔[39m Deploy is live!
 [96m[1m​[22m[39m
 [96m[1mNetlify Build Complete                                        [22m[39m
 [96m[1m────────────────────────────────────────────────────────────────[22m[39m
 ​
-[90m(Netlify Build completed in 2m)[39m
+[90m(Netlify Build completed in 1m 49.9s)[39m
 
 🚀 Deploy complete
 ────────────────────────────────────────────────────────────────
 
 Production URL: <https://maal-material.netlify.app>
-Unique deploy URL: <https://6a3cc2c4f51cdc0a33c8c614--maal-material.netlify.app>
+Unique deploy URL: <https://6a3cc5e0bdf44457adc6e32a--maal-material.netlify.app>
 
-Build logs: <https://app.netlify.com/projects/maal-material/deploys/6a3cc2c4f51cdc0a33c8c614>
+Build logs: <https://app.netlify.com/projects/maal-material/deploys/6a3cc5e0bdf44457adc6e32a>
 Function logs: <https://app.netlify.com/projects/maal-material/logs/functions>
 Edge function logs: <https://app.netlify.com/projects/maal-material/logs/edge-functions>
