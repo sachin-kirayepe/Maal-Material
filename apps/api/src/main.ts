@@ -30,9 +30,15 @@ async function bootstrap() {
 
   // M-07 FIX: CORS is environment-aware — restrict origins in production
   const isDev = (process.env.NODE_ENV || "development") !== "production";
-  const corsOrigins = isDev
-    ? ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"]
-    : [process.env.FRONTEND_URL || "https://maal-material.netlify.app"].filter(Boolean) as string[];
+  const corsOrigins = [
+    "http://localhost:3000", 
+    "http://localhost:3001", 
+    "http://localhost:3002",
+    "https://maal-material.netlify.app"
+  ];
+  if (process.env.FRONTEND_URL) {
+    corsOrigins.push(process.env.FRONTEND_URL);
+  }
 
   app.enableCors({
     origin: corsOrigins,
