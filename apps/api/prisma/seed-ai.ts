@@ -109,7 +109,7 @@ async function main() {
   if (user) {
     await prisma.copilotConversation.create({
       data: {
-        tenantId,
+        tenants: { connect: { id: tenantId } },
         userId: user.id,
         title: "Project Efficiency Analysis",
         history: JSON.stringify([
