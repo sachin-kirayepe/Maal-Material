@@ -15,7 +15,7 @@ export default function FieldManagerApp() {
         <p className="text-zinc-400">A responsive mobile-first view designed for site supervisors.</p>
       </div>
 
-      {/* Mock Mobile Device Frame */}
+
       <motion.div 
         initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
         className="w-[375px] h-[812px] bg-zinc-950 border-[8px] border-zinc-800 rounded-[3rem] overflow-hidden relative shadow-2xl flex flex-col"

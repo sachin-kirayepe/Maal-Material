@@ -90,17 +90,17 @@ export default function AnalyticsBuilder() {
               </div>
             </div>
 
-            {/* Preview Chart (Mock) */}
+
             <div className="flex-1 border border-zinc-800 rounded-xl flex items-end justify-between p-8 pb-0 gap-2 relative bg-black/50">
-              {/* Fake Y Axis labels */}
+
               <div className="absolute left-2 top-4 bottom-8 flex flex-col justify-between text-[10px] text-zinc-600">
-                <span>₹10M</span>
-                <span>₹7.5M</span>
-                <span>₹5M</span>
-                <span>₹2.5M</span>
+                <span>100</span>
+                <span>75</span>
+                <span>50</span>
+                <span>25</span>
                 <span>0</span>
               </div>
-              {/* Fake Grid lines */}
+
               <div className="absolute left-10 right-4 top-6 bottom-8 flex flex-col justify-between pointer-events-none">
                 <div className="w-full h-px bg-zinc-800/50"></div>
                 <div className="w-full h-px bg-zinc-800/50"></div>
@@ -109,17 +109,17 @@ export default function AnalyticsBuilder() {
               </div>
 
               {/* Bars */}
-              {[40, 65, 45, 80, 55, 90, 70].map((h, i) => (
+              {[].map((h, i) => (
                 <div key={i} className="w-full relative group z-10 flex justify-center">
                   <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} className="w-12 bg-indigo-500 rounded-t-sm opacity-80 group-hover:opacity-100 transition-opacity relative">
                     <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-black text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 font-medium">
-                      ₹{(h * 0.1).toFixed(1)}M
+                      {(h).toFixed(0)}
                     </div>
                   </motion.div>
                 </div>
               ))}
               
-              {/* Fake X Axis labels */}
+
               <div className="absolute left-10 right-4 -bottom-6 flex justify-between text-[10px] text-zinc-500 px-4">
                 <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
               </div>

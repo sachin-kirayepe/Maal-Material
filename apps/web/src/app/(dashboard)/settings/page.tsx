@@ -84,7 +84,7 @@ export default function SettingsPage() {
 
               <div className="space-y-2">
                 <label className="text-sm text-zinc-400 flex items-center gap-2"><Building size={14}/> Organization</label>
-                <input type="text" defaultValue="L&T Construction (Demo)" className="w-full bg-black border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition-colors" />
+                <input type="text" defaultValue="Company Name" className="w-full bg-black border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition-colors" />
               </div>
             </div>
 

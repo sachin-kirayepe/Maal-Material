@@ -120,7 +120,7 @@ export default function ProjectsPage() {
             <div>
               <p className="text-xs text-slate-500 font-medium">Portfolio Spent</p>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                ₹{(stats?.totalActualCost || 0).toLocaleString()}
+                {(stats?.totalActualCost || 0).toLocaleString()}
               </h3>
             </div>
           </CardContent>
@@ -211,13 +211,13 @@ export default function ProjectsPage() {
                           </span>
                         </td>
                         <td className="px-6 py-4 text-right font-medium text-slate-900 dark:text-white">
-                          ₹{project.estimatedBudget.toLocaleString()}
+                          {project.estimatedBudget.toLocaleString()}
                         </td>
                         <td className="px-6 py-4 text-right">
                           <div
                             className={`font-bold ${isOverBudget ? "text-rose-500" : "text-emerald-500"}`}
                           >
-                            ₹{project.actualCost.toLocaleString()}
+                            {project.actualCost.toLocaleString()}
                           </div>
                           <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-2 overflow-hidden">
                             <div

@@ -181,7 +181,7 @@ export default function OMSDashboard() {
                 Avg Order Value
               </p>
               <h3 className="text-3xl font-black text-slate-900 dark:text-white">
-                ₹{stats.averageOrderValue.toLocaleString()}
+                {stats.averageOrderValue.toLocaleString()}
               </h3>
             </div>
             <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center">
@@ -283,7 +283,7 @@ export default function OMSDashboard() {
                       </span>
                     </td>
                     <td className="p-4 font-bold text-slate-900 dark:text-white">
-                      ₹{order.grandTotal.toLocaleString()}
+                      {order.grandTotal.toLocaleString()}
                     </td>
                     <td className="p-4">{getStatusBadge(order.orderStatus)}</td>
                     <td className="p-4">{getFulfillmentBadge(order.fulfillmentStatus)}</td>

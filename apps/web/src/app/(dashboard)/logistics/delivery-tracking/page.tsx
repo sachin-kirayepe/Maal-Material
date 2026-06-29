@@ -111,12 +111,7 @@ export default function DeliveryTracking() {
                   <p className="text-zinc-500">Live Map Integration (Google Maps API)</p>
                 </div>
                 
-                {/* Mock Map Route */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30" preserveAspectRatio="none">
-                  <path d="M 100 200 C 300 200, 400 50, 700 150" fill="transparent" stroke="#a855f7" strokeWidth="3" strokeDasharray="5,5" />
-                  <circle cx="100" cy="200" r="6" fill="#a855f7" />
-                  <circle cx="700" cy="150" r="6" fill="#ef4444" />
-                </svg>
+
               </div>
               
               <div className="p-6 flex-1 flex flex-col justify-between">

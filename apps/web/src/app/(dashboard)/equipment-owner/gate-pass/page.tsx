@@ -19,7 +19,7 @@ export default function GatePassScanner() {
     setResult(null);
     try {
       // Simulate real-world RFID scan delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await Promise.resolve();
       
       const response = await ApiClient.post(`/api/v1/equipment/${equipmentId}/verify-gate-pass`);
       setResult(response);
@@ -33,7 +33,7 @@ export default function GatePassScanner() {
   const handleManualReturn = async () => {
     setIsScanning(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await Promise.resolve();
       setResult({ status: "RETURNED", message: "Equipment securely returned to yard. Calendar updated." });
     } finally {
       setIsScanning(false);

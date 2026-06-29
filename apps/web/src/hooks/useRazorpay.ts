@@ -38,7 +38,7 @@ export function useRazorpay() {
     // const order = await res.json();
 
     const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_dummy_key', // Replace with your actual Test Key
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || '',
       amount: amount * 100, // Amount in paise
       currency: 'INR',
       name: 'ConstructOS',

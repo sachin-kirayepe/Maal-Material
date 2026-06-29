@@ -105,7 +105,7 @@ export default function ProjectDetailsPage() {
               <span className="text-xs font-semibold uppercase tracking-wider">Budget</span>
             </div>
             <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-              ₹{estimatedBudget.toLocaleString()}
+              {estimatedBudget.toLocaleString()}
             </h3>
           </CardContent>
         </Card>
@@ -123,7 +123,7 @@ export default function ProjectDetailsPage() {
             <h3
               className={`text-2xl font-black ${isOverBudget ? "text-rose-500" : "text-slate-900 dark:text-white"}`}
             >
-              ₹{actualCost.toLocaleString()}
+              {actualCost.toLocaleString()}
             </h3>
             <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-2 overflow-hidden">
               <div
@@ -177,7 +177,7 @@ export default function ProjectDetailsPage() {
                       Material Costs
                     </span>
                     <span className="font-bold text-slate-900 dark:text-white">
-                      ₹{costing.materialCost.toLocaleString()}
+                      {costing.materialCost.toLocaleString()}
                     </span>
                   </div>
                   <div className="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
@@ -193,7 +193,7 @@ export default function ProjectDetailsPage() {
                       Labor Costs
                     </span>
                     <span className="font-bold text-slate-900 dark:text-white">
-                      ₹{costing.laborCost.toLocaleString()}
+                      {costing.laborCost.toLocaleString()}
                     </span>
                   </div>
                   <div className="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
@@ -209,7 +209,7 @@ export default function ProjectDetailsPage() {
                       Operational & Equipment
                     </span>
                     <span className="font-bold text-slate-900 dark:text-white">
-                      ₹{costing.operationalCost.toLocaleString()}
+                      {costing.operationalCost.toLocaleString()}
                     </span>
                   </div>
                   <div className="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
@@ -296,7 +296,7 @@ export default function ProjectDetailsPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right font-bold text-slate-900 dark:text-white">
-                      ₹{expense.amount.toLocaleString()}
+                      {expense.amount.toLocaleString()}
                     </td>
                   </tr>
                 ))}

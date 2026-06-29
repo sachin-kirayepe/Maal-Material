@@ -10,13 +10,15 @@ import { useEquipmentStore } from "@/stores/equipmentStore";
 import { Button } from "@constructos/ui";
 import Link from "next/link";
 import { EquipmentSearchSidebar } from "@/components/equipment/EquipmentSearchSidebar";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function MarketplaceHome() {
+  const tenantId = useTenantId();
   const { equipment, isLoading, fetchEquipment } = useEquipmentStore();
   const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
-    fetchEquipment("tenant-1", 1, 20); // Fetch more for marketplace
+    fetchEquipment(tenantId, 1, 20); // Fetch more for marketplace
   }, [fetchEquipment]);
 
   const categories = [
@@ -148,7 +150,7 @@ export default function MarketplaceHome() {
                     <div className="mt-auto flex justify-between items-end">
                       <div>
                         <p className="text-xs text-zinc-500 font-medium mb-1">Rental Rate</p>
-                        <p className="text-2xl font-bold text-white">₹{item.pricing?.dailyRate?.toLocaleString() || "12,000"} <span className="text-sm text-zinc-500 font-normal">/day</span></p>
+                        <p className="text-2xl font-bold text-white">{item.pricing?.dailyRate?.toLocaleString() || "12,000"} <span className="text-sm text-zinc-500 font-normal">/day</span></p>
                       </div>
                       
                       <Link href={`/equipment/${item.id}`}>

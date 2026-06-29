@@ -12,6 +12,11 @@ export default function PaymentGateway() {
   React.useEffect(() => {
     fetchLedgerEntries(1, 10);
   }, [fetchLedgerEntries]);
+
+  const totalVolume = transactions.reduce((acc: number, t: any) => acc + (t.amount || t.value || 0), 0);
+  const successCount = transactions.filter((t: any) => t.status === 'Success' || t.status === 'COMPLETED').length;
+  const successRate = transactions.length > 0 ? ((successCount / transactions.length) * 100).toFixed(1) + '%' : 'N/A';
+
   return (
     <div className="min-h-screen bg-black text-white p-8 font-sans">
       <div className="flex justify-between items-start mb-8">
@@ -30,15 +35,17 @@ export default function PaymentGateway() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
           <p className="text-zinc-400 text-sm mb-1">Total Volume (Today)</p>
-          <p className="text-3xl font-medium">₹1.75 L</p>
+          <p className="text-3xl font-medium">{isLoading ? "—" : `${totalVolume.toLocaleString()}`}</p>
         </div>
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
           <p className="text-zinc-400 text-sm mb-1">Success Rate</p>
-          <p className="text-3xl font-medium text-green-400">98.2%</p>
+          <p className={`text-3xl font-medium ${successRate === 'N/A' ? 'text-zinc-500' : 'text-green-400'}`}>{isLoading ? "—" : successRate}</p>
         </div>
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
           <p className="text-zinc-400 text-sm mb-1">Gateway Status</p>
-          <p className="text-3xl font-medium flex items-center gap-2"><span className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></span> Operational</p>
+          <p className="text-3xl font-medium flex items-center gap-2">
+            <span className={`w-4 h-4 rounded-full ${isLoading ? 'bg-zinc-500' : 'bg-green-500 animate-pulse'}`}></span> {isLoading ? "Checking..." : "Operational"}
+          </p>
         </div>
       </div>
 
@@ -63,7 +70,7 @@ export default function PaymentGateway() {
               <th className="px-6 py-4">Date & Time</th>
               <th className="px-6 py-4">Customer</th>
               <th className="px-6 py-4">Method</th>
-              <th className="px-6 py-4 text-right">Amount (₹)</th>
+              <th className="px-6 py-4 text-right">Amount ()</th>
               <th className="px-6 py-4">Status</th>
               <th className="px-6 py-4 text-center">Action</th>
             </tr>

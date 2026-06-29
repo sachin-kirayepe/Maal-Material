@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useRfqExchangeStore } from "../../stores/rfqExchangeStore";
 import { FileText as FileTextIcon, Handshake as HandshakeIcon } from "lucide-react";
+import { useTenantId } from "@/hooks/useTenantId";
 const FileText = FileTextIcon as any;
 const Handshake = HandshakeIcon as any;
 
 export default function RFQManagementCenter() {
   const { rfqs, fetchRfqs, updateRfqStatus, isLoading } = useRfqExchangeStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchRfqs(tenantId);

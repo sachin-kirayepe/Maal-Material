@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Quotation } from "@/types/marketplace";
 
 import { apiClient } from "@/lib/apiClient";
+import { toast } from "sonner";
 
 // MOCK DATA REMOVED
 
@@ -89,11 +90,11 @@ export default function ComparativeStatement({ params }: { params: { rfqId: stri
                   <div className="grid grid-cols-4 gap-6">
                     <div>
                       <p className="text-zinc-500 text-xs mb-1">Unit Price</p>
-                      <p className="text-xl font-light">₹{quote.unitPrice}<span className="text-sm text-zinc-500">/bag</span></p>
+                      <p className="text-xl font-light">{quote.unitPrice}<span className="text-sm text-zinc-500">/bag</span></p>
                     </div>
                     <div>
                       <p className="text-zinc-500 text-xs mb-1">Freight</p>
-                      <p className="text-xl font-light">{quote.freightCharges === 0 ? 'Free' : `₹${quote.freightCharges}`}</p>
+                      <p className="text-xl font-light">{quote.freightCharges === 0 ? 'Free' : `${quote.freightCharges}`}</p>
                     </div>
                     <div>
                       <p className="text-zinc-500 text-xs mb-1">GST (28%)</p>
@@ -102,7 +103,7 @@ export default function ComparativeStatement({ params }: { params: { rfqId: stri
                     <div className="pl-6 border-l border-zinc-800">
                       <p className="text-zinc-500 text-xs mb-1">Landed Total Cost</p>
                       <p className={`text-3xl font-medium ${isL1 ? 'text-green-400' : 'text-white'}`}>
-                        ₹{quote.totalCost.toLocaleString()}
+                        {quote.totalCost.toLocaleString()}
                       </p>
                     </div>
                   </div>
@@ -146,7 +147,7 @@ export default function ComparativeStatement({ params }: { params: { rfqId: stri
               </div>
               <h2 className="text-2xl font-medium mb-2">Confirm Purchase Order</h2>
               <p className="text-zinc-400 mb-8">
-                You are about to issue a legally binding Digital PO to <strong>{selectedQuote.supplier.name}</strong> for ₹{selectedQuote.totalCost.toLocaleString()}.
+                You are about to issue a legally binding Digital PO to <strong>{selectedQuote.supplier.name}</strong> for {selectedQuote.totalCost.toLocaleString()}.
               </p>
               
               <div className="flex justify-center gap-4">

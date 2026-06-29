@@ -5,12 +5,14 @@ import { motion } from "framer-motion";
 import { Share2, Warehouse, ArrowRightLeft, ArrowRight, ShieldAlert, Check } from "lucide-react";
 
 import { useInventorySharingStore } from "../../../stores/inventorySharingStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function InventorySharing() {
+  const tenantId = useTenantId();
   const { transfers: sharingRequests, isLoading, fetchTransfers } = useInventorySharingStore();
 
   React.useEffect(() => {
-    fetchTransfers("tenant-1");
+    fetchTransfers(tenantId);
   }, [fetchTransfers]);
   return (
     <div className="min-h-screen bg-black text-white p-8 font-sans">

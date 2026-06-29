@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useInventorySharingStore } from "../../stores/inventorySharingStore";
 import { Package as PackageIcon, Truck as TruckIcon } from "lucide-react";
+import { useTenantId } from "@/hooks/useTenantId";
 const Package = PackageIcon as any;
 const Truck = TruckIcon as any;
 
 export default function InventorySharingNetwork() {
   const { transfers, fetchTransfers, updateTransferStatus, isLoading } = useInventorySharingStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchTransfers(tenantId);

@@ -4,9 +4,19 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FileSearch, CheckCircle2, AlertTriangle, UploadCloud, Link as LinkIcon, Loader2 } from "lucide-react";
 import { useUploadStore } from "@/stores/uploadStore";
+import { useReconciliationStore } from "@/stores/reconciliationStore";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { SkeletonCard } from "@/components/ui/Skeleton";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function BankReconciliation() {
+  const tenantId = useTenantId();
   const uploadState = useUploadStore();
+  const { records, loading, fetchReconciliations } = useReconciliationStore();
+
+  React.useEffect(() => {
+    if (tenantId) fetchReconciliations();
+  }, [tenantId, fetchReconciliations]);
 
   const handleStatementUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -34,21 +44,28 @@ export default function BankReconciliation() {
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center text-green-400"><CheckCircle2 size={24} /></div>
           <div>
-            <h3 className="text-green-400 font-medium text-lg">Auto-Match Complete</h3>
-            <p className="text-green-500/70 text-sm">AI successfully matched 142 out of 145 transactions.</p>
+            <h3 className="text-green-400 font-medium text-lg">Auto-Match System Active</h3>
+            <p className="text-green-500/70 text-sm">AI matches transactions when statements are uploaded.</p>
           </div>
         </div>
         <div className="text-right">
-          <p className="text-3xl font-light text-white">3</p>
-          <p className="text-sm text-zinc-400">Unmatched Entries</p>
+          <p className="text-3xl font-light text-white">{loading ? "—" : records.length}</p>
+          <p className="text-sm text-zinc-400">Total Entries</p>
         </div>
       </div>
 
       <h2 className="text-xl font-medium mb-4">Pending Manual Review</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {[1, 2, 3].map((_, i) => (
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} key={i} className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col">
+        {loading ? (
+          <><SkeletonCard className="h-64"/><SkeletonCard className="h-64"/></>
+        ) : records.length === 0 ? (
+          <div className="col-span-full">
+            <EmptyState icon={FileSearch} title="No Pending Reviews" description="All ledger entries match bank statements, or no records exist." />
+          </div>
+        ) : (
+          records.map((record: any, i: number) => (
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} key={record.id || i} className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden flex flex-col">
             <div className="p-4 bg-amber-500/5 border-b border-zinc-800 flex items-center gap-2 text-amber-400 text-sm font-medium">
               <AlertTriangle size={16} /> Needs Attention
             </div>
@@ -58,9 +75,9 @@ export default function BankReconciliation() {
               <div className="flex-1">
                 <p className="text-xs text-zinc-500 uppercase tracking-wider mb-2">Bank Statement</p>
                 <div className="bg-black border border-zinc-800 rounded-xl p-4">
-                  <p className="text-sm text-zinc-400 mb-1">15 Jun, 2026</p>
-                  <p className="font-mono text-sm text-white mb-3">NEFT-IN-HDFC-9921</p>
-                  <p className="text-xl text-green-400">+ ₹45,000</p>
+                  <p className="text-sm text-zinc-400 mb-1">{record.date || new Date().toLocaleDateString()}</p>
+                  <p className="font-mono text-sm text-white mb-3">{record.transactionId || record.reference || 'Unknown Ref'}</p>
+                  <p className="text-xl text-green-400">{(record.amount || 0).toLocaleString()}</p>
                 </div>
               </div>
 
@@ -72,9 +89,9 @@ export default function BankReconciliation() {
               <div className="flex-1">
                 <p className="text-xs text-zinc-500 uppercase tracking-wider mb-2">Suggested Ledger Entry</p>
                 <div className="bg-purple-500/5 border border-purple-500/30 rounded-xl p-4">
-                  <p className="text-sm text-zinc-400 mb-1">14 Jun, 2026 (1 Day Off)</p>
-                  <p className="text-sm text-white mb-3">Client Advance - Project Alpha</p>
-                  <p className="text-xl text-green-400">+ ₹45,000</p>
+                  <p className="text-sm text-zinc-400 mb-1">{record.date || 'Pending'} ({record.status || 'Match Found'})</p>
+                  <p className="text-sm text-white mb-3">{record.description || record.customer || 'Suggested Match'}</p>
+                  <p className="text-xl text-green-400">{(record.amount || 0).toLocaleString()}</p>
                 </div>
               </div>
             </div>
@@ -84,7 +101,7 @@ export default function BankReconciliation() {
               <button className="px-4 py-2 text-sm font-medium bg-white text-black rounded-lg hover:bg-zinc-200 transition-colors">Confirm Match</button>
             </div>
           </motion.div>
-        ))}
+        )))}
       </div>
     </div>
   );

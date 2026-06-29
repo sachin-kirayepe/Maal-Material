@@ -4,12 +4,14 @@ import React from "react";
 // framer-motion not used
 import { Route, Truck, PackageCheck, Factory, Warehouse, Building2, Search } from "lucide-react";
 import { useSupplyChainStore } from "../../../stores/supplyChainStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function SupplyChainMap() {
+  const tenantId = useTenantId();
   const { logistics, isLoading, fetchLogistics } = useSupplyChainStore();
 
   React.useEffect(() => {
-    fetchLogistics("tenant-1");
+    fetchLogistics(tenantId);
   }, [fetchLogistics]);
 
   return (

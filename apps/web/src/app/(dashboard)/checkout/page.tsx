@@ -26,6 +26,7 @@ const ArrowRight = ArrowRightIcon as any;
 const CheckCircle2 = CheckCircle2Icon as any;
 
 import { ApiClient } from "@/lib/api-client";
+import { toast } from "sonner";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -118,6 +119,7 @@ export default function CheckoutPage() {
       router.push("/orders");
     } catch (error) {
       console.error(error);
+      toast.error("Action failed", { description: error?.message || "An unexpected error occurred" });
       alert("Error during checkout. Please try again.");
     } finally {
       setIsProcessing(false);
@@ -194,7 +196,7 @@ export default function CheckoutPage() {
                     <h4 className="font-bold text-slate-900 dark:text-white">{p.name}</h4>
                     <p className="text-xs text-slate-500 font-mono mt-1">SKU: {p.sku}</p>
                     <p className="text-sm font-black text-amber-600 dark:text-amber-500 mt-2">
-                      ₹{(p.purchasePrice || 100).toLocaleString()}
+                      {(p.purchasePrice || 100).toLocaleString()}
                     </p>
                   </div>
                   <button
@@ -244,7 +246,7 @@ export default function CheckoutPage() {
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-xs font-mono text-amber-500">
-                        ₹{(item.product.purchasePrice || 100).toLocaleString()}
+                        {(item.product.purchasePrice || 100).toLocaleString()}
                       </span>
                       <div className="flex items-center gap-2 bg-slate-900 rounded-lg p-1 border border-slate-700">
                         <button
@@ -272,15 +274,15 @@ export default function CheckoutPage() {
             <div className="space-y-3 pt-4 border-t border-slate-800 mb-6">
               <div className="flex justify-between text-sm">
                 <span className="text-slate-400">Subtotal</span>
-                <span className="text-white font-medium">₹{subtotal.toLocaleString()}</span>
+                <span className="text-white font-medium">{subtotal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-slate-400">Tax (18%)</span>
-                <span className="text-white font-medium">₹{tax.toLocaleString()}</span>
+                <span className="text-white font-medium">{tax.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-lg pt-2 border-t border-slate-800">
                 <span className="text-slate-300 font-bold">Total</span>
-                <span className="text-amber-500 font-black">₹{grandTotal.toLocaleString()}</span>
+                <span className="text-amber-500 font-black">{grandTotal.toLocaleString()}</span>
               </div>
             </div>
 

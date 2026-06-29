@@ -21,7 +21,7 @@ export default function ObservabilityDashboard() {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        {/* Simple mock summary cards based on the first few metrics */}
+
         <div className="bg-[#111] p-6 rounded-xl border border-purple-500/20">
           <h3 className="text-gray-400 text-sm uppercase tracking-wider mb-2">System Health</h3>
           <p className="text-3xl font-bold text-green-400">99.9%</p>

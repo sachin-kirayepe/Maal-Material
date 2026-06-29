@@ -109,7 +109,7 @@ export default function TreasurySettlements() {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-right font-medium text-white">
-                        ₹{settlement.amountApplied.toLocaleString()}
+                        {settlement.amountApplied.toLocaleString()}
                       </td>
                     </motion.tr>
                   ))}
@@ -161,7 +161,7 @@ export default function TreasurySettlements() {
 
             <div className="pt-6 border-t border-zinc-800 mb-8">
               <p className="text-zinc-500 text-sm mb-1">Total Payout Amount</p>
-              <p className="text-4xl font-light text-white">₹{totalSelectedAmount.toLocaleString()}</p>
+              <p className="text-4xl font-light text-white">{totalSelectedAmount.toLocaleString()}</p>
             </div>
 
             <button 
@@ -199,7 +199,7 @@ export default function TreasurySettlements() {
               </div>
               <h2 className="text-2xl font-medium mb-2">Confirm Authorization</h2>
               <p className="text-zinc-400 mb-8">
-                You are authorizing a transfer of <strong>₹{totalSelectedAmount.toLocaleString()}</strong> from your primary HDFC Treasury account to {selectedSuppliers.length} supplier(s).
+                You are authorizing a transfer of <strong>{totalSelectedAmount.toLocaleString()}</strong> from your primary HDFC Treasury account to {selectedSuppliers.length} supplier(s).
               </p>
               
               <div className="flex justify-center gap-4">

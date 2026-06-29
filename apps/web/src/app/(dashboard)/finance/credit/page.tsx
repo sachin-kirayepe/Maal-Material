@@ -28,7 +28,7 @@ export default function CreditLine() {
           
           <div className="space-y-6 relative z-10">
             <div>
-              <label className="block text-sm text-zinc-400 mb-2">Requested Credit Limit (₹)</label>
+              <label className="block text-sm text-zinc-400 mb-2">Requested Credit Limit ()</label>
               <div className="flex items-center gap-4">
                 <input 
                   type="range" 
@@ -39,7 +39,7 @@ export default function CreditLine() {
                   onChange={(e) => setAmount(Number(e.target.value))}
                   className="w-full accent-purple-500"
                 />
-                <span className="font-medium text-xl w-32 text-right">₹{(amount/100000).toFixed(1)}L</span>
+                <span className="font-medium text-xl w-32 text-right">{(amount/100000).toFixed(1)}L</span>
               </div>
             </div>
 
@@ -75,7 +75,7 @@ export default function CreditLine() {
                     <p className="text-sm text-zinc-500">Ref: {req.id}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-xl font-medium">₹{req.amount}</p>
+                    <p className="text-xl font-medium">{req.amount}</p>
                     <p className="text-xs text-green-400">Risk Score: {req.score}</p>
                   </div>
                 </div>

@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useSupplyChainStore } from "../../stores/supplyChainStore";
 import { Map as MapIcon, Anchor as AnchorIcon } from "lucide-react";
+import { useTenantId } from "@/hooks/useTenantId";
 const Map = MapIcon as any;
 const Anchor = AnchorIcon as any;
 
 export default function LogisticsCoordinationCenter() {
   const { logistics, fetchLogistics, assignTransporter, isLoading } = useSupplyChainStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchLogistics(tenantId);

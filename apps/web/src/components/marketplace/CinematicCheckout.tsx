@@ -19,6 +19,7 @@ const Cpu = CpuIcon as any;
 const CheckCircle2 = CheckCircle2Icon as any;
 import { useProcurementStore } from "@/stores/procurementStore";
 import { toast } from "sonner";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export function CinematicCheckout() {
   const { isCheckoutOpen, setCheckoutOpen, procurementDraft, clearDraft, products } = useLiveCommerceStore();
@@ -43,7 +44,7 @@ export function CinematicCheckout() {
       // Execute the order creation just before the final success step
       try {
         const payload = {
-          tenantId: "tenant-1", // hardcoded for demo
+          tenantId,
           destination: procurementDraft.destination,
           priority: procurementDraft.priority,
           items: procurementDraft.items.map((item) => ({

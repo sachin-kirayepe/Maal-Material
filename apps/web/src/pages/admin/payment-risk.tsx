@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useRiskAssessmentStore } from "../../stores/riskAssessmentStore";
 import { WalletCards as WalletCardsIcon, ShieldAlert as ShieldAlertIcon } from "lucide-react";
+import { useTenantId } from "@/hooks/useTenantId";
 const WalletCards = WalletCardsIcon as any;
 const ShieldAlert = ShieldAlertIcon as any;
 
 export default function PaymentRiskDashboard() {
   const { assessments, fetchAssessments, isLoading } = useRiskAssessmentStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchAssessments(tenantId);

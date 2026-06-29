@@ -15,6 +15,7 @@ const AlertCircle = AlertCircleIcon as any;
 const RefreshCw = RefreshCwIcon as any;
 const Cpu = CpuIcon as any;
 import { formatDistanceToNow } from "date-fns";
+import { toast } from "sonner";
 
 interface Job {
   id: string;

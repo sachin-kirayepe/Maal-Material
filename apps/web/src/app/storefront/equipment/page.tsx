@@ -6,8 +6,10 @@ import { Calendar, Truck, MapPin, Search, ChevronRight, X, AlertCircle } from "l
 import { useEquipmentStore } from "@/stores/equipmentStore";
 import { useRentalsStore } from "@/stores/rentalsStore";
 import { useRouter } from "next/navigation";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function EquipmentRentals() {
+  const tenantId = useTenantId();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedEq, setSelectedEq] = useState<any>(null);
   const [activeCategory, setActiveCategory] = useState("All Equipment");
@@ -20,7 +22,7 @@ export default function EquipmentRentals() {
   const { fetchBookings } = useRentalsStore();
 
   useEffect(() => {
-    fetchEquipment("tenant_123"); // Fetch globally or pass real tenant
+    fetchEquipment(tenantId); // Fetch globally or pass real tenant
   }, [fetchEquipment]);
 
   const handleBook = (eq: any) => {

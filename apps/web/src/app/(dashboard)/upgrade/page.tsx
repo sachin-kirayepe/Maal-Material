@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Check, Zap, Building2, Shield, Loader2 } from 'lucide-react';
 import { useRazorpay } from '@/hooks/useRazorpay';
+import { toast } from "sonner";
 
 const plans = [
   {
@@ -92,7 +93,7 @@ export default function UpgradePage() {
             </div>
             
             <div className="mb-6">
-              <span className="text-4xl font-extrabold text-slate-900">₹{plan.price}</span>
+              <span className="text-4xl font-extrabold text-slate-900">{plan.price}</span>
               <span className="text-slate-500">/month</span>
             </div>
             

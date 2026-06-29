@@ -6,6 +6,7 @@ import { MapPin, Calendar, Package, ArrowRight, Check, X } from "lucide-react";
 import { RFQ } from "@/types/marketplace";
 
 import { apiClient } from "@/lib/apiClient";
+import { toast } from "sonner";
 
 export default function SellerLeadsDashboard() {
   const [leads, setLeads] = useState<RFQ[]>([]);

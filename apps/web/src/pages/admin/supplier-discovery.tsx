@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useVendorDiscoveryStore } from "../../stores/vendorDiscoveryStore";
 import { Search as SearchIcon, MapPin as MapPinIcon } from "lucide-react";
+import { useTenantId } from "@/hooks/useTenantId";
 const Search = SearchIcon as any;
 const MapPin = MapPinIcon as any;
 
 export default function SupplierDiscoveryCenter() {
   const { insights, fetchInsights, isLoading } = useVendorDiscoveryStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchInsights(tenantId);

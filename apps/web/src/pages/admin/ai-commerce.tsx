@@ -9,6 +9,7 @@ import {
   Database as DatabaseIcon,
 } from "lucide-react";
 import { ledgerService } from "../../core/domain/finance/ledger-service";
+import { useTenantId } from "@/hooks/useTenantId";
 
 const Bot = BotIcon as any;
 const AlertTriangle = AlertTriangleIcon as any;
@@ -19,7 +20,7 @@ const Database = DatabaseIcon as any;
 export default function AICommerceDashboard() {
   const { summary, fetchSummary, isLoading: summaryLoading } = useIntelligenceStore();
   const { recommendations, fetchRecommendations, actionRecommendation } = useRecommendationsStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchSummary(tenantId);

@@ -6,8 +6,10 @@ import { Calculator, Download, Plus, FileText, ArrowUpRight, ArrowDownRight, Bri
 import { toast } from "sonner";
 import { ApiClient } from "@/lib/api-client";
 import { useAccountingStore } from "@/stores/accountingStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function GeneralAccounting() {
+  const tenantId = useTenantId();
   const { journals, meta, loading, fetchAccountingData } = useAccountingStore();
   const [activeTab, setActiveTab] = useState("Journal Entries");
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,7 +21,7 @@ export default function GeneralAccounting() {
   const handleExport = async () => {
     try {
       toast.info("Queueing accounting export...");
-      await ApiClient.post("/reports/generate", { templateId: "accounting-report", tenantId: "tenant-1" });
+      await ApiClient.post("/reports/generate", { templateId: "accounting-report", tenantId: tenantId });
       toast.success("Job Queued: You will be notified when the export is ready.");
     } catch (e) {
       toast.error("Failed to queue export job.");
@@ -71,8 +73,8 @@ export default function GeneralAccounting() {
                   <th className="px-6 py-4">Date</th>
                   <th className="px-6 py-4">Account</th>
                   <th className="px-6 py-4">Description</th>
-                  <th className="px-6 py-4 text-right">Debit (₹)</th>
-                  <th className="px-6 py-4 text-right">Credit (₹)</th>
+                  <th className="px-6 py-4 text-right">Debit ()</th>
+                  <th className="px-6 py-4 text-right">Credit ()</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-800/50">
@@ -94,7 +96,7 @@ export default function GeneralAccounting() {
                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.1 }}
                     key={row.id || i} className="hover:bg-zinc-800/30 transition-colors"
                   >
-                    <td className="px-6 py-4">{new Date(row.entryDate).toLocaleString()}</td>
+                    <td className="px-6 py-4">{row.entryDate ? new Date(row.entryDate).toLocaleString() : '-'}</td>
                     <td className="px-6 py-4 font-medium text-purple-400">{row.financialTransaction?.[0]?.generalLedgerAccount?.accountName || 'Multiple Accounts'}</td>
                     <td className="px-6 py-4">{row.description}</td>
                     <td className="px-6 py-4 text-right text-red-400">
@@ -140,34 +142,28 @@ export default function GeneralAccounting() {
             <div className="space-y-4">
               <div className="bg-black border border-zinc-800 rounded-xl p-4 flex justify-between items-center">
                 <div>
-                  <p className="text-xs text-zinc-500 mb-1">HDFC Current (Ending *4012)</p>
-                  <p className="font-medium text-lg">₹42,50,000</p>
+                  <p className="text-xs text-zinc-500 mb-1">Primary Bank Balance</p>
+                  <p className="font-medium text-lg">-</p>
                 </div>
-                <ArrowUpRight className="text-green-400" />
+                <ArrowUpRight className="text-zinc-600" />
               </div>
               <div className="bg-black border border-zinc-800 rounded-xl p-4 flex justify-between items-center">
                 <div>
                   <p className="text-xs text-zinc-500 mb-1">Accounts Receivable</p>
-                  <p className="font-medium text-lg">₹12,40,000</p>
+                  <p className="font-medium text-lg">-</p>
                 </div>
-                <ArrowUpRight className="text-green-400" />
+                <ArrowUpRight className="text-zinc-600" />
               </div>
               <div className="bg-black border border-zinc-800 rounded-xl p-4 flex justify-between items-center">
                 <div>
                   <p className="text-xs text-zinc-500 mb-1">Accounts Payable</p>
-                  <p className="font-medium text-lg">₹18,90,500</p>
+                  <p className="font-medium text-lg">-</p>
                 </div>
-                <ArrowDownRight className="text-red-400" />
+                <ArrowDownRight className="text-zinc-600" />
               </div>
             </div>
           </div>
-          
-          <div className="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-6 text-center">
-            <FileText size={32} className="mx-auto text-purple-400 mb-3" />
-            <h3 className="font-medium text-purple-300 mb-2">Month-End Close</h3>
-            <p className="text-sm text-purple-400/70 mb-4">You have 14 un-reconciled transactions for May 2026.</p>
-            <button className="bg-purple-500 text-white w-full py-2 rounded-xl font-medium hover:bg-purple-400 transition-colors">Start Reconciliation</button>
-          </div>
+
         </div>
       </div>
     </div>

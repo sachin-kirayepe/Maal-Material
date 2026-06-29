@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useProductsStore } from "@/stores/productsStore";
 import { useEcommerceStore } from "@/stores/ecommerceStore";
 import CartFlyout from "@/components/marketplace/CartFlyout";
+import { toast } from "sonner";
 
 export default function StorefrontHome() {
   const { products, fetchProducts, isLoading } = useProductsStore();

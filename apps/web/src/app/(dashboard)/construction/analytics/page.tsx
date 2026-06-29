@@ -49,16 +49,16 @@ export default function OperationalAnalytics() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Productivity Chart Mockup */}
+
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
           <h3 className="font-medium text-lg mb-6">Daily Output vs Labor Headcount</h3>
           <div className="h-64 flex items-end justify-between gap-2 border-b border-zinc-800 pb-2 relative">
-            {/* Fake line chart overlay */}
+
             <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
               <path d="M 0 200 C 100 180, 200 150, 300 100 S 400 50, 500 80" fill="transparent" stroke="#a855f7" strokeWidth="3" />
             </svg>
             
-            {[60, 65, 80, 75, 90, 85, 95].map((val, i) => (
+            {[].map((val, i) => (
               <div key={i} className="w-12 bg-zinc-800 rounded-t-sm relative flex flex-col justify-end" style={{ height: `${val}%` }}>
                 <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-zinc-500">Day {i+1}</div>
               </div>

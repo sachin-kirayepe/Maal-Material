@@ -19,7 +19,7 @@ export default function LogisticsCommand() {
         else if (activeTab === "SHIPPING") endpoint = "/shipping";
         else if (activeTab === "FLEET") endpoint = "/fleet/operations"; // Assumed endpoint
 
-        // Temporarily suppressing errors for mocked/unimplemented endpoints
+
         const res: any = await api.get(endpoint).catch(() => ({ data: { data: [] } }));
         setData(res.data?.data || []);
       } catch (err) {

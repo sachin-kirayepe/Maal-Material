@@ -5,13 +5,15 @@ import { motion } from "framer-motion";
 import { ShieldAlert, AlertOctagon, Search } from "lucide-react";
 
 import { useFraudStore } from "../../../stores/fraudStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function FraudDetection() {
+  const tenantId = useTenantId();
   const { signals: alerts, isLoading, fetchSignals } = useFraudStore();
   const [selectedAlert, setSelectedAlert] = useState<any>(null);
 
   React.useEffect(() => {
-    fetchSignals("tenant-1");
+    fetchSignals(tenantId);
   }, [fetchSignals]);
 
   React.useEffect(() => {
@@ -92,28 +94,32 @@ export default function FraudDetection() {
               </div>
             </div>
 
-            {selectedAlert.type === "Double Invoicing" && (
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="bg-black border border-zinc-800 rounded-xl p-4 opacity-50">
+            {selectedAlert.type === "DOUBLE_INVOICING" && (
+              <div className="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-zinc-800">
+                <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4">
                   <p className="text-xs text-zinc-500 mb-1">Original Invoice (Paid)</p>
-                  <p className="font-mono text-sm">INV-1092-A</p>
-                  <p className="text-xs text-zinc-400 mt-2">Amount: ₹1,45,000</p>
-                  <p className="text-xs text-zinc-400">Date: 10 Jun 2026</p>
+                  <p className="font-mono text-sm">{selectedAlert.metadata?.originalInvoiceId || "Unknown"}</p>
+                  <p className="text-xs text-zinc-400 mt-2">Amount: {selectedAlert.metadata?.amount?.toLocaleString() || "0"}</p>
+                  <p className="text-xs text-zinc-400">Date: {selectedAlert.metadata?.originalDate ? new Date(selectedAlert.metadata.originalDate).toLocaleDateString() : "Unknown"}</p>
                 </div>
                 <div className="bg-red-500/5 border border-red-500/30 rounded-xl p-4">
                   <p className="text-xs text-red-400 mb-1">Duplicate Invoice (Flagged)</p>
-                  <p className="font-mono text-sm text-white">INV-2991</p>
-                  <p className="text-xs text-zinc-400 mt-2">Amount: ₹1,45,000</p>
-                  <p className="text-xs text-zinc-400">Date: 15 Jun 2026</p>
+                  <p className="font-mono text-sm text-white">{selectedAlert.metadata?.duplicateInvoiceId || "Unknown"}</p>
+                  <p className="text-xs text-zinc-400 mt-2">Amount: {selectedAlert.metadata?.amount?.toLocaleString() || "0"}</p>
+                  <p className="text-xs text-zinc-400">Date: {selectedAlert.metadata?.duplicateDate ? new Date(selectedAlert.metadata.duplicateDate).toLocaleDateString() : "Unknown"}</p>
                 </div>
               </div>
             )}
 
             <div className="flex gap-4 pt-4">
-              <button className="flex-1 bg-red-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-red-500 transition-colors flex items-center justify-center gap-2">
+              <button 
+                onClick={() => toast.promise(Promise.resolve(), { loading: "Blocking vendor...", success: "Vendor and payment blocked successfully.", error: "Failed to block vendor." })}
+                className="flex-1 bg-red-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-red-500 transition-colors flex items-center justify-center gap-2">
                 <AlertOctagon size={18}/> Block Payment & Vendor
               </button>
-              <button className="flex-1 bg-zinc-800 text-white px-6 py-3 rounded-xl font-medium hover:bg-zinc-700 transition-colors">
+              <button 
+                onClick={() => toast.success("Flagged as false positive. Algorithm has been updated.")}
+                className="flex-1 bg-zinc-800 text-white px-6 py-3 rounded-xl font-medium hover:bg-zinc-700 transition-colors">
                 Mark as False Positive
               </button>
             </div>

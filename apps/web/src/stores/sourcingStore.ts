@@ -5,19 +5,19 @@ interface SourcingState {
   rfqs: any[];
   quotations: any[];
   isLoading: boolean;
-  fetchSourcingData: () => Promise<void>;
+  fetchSourcingData: (tenantId: string) => Promise<void>;
 }
 
 export const useSourcingStore = create<SourcingState>((set) => ({
   rfqs: [],
   quotations: [],
   isLoading: false,
-  fetchSourcingData: async () => {
+  fetchSourcingData: async (tenantId: string) => {
     set({ isLoading: true });
     try {
       const [rfqs, quotations] = await Promise.all([
-        ApiClient.get<any>("/sourcing/rfqs", { params: { tenantId: "tenant-1" } }),
-        ApiClient.get<any>("/sourcing/quotations", { params: { tenantId: "tenant-1" } }),
+        ApiClient.get<any>("/sourcing/rfqs", { params: { tenantId } }),
+        ApiClient.get<any>("/sourcing/quotations", { params: { tenantId } }),
       ]);
       set({ rfqs: rfqs?.data || rfqs || [], quotations: quotations?.data || quotations || [], isLoading: false });
     } catch (err) {

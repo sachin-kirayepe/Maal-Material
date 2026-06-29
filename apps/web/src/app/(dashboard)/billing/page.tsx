@@ -50,7 +50,7 @@ export default function BillingDashboard() {
             <TrendingUp className="h-4 w-4 opacity-75" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">₹{totalRevenue.toLocaleString("en-IN")}</div>
+            <div className="text-3xl font-bold">{totalRevenue.toLocaleString("en-IN")}</div>
             <p className="text-xs mt-1 opacity-75">All time generated</p>
           </CardContent>
         </Card>
@@ -62,7 +62,7 @@ export default function BillingDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold text-rose-600">
-              ₹{totalDue.toLocaleString("en-IN")}
+              {totalDue.toLocaleString("en-IN")}
             </div>
             <p className="text-xs text-slate-400 mt-1">Requires collection</p>
           </CardContent>
@@ -139,7 +139,7 @@ export default function BillingDashboard() {
                           </span>
                         </td>
                         <td className="px-4 py-3 text-right font-medium">
-                          ₹{inv.grandTotal.toLocaleString("en-IN")}
+                          {inv.grandTotal.toLocaleString("en-IN")}
                         </td>
                       </tr>
                     ))
@@ -174,7 +174,7 @@ export default function BillingDashboard() {
                       </div>
                       <div className="text-right">
                         <p className="font-bold text-rose-600">
-                          ₹{customer.totalDue.toLocaleString("en-IN")}
+                          {customer.totalDue.toLocaleString("en-IN")}
                         </p>
                       </div>
                     </div>

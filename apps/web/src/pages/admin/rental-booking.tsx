@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useRentalsStore } from "../../stores/rentalsStore";
 import { CalendarCheck as CalendarCheckIcon, ShieldCheck as ShieldCheckIcon } from "lucide-react";
+import { useTenantId } from "@/hooks/useTenantId";
 const CalendarCheck = CalendarCheckIcon as any;
 const ShieldCheck = ShieldCheckIcon as any;
 
 export default function RentalBookingCenter() {
   const { bookings, fetchBookings, approveBooking, isLoading } = useRentalsStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchBookings(tenantId);

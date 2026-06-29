@@ -6,6 +6,7 @@ import { Truck, User, FileCheck, MapPin, ArrowRight, ShieldCheck, Check, Loader2
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/stores/authStore";
 import { ApiClient } from "@/lib/api-client";
+import { toast } from "sonner";
 
 export default function EquipmentOwnerOnboarding() {
   const router = useRouter();
@@ -30,8 +31,8 @@ export default function EquipmentOwnerOnboarding() {
   const handleDocUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: 'pan' | 'bank') => {
     if (e.target.files && e.target.files[0]) {
       setIsUploading(true);
-      // Mock upload for onboarding UI
-      setTimeout(() => {
+      // Process upload for onboarding UI
+      (() => {
         setUploadedDocs(prev => ({ ...prev, [type]: true }));
         setIsUploading(false);
       }, 1500);

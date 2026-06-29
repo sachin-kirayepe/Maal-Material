@@ -43,9 +43,9 @@ export const usePlanetaryTelemetryStore = create<PlanetaryTelemetryState>((set) 
           newNodes[dbNode.nodeId] = {
             id: dbNode.nodeId,
             region: dbNode.region || "Unknown",
-            latencyMs: Math.floor(Math.random() * 50) + 10, // Simulated network hop latency
+            latencyMs: 0,
             status: dbNode.status === "ACTIVE" ? "OPERATIONAL" : "DEGRADED",
-            activeConnections: Math.floor(Math.random() * 10000), // Simulating concurrent conns
+            activeConnections: 0,
             cpuLoad: dbNode.cpuUsage || 0,
           };
         });

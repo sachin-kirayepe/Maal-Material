@@ -6,19 +6,21 @@ import { BarChart3, TrendingUp, DollarSign, Package, Users, Activity, DownloadCl
 import { toast } from "sonner";
 import { ApiClient } from "@/lib/api-client";
 import { useAnalyticsStore } from "@/stores/analyticsStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function AnalyticsDashboard() {
+  const tenantId = useTenantId();
   const { overview, isLoading, fetchOverview, fetchTrends } = useAnalyticsStore();
 
   useEffect(() => {
-    fetchOverview("tenant-1");
-    fetchTrends("procurement", 30, "tenant-1");
+    fetchOverview(tenantId);
+    fetchTrends("procurement", 30, tenantId);
   }, [fetchOverview, fetchTrends]);
 
   const handleExport = async () => {
     try {
       toast.info("Queueing analytics export...");
-      await ApiClient.post("/reports/generate", { templateId: "analytics-report", tenantId: "tenant-1" });
+      await ApiClient.post("/reports/generate", { templateId: "analytics-report", tenantId: tenantId });
       toast.success("Job Queued: You will be notified when the export is ready.");
     } catch (e) {
       toast.error("Failed to queue export job.");
@@ -26,7 +28,7 @@ export default function AnalyticsDashboard() {
   };
 
   const kpis = [
-    { title: "Total Spend", value: overview?.totalSpend || "₹0", trend: overview?.spendTrend || "0%", icon: <DollarSign className="text-green-400" size={24}/>, up: true },
+    { title: "Total Spend", value: overview?.totalSpend || "0", trend: overview?.spendTrend || "0%", icon: <DollarSign className="text-green-400" size={24}/>, up: true },
     { title: "Material Procured", value: overview?.totalProcured || "0 MT", trend: overview?.procuredTrend || "0%", icon: <Package className="text-blue-400" size={24}/>, up: true },
     { title: "Active Suppliers", value: overview?.activeSuppliers || "0", trend: overview?.supplierTrend || "0%", icon: <Users className="text-amber-400" size={24}/>, up: false },
     { title: "System Uptime", value: overview?.uptime || "0%", trend: overview?.uptimeTrend || "Optimal", icon: <Activity className="text-purple-400" size={24}/>, up: true },
@@ -78,7 +80,7 @@ export default function AnalyticsDashboard() {
           </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        {/* Spend Chart Mockup */}
+
         <div className="lg:col-span-2 bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
           <div className="flex justify-between items-center mb-6">
             <h3 className="font-medium">Monthly Procurement Spend</h3>
@@ -95,7 +97,7 @@ export default function AnalyticsDashboard() {
                   className="w-full bg-purple-500/20 group-hover:bg-purple-500 rounded-t-sm transition-colors relative"
                 >
                   <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                    ₹{height}L
+                    {height}L
                   </span>
                 </motion.div>
                 <span className="text-[10px] text-zinc-600 uppercase">
@@ -109,7 +111,7 @@ export default function AnalyticsDashboard() {
           </div>
         </div>
 
-        {/* Spend by Category Mockup */}
+
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
           <h3 className="font-medium mb-6">Spend by Category</h3>
           <div className="space-y-6">

@@ -111,7 +111,7 @@ export default function NewMachineListing() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-zinc-400 mb-2">Machine Title *</label>
-              <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="e.g. Tata Hitachi EX200" className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl p-4 focus:outline-none focus:border-amber-500 text-white" required />
+              <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="e.g. Machine Name" className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl p-4 focus:outline-none focus:border-amber-500 text-white" required />
             </div>
             
             <div>
@@ -146,7 +146,7 @@ export default function NewMachineListing() {
         {/* Pricing Engine */}
         <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-            <IndianRupee className="w-5 h-5 text-emerald-500" /> Rental Pricing (₹)
+            <IndianRupee className="w-5 h-5 text-emerald-500" /> Rental Pricing ()
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -180,7 +180,7 @@ export default function NewMachineListing() {
                 <p className="text-xs text-zinc-500 mt-1">Base price includes operator.</p>
                 {!formData.isOperatorIncluded && (
                   <div className="mt-3">
-                    <label className="text-xs text-zinc-400">Extra Charge per shift (₹)</label>
+                    <label className="text-xs text-zinc-400">Extra Charge per shift ()</label>
                     <input type="number" value={formData.operatorCharge} onChange={e => setFormData({...formData, operatorCharge: e.target.value})} placeholder="1000" className="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-2 mt-1 text-sm text-white" />
                   </div>
                 )}

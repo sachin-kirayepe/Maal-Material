@@ -1,10 +1,17 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import { Coffee, ArrowRight, Lightbulb, TrendingUp, ShieldAlert, Sparkles } from "lucide-react";
+import { useInsightsStore } from "@/stores/insightsStore";
+import { EmptyState } from "@/components/ui/EmptyState";
 
 export default function DailyInsights() {
+  const { aiInsights, operationalAlerts, isLoading, fetchAiInsights, fetchOperationalAlerts } = useInsightsStore();
+
+  React.useEffect(() => {
+    fetchAiInsights();
+    fetchOperationalAlerts();
+  }, [fetchAiInsights, fetchOperationalAlerts]);
   return (
     <div className="min-h-screen bg-black text-white p-8 font-sans">
       <div className="flex justify-between items-start mb-8">
@@ -15,8 +22,8 @@ export default function DailyInsights() {
           <p className="text-zinc-400">Your AI-generated morning digest summarizing platform health, risks, and opportunities.</p>
         </div>
         <div className="text-right">
-          <p className="text-lg font-medium text-white">Monday, 15 Jun 2026</p>
-          <p className="text-sm text-zinc-500">Prepared at 08:00 AM</p>
+          <p className="text-lg font-medium text-white">{new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' })}</p>
+          <p className="text-sm text-zinc-500">Prepared dynamically</p>
         </div>
       </div>
 
@@ -29,7 +36,7 @@ export default function DailyInsights() {
             <div>
               <h2 className="text-lg font-medium text-amber-500 mb-2">Good Morning, Chief!</h2>
               <p className="text-zinc-300 leading-relaxed">
-                Overall platform health is strong at 94%. We've successfully processed 142 POs in the last 24 hours. However, there are two emerging risks in the logistics module regarding steel deliveries, and one immediate opportunity to save costs on upcoming cement purchases.
+                {isLoading ? "Analyzing your platform data..." : aiInsights.length === 0 && operationalAlerts.length === 0 ? "You're all caught up. No new alerts or insights to report." : `You have ${operationalAlerts.length} operational alerts and ${aiInsights.length} actionable insights to review today.`}
               </p>
             </div>
           </div>
@@ -37,52 +44,37 @@ export default function DailyInsights() {
 
         {/* The Insights Feed */}
         <div className="space-y-4">
-          
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex gap-6">
-            <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center shrink-0 border border-red-500/20">
-              <ShieldAlert className="text-red-500" size={20} />
-            </div>
-            <div>
-              <h3 className="text-lg font-medium text-white mb-2">Logistics Risk at Project Alpha</h3>
-              <p className="text-sm text-zinc-400 mb-4">
-                We've detected a pattern of delays from 'Apex Builders' (Vendor Score dropped to 68). They have missed 3 delivery windows for TMT Steel this week. If this continues, it will impact slab casting scheduled for Thursday.
-              </p>
-              <button className="text-xs bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                View Alternatives & Reroute
-              </button>
-            </div>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex gap-6">
-            <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center shrink-0 border border-green-500/20">
-              <Lightbulb className="text-green-500" size={20} />
-            </div>
-            <div>
-              <h3 className="text-lg font-medium text-white mb-2">Cost Saving Opportunity (₹1.2L)</h3>
-              <p className="text-sm text-zinc-400 mb-4">
-                National prices for OPC 53 Grade Cement have dipped temporarily by 3.5%. You have 4 upcoming POs drafted for next week across different sites. Aggregating these today will lock in the lower rate.
-              </p>
-              <button className="text-xs bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                Approve Aggregation
-              </button>
-            </div>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex gap-6">
-            <div className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center shrink-0 border border-blue-500/20">
-              <TrendingUp className="text-blue-500" size={20} />
-            </div>
-            <div>
-              <h3 className="text-lg font-medium text-white mb-2">Financial Milestone Reached</h3>
-              <p className="text-sm text-zinc-400 mb-4">
-                The auto-approval engine successfully processed 82% of all invoices under ₹50k yesterday, saving approximately 14 hours of manual audit time. Error rate remains at 0.01%.
-              </p>
-              <button className="flex items-center gap-1 text-xs text-blue-400 hover:underline font-medium transition-colors">
-                View Engine Logs <ArrowRight size={14}/>
-              </button>
-            </div>
-          </motion.div>
-
+          {isLoading ? (
+             <div className="text-center text-zinc-500 p-8">Loading insights...</div>
+          ) : aiInsights.length === 0 && operationalAlerts.length === 0 ? (
+             <EmptyState icon={Coffee} title="No New Insights" description="Check back later for AI-generated operational and financial insights." />
+          ) : (
+             <>
+               {operationalAlerts.map((alert: any, i: number) => (
+                 <div key={`alert-${i}`} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex gap-6">
+                   <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center shrink-0 border border-red-500/20">
+                     <ShieldAlert className="text-red-500" size={20} />
+                   </div>
+                   <div>
+                     <h3 className="text-lg font-medium text-white mb-2">{alert.title || "Alert"}</h3>
+                     <p className="text-sm text-zinc-400 mb-4">{alert.description || alert.message || "Action required."}</p>
+                   </div>
+                 </div>
+               ))}
+               
+               {aiInsights.map((insight: any, i: number) => (
+                 <div key={`insight-${i}`} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex gap-6">
+                   <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center shrink-0 border border-green-500/20">
+                     <Lightbulb className="text-green-500" size={20} />
+                   </div>
+                   <div>
+                     <h3 className="text-lg font-medium text-white mb-2">{insight.title || "AI Insight"}</h3>
+                     <p className="text-sm text-zinc-400 mb-4">{insight.description || insight.message || "Optimization opportunity detected."}</p>
+                   </div>
+                 </div>
+               ))}
+             </>
+          )}
         </div>
 
       </div>

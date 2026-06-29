@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useEquipmentStore } from "../../stores/equipmentStore";
 import { Tractor as TractorIcon, IndianRupee as IndianRupeeIcon } from "lucide-react";
+import { useTenantId } from "@/hooks/useTenantId";
 const Tractor = TractorIcon as any;
 const IndianRupee = IndianRupeeIcon as any;
 
 export default function EquipmentMarketplace() {
   const { equipment, fetchEquipment, isLoading } = useEquipmentStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchEquipment(tenantId);

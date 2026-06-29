@@ -80,7 +80,7 @@ export default function WorkersPage() {
                 </h4>
                 <p className="text-2xl font-bold text-slate-900 dark:text-white">{skill.count}</p>
                 <div className="mt-2 text-[10px] text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
-                  Avg: ₹{skill.avgDailyWage}/day
+                  Avg: {skill.avgDailyWage}/day
                 </div>
               </CardContent>
             </Card>
@@ -186,7 +186,7 @@ export default function WorkersPage() {
                         )}
                       </td>
                       <td className="px-6 py-4 text-right font-medium text-slate-900 dark:text-white">
-                        ₹{worker.dailyWage.toLocaleString()}
+                        {worker.dailyWage.toLocaleString()}
                       </td>
                       <td className="px-6 py-4 text-center">
                         {worker.isActive ? (

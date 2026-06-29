@@ -79,7 +79,7 @@ export default function VendorDiscovery() {
               <div>
                 <h4 className="text-sm font-medium text-zinc-300 mb-3">Minimum Rating</h4>
                 <div className="flex gap-2">
-                  {[4, 3, 2].map(r => (
+                  {[].map(r => (
                     <button key={r} className="flex-1 bg-black border border-zinc-800 py-1.5 rounded text-sm text-zinc-400 hover:border-purple-500 hover:text-white transition-colors flex justify-center items-center gap-1">
                       {r}+ <Star size={12}/>
                     </button>
@@ -103,7 +103,7 @@ export default function VendorDiscovery() {
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} key={r.id || i} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-purple-500/50 transition-all group">
               <div className="flex justify-between items-start">
                 <div className="flex gap-6">
-                  {/* Fake Logo */}
+
                   <div className="w-20 h-20 bg-black border border-zinc-800 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                     <Building2 size={32} className="text-zinc-600" />
                   </div>

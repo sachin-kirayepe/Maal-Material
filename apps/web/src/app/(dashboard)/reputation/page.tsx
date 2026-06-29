@@ -5,13 +5,15 @@ import { motion } from "framer-motion";
 import { Star, ShieldCheck, ThumbsUp, MessageSquare, AlertCircle, Building2, ChevronDown } from "lucide-react";
 
 import { useTrustStore } from "../../../stores/trustStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function SupplierReputation() {
+  const tenantId = useTenantId();
 
   const { profiles: reviews, isLoading, fetchTrustProfiles } = useTrustStore();
 
   React.useEffect(() => {
-    fetchTrustProfiles("tenant-1");
+    fetchTrustProfiles(tenantId);
   }, [fetchTrustProfiles]);
 
   return (
@@ -29,46 +31,11 @@ export default function SupplierReputation() {
         
         {/* Network Trust Score Sidebar */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 text-center">
-            <h3 className="font-medium mb-4 text-zinc-300">Global Network Trust Score</h3>
-            
-            <div className="relative w-32 h-32 mx-auto mb-4">
-              <svg className="w-full h-full transform -rotate-90">
-                <circle cx="64" cy="64" r="60" fill="none" stroke="#27272a" strokeWidth="8" />
-                <circle cx="64" cy="64" r="60" fill="none" stroke="#22c55e" strokeWidth="8" strokeDasharray="377" strokeDashoffset="45" className="transition-all duration-1000" />
-              </svg>
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-3xl font-medium text-white">4.8</span>
-                <span className="text-xs text-zinc-500 uppercase tracking-widest">Out of 5</span>
-              </div>
-            </div>
-            
-            <div className="flex justify-center gap-1 text-amber-500 mb-2">
-              <Star size={16} className="fill-amber-500"/>
-              <Star size={16} className="fill-amber-500"/>
-              <Star size={16} className="fill-amber-500"/>
-              <Star size={16} className="fill-amber-500"/>
-              <Star size={16} className="fill-amber-500/50"/>
-            </div>
-            <p className="text-xs text-zinc-400">Based on 12,450 verified transactions</p>
+          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 text-center text-zinc-500">
+            Network Trust Score unavailable
           </div>
-
-          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-            <h3 className="font-medium mb-4 text-zinc-300 flex items-center gap-2"><ShieldCheck size={18} className="text-green-500"/> Trust Factors</h3>
-            <div className="space-y-4 text-sm">
-              <div className="flex justify-between items-center">
-                <span className="text-zinc-400">On-Time Delivery</span>
-                <span className="text-green-400 font-medium">92%</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-zinc-400">QC Pass Rate</span>
-                <span className="text-green-400 font-medium">98.5%</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-zinc-400">Dispute Resolution</span>
-                <span className="text-amber-400 font-medium">4.2 Days</span>
-              </div>
-            </div>
+          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 text-center text-zinc-500">
+            Trust Factors unavailable
           </div>
         </div>
 
@@ -100,23 +67,23 @@ export default function SupplierReputation() {
                     <Building2 size={20} className="text-zinc-500" />
                   </div>
                   <div>
-                    <h3 className="font-medium text-white text-lg">{review.supplier || review.entityId || "Supplier"}</h3>
+                    <h3 className="font-medium text-white text-lg">{review.supplier || review.entityId || ""}</h3>
                     <div className="flex items-center gap-3 text-sm mt-1">
                       <div className="flex gap-0.5 text-amber-500">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} size={14} className={i < (review.rating || Math.round(review.trustScore / 20) || 4) ? "fill-amber-500" : "text-zinc-700"} />
+                          <Star key={i} size={14} className={i < (review.rating || Math.round(review.trustScore / 20) || 0) ? "fill-amber-500" : "text-zinc-700"} />
                         ))}
                       </div>
                       <span className="text-zinc-600">•</span>
-                      <span className="text-zinc-400">Reviewed by {review.reviewer || "Maal-Material Auditor"}</span>
+                      <span className="text-zinc-400">Reviewed by {review.reviewer || ""}</span>
                       <span className="text-zinc-600">•</span>
-                      <span className="text-zinc-500">{review.date || "Recent"}</span>
+                      <span className="text-zinc-500">{review.date || ""}</span>
                     </div>
                   </div>
                 </div>
 
                 <p className="text-zinc-300 text-sm leading-relaxed mb-4 pl-16">
-                  {review.comment || `Entity Type: ${review.entityType || "Business"}. KYC Status: ${review.kycStatus || "Unknown"}. Trust Score: ${review.trustScore || 85}/100. Status: ${review.status || "Active"}.`}
+                  {review.comment || ""}
                 </p>
 
                 <div className="flex items-center gap-4 pl-16 text-xs text-zinc-500">

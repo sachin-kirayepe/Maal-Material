@@ -158,7 +158,7 @@ export default function MaterialsPage() {
                           {item.wastageQty > 0 ? item.wastageQty : "-"}
                         </td>
                         <td className="px-6 py-4 text-right font-bold text-slate-900 dark:text-white">
-                          ₹{item.totalCost.toLocaleString()}
+                          {item.totalCost.toLocaleString()}
                         </td>
                       </tr>
                     ))

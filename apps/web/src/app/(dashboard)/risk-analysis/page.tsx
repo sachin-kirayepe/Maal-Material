@@ -5,12 +5,14 @@ import { motion } from "framer-motion";
 import { Activity, AlertTriangle, TrendingUp, TrendingDown, Search, ShieldAlert, BarChart2 } from "lucide-react";
 
 import { useRiskAnalysisStore } from "../../../stores/riskAnalysisStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function VendorRiskAnalysis() {
+  const tenantId = useTenantId();
   const { vendorIntelligence: vendors, isLoading, fetchVendorIntelligence } = useRiskAnalysisStore();
 
   React.useEffect(() => {
-    fetchVendorIntelligence("tenant-1");
+    fetchVendorIntelligence(tenantId);
   }, [fetchVendorIntelligence]);
   return (
     <div className="min-h-screen bg-black text-white p-8 font-sans">

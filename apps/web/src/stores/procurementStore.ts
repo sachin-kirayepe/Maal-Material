@@ -50,10 +50,10 @@ export const useProcurementStore = create<ProcurementState>((set) => ({
   },
   requisitions: [],
   isLoading: false,
-  fetchRequisitions: async () => {
+  fetchRequisitions: async (tenantId: string) => {
     set({ isLoading: true });
     try {
-      const data = await ApiClient.get<any>("/procurement/requisitions", { params: { tenantId: "tenant-1" } });
+      const data = await ApiClient.get<any>("/procurement/requisitions", { params: { tenantId } });
       set({ requisitions: data.data || data || [], isLoading: false });
     } catch (err) {
       console.error(err);

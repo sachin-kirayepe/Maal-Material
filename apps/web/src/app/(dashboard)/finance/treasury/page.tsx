@@ -5,13 +5,17 @@ import { motion } from "framer-motion";
 import { Landmark, ArrowRightLeft, Shield, Wallet, ArrowUpRight, Plus, RefreshCw } from "lucide-react";
 
 import { useTreasuryStore } from "@/stores/treasuryStore";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { SkeletonCard } from "@/components/ui/Skeleton";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function TreasuryManagement() {
-  const { bankAccounts, loading, fetchTreasuryData } = useTreasuryStore();
+  const tenantId = useTenantId();
+  const { bankAccounts, treasuryBalance, loading, fetchTreasuryData } = useTreasuryStore();
 
   React.useEffect(() => {
-    fetchTreasuryData();
-  }, [fetchTreasuryData]);
+    if (tenantId) fetchTreasuryData();
+  }, [tenantId, fetchTreasuryData]);
   return (
     <div className="min-h-screen bg-black text-white p-8 font-sans">
       <div className="flex justify-between items-start mb-8">
@@ -38,20 +42,20 @@ export default function TreasuryManagement() {
           <div className="bg-gradient-to-br from-purple-900/40 to-black border border-purple-500/30 rounded-2xl p-6 relative overflow-hidden">
             <div className="absolute -right-4 -bottom-4 text-purple-500/20"><Wallet size={120} /></div>
             <p className="text-purple-300 text-sm mb-2 relative z-10">Total Company Liquidity</p>
-            <h2 className="text-4xl font-light text-white mb-4 relative z-10">₹2.42 Cr</h2>
+            <h2 className="text-4xl font-light text-white mb-4 relative z-10">{loading ? "—" : `${(treasuryBalance?.totalLiquidity || 0).toLocaleString()}`}</h2>
             
             <div className="space-y-3 relative z-10 border-t border-purple-500/20 pt-4 mt-4">
               <div className="flex justify-between items-center text-sm">
                 <span className="text-purple-200/70">Operating Cash</span>
-                <span className="text-white font-medium">₹42.5 L</span>
+                <span className="text-white font-medium">{loading ? "—" : `${(treasuryBalance?.operatingCash || 0).toLocaleString()}`}</span>
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span className="text-purple-200/70">Restricted/Escrow</span>
-                <span className="text-white font-medium">₹1.15 Cr</span>
+                <span className="text-white font-medium">{loading ? "—" : `${(treasuryBalance?.escrow || 0).toLocaleString()}`}</span>
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span className="text-purple-200/70">Investments</span>
-                <span className="text-white font-medium">₹85.2 L</span>
+                <span className="text-white font-medium">{loading ? "—" : `${(treasuryBalance?.investments || 0).toLocaleString()}`}</span>
               </div>
             </div>
           </div>
@@ -61,9 +65,9 @@ export default function TreasuryManagement() {
             <div className="bg-black border border-zinc-800 p-4 rounded-xl">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-zinc-400">Maker-Checker Rule</span>
-                <span className="text-xs bg-green-500/10 text-green-400 px-2 py-0.5 rounded border border-green-500/20">Enabled</span>
+                <span className="text-xs bg-zinc-500/10 text-zinc-400 px-2 py-0.5 rounded border border-zinc-500/20">Unavailable</span>
               </div>
-              <p className="text-xs text-zinc-500">Transfers above ₹5L require dual approval.</p>
+              <p className="text-xs text-zinc-500">Security rule status not fetched.</p>
             </div>
           </div>
         </div>
@@ -78,11 +82,9 @@ export default function TreasuryManagement() {
             
             <div className="p-6 space-y-4">
               {loading ? (
-                <div className="text-center py-8 text-zinc-500">Loading accounts...</div>
+                <><SkeletonCard className="h-24"/><SkeletonCard className="h-24"/></>
               ) : bankAccounts.length === 0 ? (
-                <div className="text-center py-8 text-zinc-500 border border-dashed border-zinc-800 rounded-xl">
-                  No bank accounts connected.
-                </div>
+                <EmptyState icon={Landmark} title="No Bank Accounts" description="Connect your corporate bank accounts to view balances." />
               ) : (
                 bankAccounts.map((acc: any, i: number) => (
                 <motion.div 
@@ -100,7 +102,7 @@ export default function TreasuryManagement() {
                   </div>
                   
                   <div className="text-right">
-                    <p className="text-xl font-medium">₹{(acc.balance || 0).toLocaleString()}</p>
+                    <p className="text-xl font-medium">{(acc.balance || 0).toLocaleString()}</p>
                     {acc.apy && acc.apy !== "0.0%" ? (
                       <p className="text-sm text-green-400 flex items-center justify-end gap-1"><ArrowUpRight size={14}/> {acc.apy} Yield</p>
                     ) : (

@@ -4,12 +4,14 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { GitMerge, Plus, Play, Save, MessageSquare, Briefcase, BellRing, Settings2, Loader2 } from "lucide-react";
 import { useWorkflowsStore } from "@/stores/workflowsStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function WorkflowBuilder() {
+  const tenantId = useTenantId();
   const { isLoading, fetchWorkflows } = useWorkflowsStore();
 
   useEffect(() => {
-    fetchWorkflows("tenant-1");
+    fetchWorkflows(tenantId);
   }, [fetchWorkflows]);
   return (
     <div className="min-h-screen bg-black text-white flex flex-col font-sans">
@@ -37,7 +39,7 @@ export default function WorkflowBuilder() {
       </header>
 
       <div className="flex-1 flex overflow-hidden">
-        {/* Nodes Canvas (Mockup) */}
+
         <div className="flex-1 bg-zinc-950 relative overflow-hidden flex flex-col items-center justify-start pt-16 p-8">
           {/* Grid Background */}
           <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #27272a 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
@@ -73,7 +75,7 @@ export default function WorkflowBuilder() {
                   <span className="text-zinc-400">Where</span>
                   <span className="bg-zinc-800 px-2 py-1 rounded text-white">PO.TotalAmount</span>
                   <span className="text-zinc-400">is greater than</span>
-                  <span className="bg-zinc-800 px-2 py-1 rounded text-white font-mono">₹1,00,000</span>
+                  <span className="bg-zinc-800 px-2 py-1 rounded text-white font-mono">1,00,000</span>
                 </div>
               </div>
             </motion.div>
@@ -99,7 +101,7 @@ export default function WorkflowBuilder() {
                 <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 }} className="bg-zinc-900 border border-zinc-700 rounded-2xl w-full p-4 shadow-xl text-center">
                   <div className="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3"><MessageSquare size={16} className="text-green-400"/></div>
                   <h3 className="font-medium text-sm mb-1">Send WhatsApp Alert</h3>
-                  <p className="text-xs text-zinc-500">To: +91 98765 43210</p>
+                  <p className="text-xs text-zinc-500">To: Configured Number</p>
                 </motion.div>
               </div>
 

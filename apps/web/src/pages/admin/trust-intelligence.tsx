@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useTrustStore } from "../../stores/trustStore";
 import { ShieldCheck as ShieldCheckIcon, Users as UsersIcon } from "lucide-react";
+import { useTenantId } from "@/hooks/useTenantId";
 const ShieldCheck = ShieldCheckIcon as any;
 const Users = UsersIcon as any;
 
 export default function TrustIntelligenceDashboard() {
   const { profiles, metrics, fetchTrustProfiles, fetchTrustMetrics, isLoading } = useTrustStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchTrustProfiles(tenantId);

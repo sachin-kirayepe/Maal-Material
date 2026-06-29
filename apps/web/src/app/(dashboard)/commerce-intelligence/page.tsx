@@ -2,8 +2,15 @@
 
 import React from "react";
 import { LineChart, ArrowUpRight, ArrowDownRight, RefreshCw, Layers } from "lucide-react";
+import { useCommerceIntelligenceStore } from "@/stores/commerceIntelligenceStore";
+import { EmptyState } from "@/components/ui/EmptyState";
 
 export default function CommerceIntelligence() {
+  const { analytics, fetchAnalytics } = useCommerceIntelligenceStore();
+
+  React.useEffect(() => {
+    fetchAnalytics();
+  }, [fetchAnalytics]);
   return (
     <div className="min-h-screen bg-black text-white p-8 font-sans">
       <div className="flex justify-between items-start mb-8">
@@ -20,23 +27,21 @@ export default function CommerceIntelligence() {
 
       {/* Live Tickers */}
       <div className="flex gap-4 mb-8 overflow-x-auto pb-4 hide-scrollbar">
-        {[
-          { symbol: "TMT Rebar (8mm)", price: "₹52,400/MT", change: "+1.2%", up: true },
-          { symbol: "OPC 53 Cement", price: "₹345/Bag", change: "-0.5%", up: false },
-          { সংকট: "Diesel", price: "₹92.45/L", change: "0.0%", up: true },
-          { symbol: "Bricks (Fly Ash)", price: "₹4.50/Pc", change: "+2.1%", up: true },
-          { symbol: "Sand (River)", price: "₹3,200/Brass", change: "-1.8%", up: false },
-        ].map((ticker, i) => (
-          <div key={i} className="min-w-[200px] bg-zinc-900 border border-zinc-800 rounded-xl p-4 shrink-0">
-            <p className="text-zinc-400 text-xs font-medium mb-2">{ticker.symbol || ticker.সংকট}</p>
-            <div className="flex justify-between items-end">
-              <p className="text-lg font-medium">{ticker.price}</p>
-              <div className={`flex items-center gap-0.5 text-xs font-medium ${ticker.up ? 'text-emerald-400' : 'text-red-400'}`}>
-                {ticker.up ? <ArrowUpRight size={14}/> : <ArrowDownRight size={14}/>} {ticker.change}
+        {!analytics?.tickers || analytics.tickers.length === 0 ? (
+          <div className="w-full text-zinc-500 text-sm">No live market tickers available.</div>
+        ) : (
+          analytics.tickers.map((ticker: any, i: number) => (
+            <div key={i} className="min-w-[200px] bg-zinc-900 border border-zinc-800 rounded-xl p-4 shrink-0">
+              <p className="text-zinc-400 text-xs font-medium mb-2">{ticker.symbol || ticker.name}</p>
+              <div className="flex justify-between items-end">
+                <p className="text-lg font-medium">{ticker.price || "N/A"}</p>
+                <div className={`flex items-center gap-0.5 text-xs font-medium ${ticker.up ? 'text-emerald-400' : 'text-red-400'}`}>
+                  {ticker.up ? <ArrowUpRight size={14}/> : <ArrowDownRight size={14}/>} {ticker.change || "0%"}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -56,27 +61,8 @@ export default function CommerceIntelligence() {
             </div>
           </div>
 
-          <div className="h-[400px] w-full relative pt-4">
-            {/* Chart Simulation */}
-            <div className="absolute inset-0 flex flex-col justify-between pb-8">
-              <div className="w-full border-t border-zinc-800/50 flex items-start justify-end text-[10px] text-zinc-600 pt-1">₹55,000</div>
-              <div className="w-full border-t border-zinc-800/50 flex items-start justify-end text-[10px] text-zinc-600 pt-1">₹52,500</div>
-              <div className="w-full border-t border-zinc-800/50 flex items-start justify-end text-[10px] text-zinc-600 pt-1">₹50,000</div>
-              <div className="w-full border-t border-zinc-800/50 flex items-start justify-end text-[10px] text-zinc-600 pt-1">₹47,500</div>
-            </div>
-            <svg className="absolute inset-0 w-full h-full pb-8" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="rgba(16, 185, 129, 0.4)" />
-                  <stop offset="100%" stopColor="rgba(16, 185, 129, 0)" />
-                </linearGradient>
-              </defs>
-              <path d="M0,250 L100,220 L200,240 L300,180 L400,200 L500,150 L600,170 L700,90 L800,110 L900,40 L1000,60 L1000,400 L0,400 Z" fill="url(#lineGrad)" />
-              <path d="M0,250 L100,220 L200,240 L300,180 L400,200 L500,150 L600,170 L700,90 L800,110 L900,40 L1000,60" fill="none" stroke="#10b981" strokeWidth="3" />
-            </svg>
-            <div className="absolute bottom-2 w-full flex justify-between px-4 text-[10px] text-zinc-500">
-              <span>Mar 01</span><span>Mar 15</span><span>Apr 01</span><span>Apr 15</span><span>May 01</span><span>May 15</span><span>Jun 01</span><span>Jun 15</span>
-            </div>
+          <div className="h-[400px] w-full relative pt-4 flex items-center justify-center text-zinc-500">
+            No chart data available.
           </div>
         </div>
 
@@ -86,14 +72,16 @@ export default function CommerceIntelligence() {
             <h3 className="font-medium text-white mb-4 flex items-center gap-2"><Layers size={18} className="text-blue-500"/> AI Market Insights</h3>
             
             <div className="space-y-4">
-              <div className="bg-black border border-zinc-800 p-4 rounded-xl">
-                <p className="text-sm font-medium text-white mb-2">Steel Prices Peaking</p>
-                <p className="text-xs text-zinc-400">Based on global iron ore futures and local monsoon forecasts, TMT prices are expected to correct by <span className="text-emerald-400 font-medium">3-5%</span> in the next 15 days.</p>
-              </div>
-              <div className="bg-black border border-zinc-800 p-4 rounded-xl">
-                <p className="text-sm font-medium text-white mb-2">Cement Supply Chain</p>
-                <p className="text-xs text-zinc-400">Local strikes in Maharashtra have caused a short-term artificial hike of ₹10/Bag. Hold bulk purchases until resolving.</p>
-              </div>
+              {!analytics?.insights || analytics.insights.length === 0 ? (
+                <EmptyState icon={Layers} title="No Insights" description="Market insights will appear here once data is aggregated." />
+              ) : (
+                analytics.insights.map((insight: any, i: number) => (
+                  <div key={i} className="bg-black border border-zinc-800 p-4 rounded-xl">
+                    <p className="text-sm font-medium text-white mb-2">{insight.title}</p>
+                    <p className="text-xs text-zinc-400">{insight.description}</p>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>

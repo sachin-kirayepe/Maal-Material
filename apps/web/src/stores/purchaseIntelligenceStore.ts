@@ -4,16 +4,16 @@ import { ApiClient } from "@/lib/api-client";
 interface PurchaseIntelligenceState {
   analytics: any;
   isLoading: boolean;
-  fetchAnalytics: () => Promise<void>;
+  fetchAnalytics: (tenantId: string) => Promise<void>;
 }
 
 export const usePurchaseIntelligenceStore = create<PurchaseIntelligenceState>((set) => ({
   analytics: null,
   isLoading: false,
-  fetchAnalytics: async () => {
+  fetchAnalytics: async (tenantId: string) => {
     set({ isLoading: true });
     try {
-      const data = await ApiClient.get<any>("/purchase-intelligence/analytics", { params: { tenantId: "tenant-1" } });
+      const data = await ApiClient.get<any>("/purchase-intelligence/analytics", { params: { tenantId } });
       set({ analytics: data?.data || data || null, isLoading: false });
     } catch (err) {
       console.error(err);

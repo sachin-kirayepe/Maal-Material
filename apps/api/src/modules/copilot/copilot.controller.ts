@@ -26,4 +26,13 @@ export class CopilotController {
   ) {
     return this.copilotService.sendMessage(req.tenantId, req.user!.sub, conversationId, message);
   }
+
+  @Post("action")
+  executeAction(
+    @Request() req: any,
+    @Body("actionId") actionId: string,
+    @Body("messageId") messageId: string,
+  ) {
+    return this.copilotService.executeAction(req.tenantId, req.user!.sub, actionId, messageId);
+  }
 }

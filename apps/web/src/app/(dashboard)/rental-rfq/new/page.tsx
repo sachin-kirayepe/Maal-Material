@@ -42,8 +42,8 @@ export default function CreateRentalRFQ() {
     setIsLoading(true);
     try {
       await ApiClient.post("/rental-rfq", {
-        tenantId: user?.tenantId || "tenant-1",
-        contractorId: user?.id || "contractor-1",
+        tenantId: user?.tenantId || "",
+        contractorId: user?.id || "",
         equipmentType: formData.equipmentType,
         quantity: parseInt(formData.quantity) || 1,
         location: formData.location,

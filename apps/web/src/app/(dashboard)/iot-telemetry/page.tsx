@@ -70,65 +70,9 @@ export default function IOTTelemetry() {
         {/* Map & Diagnostics */}
         <div className="lg:col-span-3 flex flex-col gap-6">
           
-          {/* Map View */}
-          <div className="flex-1 bg-zinc-900 border border-zinc-800 rounded-2xl relative overflow-hidden">
-            {/* Fake Map Grid */}
-            <div className="absolute inset-0 bg-[#0f1115]">
-              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cartographer.png')] opacity-20"></div>
-              
-              {/* Site Boundary Overlay */}
-              <svg className="absolute inset-0 w-full h-full">
-                <polygon points="30%,20% 70%,25% 65%,80% 25%,75%" fill="rgba(16, 185, 129, 0.05)" stroke="#10b981" strokeWidth="2" strokeDasharray="5,5"/>
-                <text x="32%" y="25%" fill="#10b981" fontSize="12" fontFamily="monospace">Project Alpha Boundary (Geofence)</text>
-              </svg>
-
-              {/* Machine Marker */}
-              <motion.div 
-                animate={{ x: [0, 10, -5, 0], y: [0, 5, 10, 0] }}
-                transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-              >
-                <div className="w-12 h-12 bg-emerald-500/20 rounded-full border-2 border-emerald-500 flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.4)]">
-                  <Radio size={20} className="text-emerald-400 animate-pulse" />
-                </div>
-                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black/80 border border-zinc-700 text-white text-[10px] font-medium px-3 py-1.5 rounded whitespace-nowrap backdrop-blur">
-                  Volvo EC200D • 4km/h
-                </div>
-              </motion.div>
-            </div>
+          <div className="flex-1 bg-zinc-900 border border-zinc-800 rounded-2xl relative overflow-hidden flex items-center justify-center text-zinc-500">
+            Telemetry map and diagnostics unavailable. Waiting for live data stream.
           </div>
-
-          {/* Diagnostics Panel */}
-          {activeMachine === 1 && (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="h-48 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 grid grid-cols-4 gap-6">
-              <div className="col-span-1 border-r border-zinc-800 pr-6">
-                <h3 className="font-medium text-white mb-1">Engine Health</h3>
-                <p className="text-xs text-emerald-400 mb-4">Optimal Parameters</p>
-                <div className="flex justify-between text-xs text-zinc-500 mb-1">
-                  <span>Service Due In</span>
-                  <span className="text-white">124 Hrs</span>
-                </div>
-                <div className="w-full bg-zinc-800 rounded-full h-1.5">
-                  <div className="bg-emerald-500 h-1.5 rounded-full" style={{ width: '80%' }}></div>
-                </div>
-              </div>
-              
-              <div className="col-span-3 flex justify-around items-center">
-                <div className="text-center">
-                  <p className="text-xs text-zinc-500 mb-2 uppercase tracking-widest">Hydraulic Temp</p>
-                  <p className="text-3xl font-light text-white">65<span className="text-sm text-zinc-500">°C</span></p>
-                </div>
-                <div className="text-center">
-                  <p className="text-xs text-zinc-500 mb-2 uppercase tracking-widest">Fuel Consumption</p>
-                  <p className="text-3xl font-light text-white">12.4<span className="text-sm text-zinc-500"> L/hr</span></p>
-                </div>
-                <div className="text-center">
-                  <p className="text-xs text-zinc-500 mb-2 uppercase tracking-widest">Engine Load</p>
-                  <p className="text-3xl font-light text-emerald-400">76<span className="text-sm text-zinc-500">%</span></p>
-                </div>
-              </div>
-            </motion.div>
-          )}
 
         </div>
       </div>

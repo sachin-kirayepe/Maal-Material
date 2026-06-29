@@ -96,7 +96,7 @@ export default function EquipmentOwnerDashboard() {
           </div>
           <div className="mt-4">
             <h3 className="text-zinc-400 text-sm font-medium">Monthly Revenue</h3>
-            <p className="text-3xl font-bold text-white mt-1">₹ 2,45,000</p>
+            <p className="text-3xl font-bold text-white mt-1">N/A</p>
           </div>
         </Card>
 
@@ -152,7 +152,7 @@ export default function EquipmentOwnerDashboard() {
                       {machine.status}
                     </span>
                     <div className="text-right">
-                      <p className="text-white font-medium">₹ {machine.pricing?.dailyRate || 0}</p>
+                      <p className="text-white font-medium">{machine.pricing?.dailyRate || "N/A"}</p>
                       <p className="text-xs text-zinc-500">per day</p>
                     </div>
                   </div>
@@ -169,20 +169,7 @@ export default function EquipmentOwnerDashboard() {
           </div>
           
           <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-5 space-y-5">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="flex gap-4 pb-5 border-b border-zinc-800/50 last:border-0 last:pb-0">
-                <div className="w-10 h-10 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0">
-                  <CalendarDays className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-white text-sm font-medium">Tata Hitachi EX200</h4>
-                  <p className="text-xs text-zinc-400 mt-1 flex items-center gap-1">
-                    <Clock className="w-3 h-3" /> Tommorrow, 09:00 AM
-                  </p>
-                  <p className="text-xs text-amber-500 mt-2 font-medium">Contractor: L&T Construction</p>
-                </div>
-              </div>
-            ))}
+             <div className="text-zinc-500 text-sm text-center py-4">No upcoming bookings.</div>
           </div>
         </div>
       </div>

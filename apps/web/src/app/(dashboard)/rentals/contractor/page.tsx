@@ -9,6 +9,7 @@ import {
 import { Button } from "@constructos/ui";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 export default function ContractorRentalsDashboard() {
   const { user } = useAuthStore();
@@ -19,8 +20,8 @@ export default function ContractorRentalsDashboard() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const contractorId = user?.id || "contractor-1";
-        const tenantId = user?.tenantId || "tenant-1";
+        const contractorId = user?.id || "";
+        const tenantId = user?.tenantId || "";
         
         const [bookingsRes, rfqsRes] = await Promise.all([
           ApiClient.get(`/api/v1/rentals?contractorId=${contractorId}`),
@@ -94,7 +95,7 @@ export default function ContractorRentalsDashboard() {
                             {new Date(booking.startDate).toLocaleDateString()} - {new Date(booking.endDate).toLocaleDateString()}
                           </span>
                           <span>•</span>
-                          <span className="text-amber-500 font-medium">₹{booking.totalAmount?.toLocaleString()}</span>
+                          <span className="text-amber-500 font-medium">{booking.totalAmount?.toLocaleString()}</span>
                         </div>
                       </div>
                     </div>

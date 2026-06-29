@@ -30,7 +30,7 @@ const Download = DownloadIcon as any;
 const TrendingUp = TrendingUpIcon as any;
 const ShieldAlert = ShieldAlertIcon as any;
 
-// Mock data to visualize since we don't have a live seed yet
+
 const data = [
   { name: "Mon", revenue: 4000, deliveries: 24, expenses: 2400 },
   { name: "Tue", revenue: 3000, deliveries: 13, expenses: 1398 },

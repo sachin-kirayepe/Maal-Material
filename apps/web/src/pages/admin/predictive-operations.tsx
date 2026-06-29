@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useContractorAnalyticsStore } from "../../stores/contractorAnalyticsStore";
+import { useTenantId } from "@/hooks/useTenantId";
 import {
   LineChart as LineChartIcon,
   Briefcase as BriefcaseIcon,
@@ -12,7 +13,7 @@ const Activity = ActivityIcon as any;
 export default function PredictiveOperationsCenter() {
   const { contractors, workflows, fetchContractors, fetchWorkflows, isLoading } =
     useContractorAnalyticsStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchContractors(tenantId);

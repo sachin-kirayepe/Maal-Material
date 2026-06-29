@@ -38,7 +38,7 @@ export default function PlatformSettings() {
               <div>
                 <label className="text-xs text-zinc-400 block mb-1">Company Subdomain</label>
                 <div className="flex items-center">
-                  <input type="text" defaultValue="jindal" className="bg-black border border-zinc-800 rounded-l-lg px-4 py-2 focus:outline-none focus:border-fuchsia-500 w-full" />
+                  <input type="text" placeholder="company" className="bg-black border border-zinc-800 rounded-l-lg px-4 py-2 focus:outline-none focus:border-fuchsia-500 w-full" />
                   <span className="bg-zinc-800 border border-l-0 border-zinc-800 rounded-r-lg px-4 py-2 text-zinc-400 text-sm">.constructos.com</span>
                 </div>
               </div>
@@ -97,7 +97,7 @@ export default function PlatformSettings() {
           <h3 className="font-medium text-lg mb-6 flex items-center gap-2"><Smartphone className="text-zinc-400" size={20}/> Live Preview</h3>
           
           <div className="flex-1 bg-[#050505] border border-zinc-800 rounded-xl overflow-hidden flex flex-col relative">
-            {/* Fake Browser Chrome */}
+
             <div className="bg-zinc-900 border-b border-zinc-800 px-4 py-3 flex items-center gap-2">
               <div className="flex gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
@@ -105,39 +105,12 @@ export default function PlatformSettings() {
                 <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
               </div>
               <div className="mx-auto bg-black border border-zinc-800 rounded text-[10px] text-zinc-500 px-24 py-1">
-                jindal.constructos.com
+                tenant.constructos.com
               </div>
             </div>
 
-            {/* Fake App Preview */}
-            <div className="flex-1 flex">
-              {/* Fake Sidebar */}
-              <div className="w-48 bg-zinc-900/50 border-r border-zinc-800 p-4">
-                <div className="flex items-center gap-2 mb-8">
-                  <div className="w-6 h-6 rounded bg-zinc-800 flex items-center justify-center font-bold text-xs" style={{ color: primaryColor }}>J</div>
-                  <span className="font-medium text-sm text-white">Jindal Steel</span>
-                </div>
-                <div className="space-y-2">
-                  <div className="w-full h-8 rounded" style={{ backgroundColor: `${primaryColor}20`, borderLeft: `2px solid ${primaryColor}` }}></div>
-                  <div className="w-3/4 h-6 rounded bg-zinc-800"></div>
-                  <div className="w-5/6 h-6 rounded bg-zinc-800"></div>
-                </div>
-              </div>
-              {/* Fake Content */}
-              <div className="flex-1 p-6">
-                <div className="w-48 h-8 rounded bg-zinc-800 mb-6"></div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="h-24 rounded-lg bg-zinc-900 border border-zinc-800"></div>
-                  <div className="h-24 rounded-lg bg-zinc-900 border border-zinc-800 relative overflow-hidden">
-                    <div className="absolute bottom-0 left-0 h-1 w-full" style={{ backgroundColor: primaryColor }}></div>
-                  </div>
-                </div>
-                <div className="mt-6">
-                  <button className="px-4 py-2 rounded text-xs font-medium text-white" style={{ backgroundColor: primaryColor }}>
-                    Primary Action
-                  </button>
-                </div>
-              </div>
+            <div className="flex-1 flex items-center justify-center text-zinc-500 text-sm py-12">
+              Preview generation disabled (Awaiting configurations)
             </div>
 
           </div>

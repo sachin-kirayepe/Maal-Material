@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { MapPin, Star, ShieldCheck, Filter, Search, PhoneCall } from "lucide-react";
 
 import { apiClient } from "@/lib/apiClient";
+import { toast } from "sonner";
 
 export default function VendorDiscovery() {
   const [activeCategory, setActiveCategory] = useState("All");

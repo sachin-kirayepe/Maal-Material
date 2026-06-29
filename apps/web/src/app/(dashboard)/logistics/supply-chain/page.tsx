@@ -5,12 +5,14 @@ import { motion } from "framer-motion";
 import { Network, Warehouse, ArrowRight } from "lucide-react";
 
 import { useSupplyChainStore } from "@/stores/supplyChainStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function SupplyChainMap() {
+  const tenantId = useTenantId();
   const { logistics, isLoading, fetchLogistics } = useSupplyChainStore();
 
   React.useEffect(() => {
-    fetchLogistics("tenant-1");
+    fetchLogistics(tenantId);
   }, [fetchLogistics]);
   return (
     <div className="min-h-screen bg-black text-white p-8 font-sans">
@@ -28,10 +30,10 @@ export default function SupplyChainMap() {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
         {[
-          { label: "Active Suppliers", value: "124" },
-          { label: "Material in Transit", value: "₹45.2L" },
-          { label: "Avg Lead Time", value: "2.4 Days" },
-          { label: "Network Health", value: "94%" },
+          { label: "Active Routes", value: isLoading ? "—" : String(logistics.length) },
+          { label: "In Transit", value: isLoading ? "—" : String(logistics.filter((l: any) => l.status === "DISPATCHED" || l.status === "Active" || l.status === "IN_TRANSIT").length) },
+          { label: "Completed", value: isLoading ? "—" : String(logistics.filter((l: any) => l.status === "DELIVERED" || l.status === "COMPLETED").length) },
+          { label: "Network Health", value: isLoading ? "—" : logistics.length > 0 ? Math.round((logistics.filter((l: any) => l.status !== "DELAYED" && l.status !== "FAILED").length / logistics.length) * 100) + "%" : "N/A" },
         ].map((stat, i) => (
           <div key={i} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
             <p className="text-sm text-zinc-400 mb-1">{stat.label}</p>

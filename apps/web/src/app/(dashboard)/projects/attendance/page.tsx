@@ -155,7 +155,7 @@ export default function AttendancePage() {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-right font-bold text-slate-900 dark:text-white">
-                        ₹{record.wageAmount.toLocaleString()}
+                        {record.wageAmount.toLocaleString()}
                       </td>
                     </tr>
                   ))}

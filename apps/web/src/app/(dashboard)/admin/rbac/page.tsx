@@ -22,7 +22,7 @@ export default function RBACEditor() {
 
   const activeRole = roles.find(r => r.name === activeRoleName);
 
-  // Group permissions by module (mock implementation based on action prefix)
+  // Group permissions by module
   const groupedPermissions = permissions.reduce((acc: any, perm: any) => {
     const moduleName = perm.action.split(':')[0] || "General";
     if (!acc[moduleName]) acc[moduleName] = [];

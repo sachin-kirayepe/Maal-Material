@@ -66,7 +66,7 @@ export const useSpatialStore = create<SpatialState>((set) => ({
           type: "rack",
           position: [index * 10 - 15, 0, index % 2 === 0 ? 5 : -5], // Dynamic layout
           status: w.capacity > 90 ? "critical" : w.capacity > 75 ? "warning" : "optimal",
-          loadPercentage: w.capacity || Math.floor(Math.random() * 100),
+          loadPercentage: w.capacity || 0,
           temperature: 22 + (index % 5),
           metadata: {
             name: w.name,

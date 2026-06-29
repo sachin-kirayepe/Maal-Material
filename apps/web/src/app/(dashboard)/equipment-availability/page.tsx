@@ -5,8 +5,9 @@ import { motion } from "framer-motion";
 import { CalendarDays, ChevronLeft, ChevronRight, Truck } from "lucide-react";
 
 import { apiClient } from "@/lib/apiClient";
+import { toast } from "sonner";
 
-const days = Array.from({ length: 14 }, (_, i) => i + 10); // June 10 to June 23 mockup
+const days = Array.from({ length: 14 }, (_, i) => i + 10);
 
 export default function MachineAvailability() {
   const [equipment, setEquipment] = React.useState<any[]>([]);

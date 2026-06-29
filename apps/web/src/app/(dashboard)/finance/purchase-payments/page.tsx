@@ -5,15 +5,22 @@ import { motion } from "framer-motion";
 import { FileStack, CheckSquare, Square, Clock, AlertCircle, ArrowRight, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useInvoiceStore } from "@/stores/invoiceStore";
+import { useTreasuryStore } from "@/stores/treasuryStore";
+import { useTenantId } from "@/hooks/useTenantId";
 import { ApiClient } from "@/lib/api-client";
 
 export default function AccountsPayable() {
+  const tenantId = useTenantId();
   const { invoices: payables, isLoading, fetchInvoices } = useInvoiceStore();
+  const { bankAccounts, fetchTreasuryData } = useTreasuryStore();
+  const [selected, setSelected] = useState<string[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [selectedAccount, setSelectedAccount] = useState("");
 
   React.useEffect(() => {
     fetchInvoices("PENDING");
-  }, [fetchInvoices]);
+    if (tenantId) fetchTreasuryData();
+  }, [fetchInvoices, tenantId, fetchTreasuryData]);
 
   const toggleSelect = (id: string) => {
     setSelected(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
@@ -28,7 +35,7 @@ export default function AccountsPayable() {
       // In a real batch processing, we would send the array of IDs. 
       // For this E2E validation demo, we iterate and pay each to the invoice endpoint.
       for (const id of selected) {
-        await ApiClient.post(`/purchase-payments/invoices/${id}/pay`, { amount: totalSelected, account: "HDFC Current (*4012)" });
+        await ApiClient.post(`/purchase-payments/invoices/${id}/pay`, { amount: totalSelected, account: selectedAccount || bankAccounts?.[0]?.accountNumber || "Unknown" });
       }
       toast.success(`Successfully processed payment for ${selected.length} invoices.`);
       setSelected([]);
@@ -66,7 +73,7 @@ export default function AccountsPayable() {
                   <th className="px-6 py-4">Invoice #</th>
                   <th className="px-6 py-4">Supplier</th>
                   <th className="px-6 py-4">GRN Ref</th>
-                  <th className="px-6 py-4 text-right">Amount (₹)</th>
+                  <th className="px-6 py-4 text-right">Amount ()</th>
                   <th className="px-6 py-4">Due Date</th>
                 </tr>
               </thead>
@@ -114,15 +121,25 @@ export default function AccountsPayable() {
               <div className="h-px bg-zinc-800"></div>
               <div className="flex justify-between items-center">
                 <span className="text-zinc-400">Total Payout</span>
-                <span className="text-2xl font-light text-white">₹{totalSelected.toLocaleString()}</span>
+                <span className="text-2xl font-light text-white">{totalSelected.toLocaleString()}</span>
               </div>
             </div>
 
             <div className="space-y-4">
               <label className="block text-sm text-zinc-400">Pay From Account</label>
-              <select className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white mb-6 text-sm">
-                <option>HDFC Current (*4012) - Bal: ₹42.5L</option>
-                <option>ICICI Escrow (*8891) - Bal: ₹1.15Cr</option>
+              <select 
+                value={selectedAccount}
+                onChange={(e) => setSelectedAccount(e.target.value)}
+                className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white mb-6 text-sm">
+                {bankAccounts.length === 0 ? (
+                  <option disabled>No accounts available</option>
+                ) : (
+                  bankAccounts.map((acc: any, i: number) => (
+                    <option key={i} value={acc.accountNumber || acc.acc}>
+                      {acc.bankName || acc.bank || 'Bank'} ({acc.accountNumber || acc.acc}) - Bal: {(acc.balance || 0).toLocaleString()}
+                    </option>
+                  ))
+                )}
               </select>
 
               <button 

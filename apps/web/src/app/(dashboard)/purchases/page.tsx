@@ -6,8 +6,10 @@ import { ShoppingBag, Download, Search, Filter, CheckCircle2, Clock, Calendar } 
 import { toast } from "sonner";
 import { ApiClient } from "@/lib/api-client";
 import { useProcurementStore } from "../../../stores/procurementStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function PurchaseHistory() {
+  const tenantId = useTenantId();
   const { purchaseOrders: purchases, isLoading, fetchPurchaseOrders } = useProcurementStore();
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -15,10 +17,14 @@ export default function PurchaseHistory() {
     fetchPurchaseOrders();
   }, [fetchPurchaseOrders]);
 
+  const totalSpend = purchases.reduce((acc: number, p: any) => acc + (p.totalAmount || p.amount || 0), 0);
+  const activeSuppliers = new Set(purchases.map((p: any) => p.vendor?.name || p.supplier).filter(Boolean)).size;
+  const pendingDeliveries = purchases.filter((p: any) => p.status === 'Pending' || p.status === 'In Transit' || p.status === 'SHIPPED').length;
+
   const handleExport = async () => {
     try {
       toast.info("Queueing purchase history export...");
-      await ApiClient.post("/reports/generate", { templateId: "purchase-history", tenantId: "tenant-1" });
+      await ApiClient.post("/reports/generate", { templateId: "purchase-history", tenantId: tenantId });
       toast.success("Job Queued: You will be notified when the export is ready.");
     } catch (e) {
       toast.error("Failed to queue export job.");
@@ -43,19 +49,19 @@ export default function PurchaseHistory() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
           <p className="text-sm text-zinc-400 mb-2">Total Spend (YTD)</p>
-          <p className="text-2xl font-medium text-white">₹45.2 Cr</p>
+          <p className="text-2xl font-medium text-white">{isLoading ? "—" : `${totalSpend.toLocaleString()}`}</p>
         </div>
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
           <p className="text-sm text-zinc-400 mb-2">Total Orders</p>
-          <p className="text-2xl font-medium text-white">342</p>
+          <p className="text-2xl font-medium text-white">{isLoading ? "—" : purchases.length}</p>
         </div>
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
           <p className="text-sm text-zinc-400 mb-2">Active Suppliers</p>
-          <p className="text-2xl font-medium text-white">28</p>
+          <p className="text-2xl font-medium text-white">{isLoading ? "—" : activeSuppliers}</p>
         </div>
         <div className="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-6">
           <p className="text-sm text-purple-400 mb-2">Pending Deliveries</p>
-          <p className="text-2xl font-medium text-purple-300">4</p>
+          <p className="text-2xl font-medium text-purple-300">{isLoading ? "—" : pendingDeliveries}</p>
         </div>
       </div>
 
@@ -108,7 +114,7 @@ export default function PurchaseHistory() {
                 <td className="px-6 py-4 text-white">{new Date(po.createdAt || po.date).toLocaleDateString()}</td>
                 <td className="px-6 py-4 font-medium text-white">{po.vendor?.name || po.supplier || 'Unknown'}</td>
                 <td className="px-6 py-4">{po.items?.length || po.items || 0} items</td>
-                <td className="px-6 py-4 font-medium text-white">₹{(po.totalAmount || po.amount || 0).toLocaleString()}</td>
+                <td className="px-6 py-4 font-medium text-white">{(po.totalAmount || po.amount || 0).toLocaleString()}</td>
                 <td className="px-6 py-4">
                   <span className={`flex w-fit items-center gap-1 text-xs px-2 py-1 rounded border ${po.status === 'Delivered' || po.status === 'DELIVERED' ? 'bg-green-500/10 text-green-500 border-green-500/20' : po.status === 'In Transit' || po.status === 'SHIPPED' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'}`}>
                     {po.status === 'Delivered' || po.status === 'DELIVERED' ? <CheckCircle2 size={12}/> : <Clock size={12}/>} {po.status}

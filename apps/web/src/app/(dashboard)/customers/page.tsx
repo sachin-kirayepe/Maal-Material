@@ -107,13 +107,13 @@ export default function CustomersPage() {
                         {c.email && <p className="text-xs text-slate-500">{c.email}</p>}
                       </td>
                       <td className="px-4 py-3 text-right">
-                        ₹{c.creditLimit.toLocaleString("en-IN")}
+                        {c.creditLimit.toLocaleString("en-IN")}
                       </td>
                       <td className="px-4 py-3 text-right">
                         <span
                           className={`font-medium ${c.totalDue > 0 ? "text-rose-600" : "text-emerald-600"}`}
                         >
-                          ₹{c.totalDue.toLocaleString("en-IN")}
+                          {c.totalDue.toLocaleString("en-IN")}
                         </span>
                       </td>
                     </tr>

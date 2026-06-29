@@ -38,7 +38,7 @@ export class AuditEngine {
     afterState: Record<string, any>,
     authMethod: "SESSION" | "API_KEY" | "SYSTEM_OVERRIDE" = "SESSION",
   ): Promise<AuditLogEntry> {
-    const entryId = `audit_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const entryId = `audit_${Date.now()}`;
     const timestamp = new Date().toISOString();
 
     const payloadString = JSON.stringify({

@@ -103,8 +103,8 @@ export default function ShippingZonesPage() {
                         <MapPin className="w-4 h-4 text-amber-500" /> {zone.name}
                       </td>
                       <td className="p-4 font-mono text-xs">{zone.code}</td>
-                      <td className="p-4">₹{zone.baseCost}</td>
-                      <td className="p-4">₹{zone.perKmCost}/km</td>
+                      <td className="p-4">{zone.baseCost || "N/A"}</td>
+                      <td className="p-4">{zone.perKmCost ? `${zone.perKmCost}/km` : "N/A"}</td>
                       <td className="p-4">
                         <span
                           className={`inline-flex px-2 py-1 rounded text-[10px] font-bold ${

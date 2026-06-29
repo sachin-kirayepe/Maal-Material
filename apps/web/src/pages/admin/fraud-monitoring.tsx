@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useFraudStore } from "../../stores/fraudStore";
 import { AlertTriangle as AlertTriangleIcon, AlertOctagon as AlertOctagonIcon } from "lucide-react";
+import { useTenantId } from "@/hooks/useTenantId";
 const AlertTriangle = AlertTriangleIcon as any;
 const AlertOctagon = AlertOctagonIcon as any;
 
 export default function FraudMonitoringCenter() {
   const { signals, fetchSignals, resolveSignal, isLoading } = useFraudStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchSignals(tenantId);

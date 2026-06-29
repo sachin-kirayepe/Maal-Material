@@ -6,8 +6,7 @@ const request = async (method: string, path: string, data?: any) => {
     method,
     headers: {
       "Content-Type": "application/json",
-      // Mock auth header for testing
-      Authorization: "Bearer test-token",
+      Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
       "x-tenant-id": "025b5fe2-63ee-451a-9a63-47ab114fb231",
     },
   };

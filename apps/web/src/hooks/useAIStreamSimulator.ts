@@ -79,7 +79,7 @@ export const useAIStreamSimulator = () => {
       // 4. Stream Reasoning Steps
       let currentSteps: string[] = [];
       for (const step of scenario.reasoning) {
-        await new Promise((resolve) => setTimeout(resolve, 800 + Math.random() * 500)); // Simulate think time
+        await new Promise((resolve) => setTimeout(resolve, 800));
         currentSteps = [...currentSteps, step];
         updateMessage(assistantMsgId, { reasoningSteps: currentSteps });
       }
@@ -89,7 +89,7 @@ export const useAIStreamSimulator = () => {
       const words = scenario.text.split(" ");
 
       for (const word of words) {
-        await new Promise((resolve) => setTimeout(resolve, 40 + Math.random() * 60)); // Token streaming speed
+        await new Promise((resolve) => setTimeout(resolve, 40));
         streamedText += word + " ";
         updateMessage(assistantMsgId, { content: streamedText });
       }

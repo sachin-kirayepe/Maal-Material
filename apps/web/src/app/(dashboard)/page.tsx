@@ -29,7 +29,7 @@ export default function OverviewPage() {
   const [segmentData, setSegmentData] = useState<any[]>([]);
   const { isConnected, metrics, notifications } = useWebsocketStore();
 
-  // Initialize high-frequency websocket stream mock
+  // Initialize high-frequency websocket stream
   useWebsocketStream();
 
   useEffect(() => {

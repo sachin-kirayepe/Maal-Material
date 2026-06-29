@@ -19,9 +19,7 @@ class LedgerService {
 
   private generateHash(): string {
     // Simulated SHA-256 for demo purposes
-    return (
-      "0x" + Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join("")
-    );
+    return "0x" + Date.now().toString(16) + "hash";
   }
 
   public recordDeal(
@@ -31,7 +29,7 @@ class LedgerService {
     quantity: number,
   ): LedgerTransaction {
     const tx: LedgerTransaction = {
-      id: `tx-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      id: `tx-${Date.now()}`,
       type: "DEAL_NEGOTIATED",
       amount,
       currency: "USD",

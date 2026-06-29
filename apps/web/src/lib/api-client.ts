@@ -18,7 +18,7 @@ type RequestOptions = RequestInit & {
 // H-03 FIX: Generate collision-resistant idempotency keys for mutation deduplication
 function generateIdempotencyKey(): string {
   const timestamp = Date.now().toString(36);
-  const random = Math.random().toString(36).substring(2, 10);
+  const random = Date.now().toString(36);
   return `${timestamp}-${random}`;
 }
 

@@ -3,13 +3,14 @@ import { useCommerceNetworkStore } from "../../stores/commerceNetworkStore";
 import { ArrowRightLeft as ArrowRightLeftIcon, ShoppingBag as ShoppingBagIcon } from "lucide-react";
 import { IndustrialCatalogGrid } from "../../components/marketplace/IndustrialCatalogGrid";
 import { AIChatInterface } from "../../components/ai/AIChatInterface";
+import { useTenantId } from "@/hooks/useTenantId";
 
 const ArrowRightLeft = ArrowRightLeftIcon as any;
 const ShoppingBag = ShoppingBagIcon as any;
 
 export default function B2BExchangeDashboard() {
   const { nodes, fetchGraph, isLoading } = useCommerceNetworkStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchGraph(tenantId);

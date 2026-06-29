@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useRiskAnalysisStore } from "../../stores/riskAnalysisStore";
+import { useTenantId } from "@/hooks/useTenantId";
 import {
   ShieldAlert as ShieldAlertIcon,
   Users as UsersIcon,
@@ -17,7 +18,7 @@ export default function RiskIntelligenceCenter() {
     fetchVendorIntelligence,
     isLoading,
   } = useRiskAnalysisStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchCustomerRisks(tenantId);

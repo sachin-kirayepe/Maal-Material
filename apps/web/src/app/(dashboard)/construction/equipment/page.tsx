@@ -5,12 +5,14 @@ import { motion } from "framer-motion";
 import { Wrench, Settings, AlertTriangle, CheckCircle2, BatteryCharging, Clock, Gauge } from "lucide-react";
 
 import { useEquipmentStore } from "@/stores/equipmentStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function EquipmentUsage() {
+  const tenantId = useTenantId();
   const { equipment: machinery, isLoading, fetchEquipment } = useEquipmentStore();
 
   React.useEffect(() => {
-    fetchEquipment("tenant-1");
+    fetchEquipment(tenantId);
   }, [fetchEquipment]);
   return (
     <div className="min-h-screen bg-black text-white p-8 font-sans">

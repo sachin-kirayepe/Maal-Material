@@ -6,8 +6,10 @@ import { Users, HardHat, TrendingUp, Calendar as CalendarIcon, Filter, Download,
 import { useWorkerStore } from "@/stores/workerStore";
 import { ApiClient } from "@/lib/api-client";
 import { toast } from "sonner";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function LaborTracking() {
+  const tenantId = useTenantId();
   const { workers, meta, isLoading, fetchWorkers, skillBreakdown, fetchSkillBreakdown } = useWorkerStore();
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -22,7 +24,7 @@ export default function LaborTracking() {
   const handleExport = async () => {
     try {
       toast.info("Queueing report generation job...");
-      await ApiClient.post("/reports/generate", { templateId: "labor-report", tenantId: "tenant_1" });
+      await ApiClient.post("/reports/generate", { templateId: "labor-report", tenantId: tenantId });
       toast.success("Job Queued: You will be notified when the report is ready to download.");
     } catch (e) {
       toast.error("Failed to queue export job.");
@@ -58,7 +60,7 @@ export default function LaborTracking() {
             <div className="p-2 bg-zinc-800 rounded-lg"><TrendingUp size={20} className="text-red-400" /></div>
           </div>
           <p className="text-sm text-zinc-400 mb-1">Daily Labor Cost</p>
-          <p className="text-3xl font-medium text-red-400">₹{totalDailyWage.toLocaleString()}</p>
+          <p className="text-3xl font-medium text-red-400">{totalDailyWage.toLocaleString()}</p>
         </div>
 
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 relative overflow-hidden flex flex-col justify-center items-start">
@@ -90,7 +92,7 @@ export default function LaborTracking() {
                 <th className="px-6 py-4">Skill Category</th>
                 <th className="px-6 py-4">Contact</th>
                 <th className="px-6 py-4">Contractor/Team</th>
-                <th className="px-6 py-4 text-right">Daily Wage (₹)</th>
+                <th className="px-6 py-4 text-right">Daily Wage ()</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-800/50">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button } from "@constructos/ui";
 import { useWhatsAppStore } from "../../stores/whatsappStore";
+import { useTenantId } from "@/hooks/useTenantId";
 import {
   MessageCircle as MessageCircleIcon,
   FileText as FileTextIcon,
@@ -12,10 +13,10 @@ const Send = SendIcon as any;
 
 export default function WhatsappOperations() {
   const { workflows, isLoading, fetchWorkflows, initiateWorkflow } = useWhatsAppStore();
-  const [phone, setPhone] = useState("+91");
+  const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
 
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchWorkflows(tenantId);
@@ -25,14 +26,14 @@ export default function WhatsappOperations() {
     if (phone.length < 10 || !amount) return;
 
     await initiateWorkflow(tenantId, {
-      shopId: "shop-001",
+      shopId: "",
       phoneNumber: phone,
       workflowType: "QUOTATION",
       referenceId: `quote-${Date.now()}`,
       contextData: { amount: Number(amount) },
     });
 
-    setPhone("+91");
+    setPhone("");
     setAmount("");
   };
 

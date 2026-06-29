@@ -7,6 +7,7 @@ import {
   FileText, ShieldCheck, Star, MapPin, CheckCircle2, Building2, Truck
 } from "lucide-react";
 import { Button } from "@constructos/ui";
+import { toast } from "sonner";
 
 export default function QuoteComparisonPage() {
   const params = useParams();
@@ -40,10 +41,11 @@ export default function QuoteComparisonPage() {
     try {
       // Create Order or update RFQ status. Using existing commerce-network if needed, 
       // or simply update RFQ status here. For demo, we'll just show success.
-      await new Promise(resolve => setTimeout(resolve, 1500)); 
+      await Promise.resolve(); 
       router.push("/rentals/contractor");
     } catch (e) {
       console.error(e);
+      toast.error("Action failed", { description: e?.message || "An unexpected error occurred" });
     } finally {
       setIsAwarding(null);
     }
@@ -131,7 +133,7 @@ export default function QuoteComparisonPage() {
 
                   <div className="bg-zinc-950 rounded-2xl p-4 mb-6">
                     <p className="text-xs text-zinc-500 mb-1">Proposed Total Price</p>
-                    <p className="text-3xl font-bold text-white">₹{quote.quoteAmount.toLocaleString()}</p>
+                    <p className="text-3xl font-bold text-white">{quote.quoteAmount.toLocaleString()}</p>
                     <p className="text-xs text-emerald-500 mt-2 flex items-center gap-1"><CheckCircle2 className="w-3 h-3"/> Available for requested dates</p>
                   </div>
 

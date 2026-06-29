@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Store, User, FileCheck, MapPin, ArrowRight, ShieldCheck, Check, Loader2, CheckCircle2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "../../../../stores/authStore";
+import { toast } from "sonner";
 
 export default function SMBOnboarding() {
   const uploadState = useUploadStore();
@@ -17,10 +18,10 @@ export default function SMBOnboarding() {
   
   const [formData, setFormData] = useState({
     name: "",
-    category: "Heavy Building Materials",
+    category: "",
     gstin: "",
     pincode: "",
-    city: "Mumbai",
+    city: "",
     address: ""
   });
 
@@ -47,7 +48,7 @@ export default function SMBOnboarding() {
         },
         body: JSON.stringify({
           name: formData.name,
-          registrationNumber: formData.gstin || `SMB-${Date.now()}`,
+          registrationNumber: formData.gstin || "",
           isActive: true
         }),
       });
@@ -65,11 +66,11 @@ export default function SMBOnboarding() {
         body: JSON.stringify({
           addressLine1: formData.address,
           city: formData.city,
-          state: "Maharashtra",
+          state: "",
           postalCode: formData.pincode,
-          country: "India",
-          latitude: 19.0760,
-          longitude: 72.8777
+          country: "",
+          latitude: 0,
+          longitude: 0
         }),
       });
 
@@ -149,7 +150,7 @@ export default function SMBOnboarding() {
                 <div className="space-y-5">
                   <div>
                     <label className="block text-sm text-zinc-400 mb-2">Shop/Company Name</label>
-                    <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="e.g. Metro Hardware Supply" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
+                    <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
                   </div>
                   <div>
                     <label className="block text-sm text-zinc-400 mb-2">Primary Category</label>
@@ -161,8 +162,8 @@ export default function SMBOnboarding() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm text-zinc-400 mb-2">GSTIN (Optional for turnover &lt; ₹40L)</label>
-                    <input type="text" value={formData.gstin} onChange={e => setFormData({...formData, gstin: e.target.value})} placeholder="22AAAAA0000A1Z5" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white font-mono uppercase" />
+                    <label className="block text-sm text-zinc-400 mb-2">GSTIN (Optional for turnover &lt; 40L)</label>
+                    <input type="text" value={formData.gstin} onChange={e => setFormData({...formData, gstin: e.target.value})} className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white font-mono uppercase" />
                   </div>
                 </div>
 
@@ -183,16 +184,16 @@ export default function SMBOnboarding() {
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <label className="block text-sm text-zinc-400 mb-2">Pincode</label>
-                      <input type="text" value={formData.pincode} onChange={e => setFormData({...formData, pincode: e.target.value})} placeholder="400001" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
+                      <input type="text" value={formData.pincode} onChange={e => setFormData({...formData, pincode: e.target.value})} className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
                     </div>
                     <div className="flex-1">
                       <label className="block text-sm text-zinc-400 mb-2">City</label>
-                      <input type="text" value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} placeholder="Mumbai" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white bg-zinc-950" readOnly />
+                      <input type="text" value={formData.city} onChange={e => setFormData({...formData, city: e.target.value})} className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white bg-zinc-950" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm text-zinc-400 mb-2">Complete Address</label>
-                    <textarea value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} rows={3} placeholder="Shop No, Building, Street..." className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white resize-none"></textarea>
+                    <textarea value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} rows={3} className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white resize-none"></textarea>
                   </div>
                 </div>
 

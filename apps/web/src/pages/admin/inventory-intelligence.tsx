@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { usePredictionsStore } from "../../stores/predictionsStore";
+import { useTenantId } from "@/hooks/useTenantId";
 import {
   Package as PackageIcon,
   TrendingDown as TrendingDownIcon,
@@ -11,7 +12,7 @@ const ShieldAlert = ShieldAlertIcon as any;
 
 export default function InventoryIntelligence() {
   const { inventoryPredictions, fetchInventoryPredictions, isLoading } = usePredictionsStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchInventoryPredictions(tenantId);

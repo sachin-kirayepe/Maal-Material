@@ -38,8 +38,6 @@ export const useSystemCommandStore = create<SystemCommandState>((set) => ({
   triggerSyncPush: async (operations: any[]) => {
     try {
       await ApiClient.post<any>("/offline-sync/push", {
-        tenantId: "t-001",
-        deviceId: "admin-dashboard-device",
         operations,
       });
       return true;

@@ -70,7 +70,7 @@ export default function DeliveryTracking() {
 
         {/* Live Map & Details */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Fake Map Container */}
+
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden relative h-[400px]">
             {/* Map Imagery Simulation */}
             <div className="absolute inset-0 bg-[#0f1115]">
@@ -130,7 +130,7 @@ export default function DeliveryTracking() {
                 </div>
                 <div>
                   <p className="font-medium text-white">Ramesh Jadhav</p>
-                  <p className="text-xs text-zinc-400">Vehicle: MH-04-AB-1234 (Tata 407)</p>
+                  <p className="text-xs text-zinc-400">Vehicle: Vehicle Reg (Commercial Vehicle)</p>
                 </div>
               </div>
               <button className="w-10 h-10 bg-green-500/10 text-green-500 border border-green-500/20 rounded-full flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors">

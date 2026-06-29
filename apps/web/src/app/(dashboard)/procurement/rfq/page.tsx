@@ -5,14 +5,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Search, Filter, ArrowRight, Package, Calendar, MapPin, X, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useRfqExchangeStore } from "@/stores/rfqExchangeStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function ProcurementRfqHub() {
+  const tenantId = useTenantId();
   const { rfqs, meta, isLoading, fetchRfqs } = useRfqExchangeStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    fetchRfqs("tenant-1", currentPage, 10);
+    fetchRfqs(tenantId, currentPage, 10);
   }, [fetchRfqs, currentPage]);
 
   const getStatusBadge = (status: any) => {

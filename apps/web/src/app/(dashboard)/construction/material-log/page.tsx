@@ -17,6 +17,9 @@ export default function MaterialLog() {
     fetchMaterials();
   }, [fetchMaterials]);
 
+  const totalIssued = materials.reduce((acc: number, log: any) => acc + (log.quantityIssued || 0), 0);
+  const estimatedValue = materials.reduce((acc: number, log: any) => acc + (log.quantityIssued || 0) * (log.unitPrice || 7000), 0);
+
   const handleSubmit = async () => {
     try {
       await logConsumption(formData);
@@ -105,11 +108,11 @@ export default function MaterialLog() {
             <div className="space-y-4">
               <div className="bg-black border border-zinc-800 p-4 rounded-xl">
                 <p className="text-xs text-zinc-500 mb-1">Total Materials Issued</p>
-                <p className="text-2xl font-light">12 Items</p>
+                <p className="text-2xl font-light">{isLoading ? "—" : totalIssued}</p>
               </div>
               <div className="bg-black border border-zinc-800 p-4 rounded-xl">
                 <p className="text-xs text-zinc-500 mb-1">Estimated Value</p>
-                <p className="text-2xl font-light text-purple-400">₹84,500</p>
+                <p className="text-2xl font-light text-purple-400">{isLoading ? "—" : `${estimatedValue.toLocaleString()}`}</p>
               </div>
             </div>
           </div>

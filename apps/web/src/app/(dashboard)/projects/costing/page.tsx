@@ -62,7 +62,7 @@ export default function CostingPage() {
               </span>
             </div>
             <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-              ₹{summary.totalBudget.toLocaleString()}
+              {summary.totalBudget.toLocaleString()}
             </h3>
           </CardContent>
         </Card>
@@ -74,7 +74,7 @@ export default function CostingPage() {
               <span className="text-xs font-semibold uppercase tracking-wider">Actual Costs</span>
             </div>
             <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-              ₹{summary.totalSpent.toLocaleString()}
+              {summary.totalSpent.toLocaleString()}
             </h3>
             <div className="mt-2 text-xs text-slate-500">
               {summary.budgetUtilization}% of budget utilized
@@ -112,7 +112,7 @@ export default function CostingPage() {
               </span>
             </div>
             <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-              ₹{(summary.totalBudget - summary.totalSpent).toLocaleString()}
+              {(summary.totalBudget - summary.totalSpent).toLocaleString()}
             </h3>
           </CardContent>
         </Card>
@@ -153,13 +153,13 @@ export default function CostingPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-right font-medium text-slate-600 dark:text-slate-300">
-                        ₹{p.estimatedBudget.toLocaleString()}
+                        {p.estimatedBudget.toLocaleString()}
                       </td>
                       <td className="px-6 py-4 text-right">
                         <div
                           className={`font-bold ${p.isOverBudget ? "text-rose-500" : "text-emerald-500"}`}
                         >
-                          ₹{p.actualCost.toLocaleString()}
+                          {p.actualCost.toLocaleString()}
                         </div>
                         <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
                           <div
@@ -171,7 +171,7 @@ export default function CostingPage() {
                       <td
                         className={`px-6 py-4 text-right font-bold ${p.isOverBudget ? "text-rose-500" : "text-emerald-500"}`}
                       >
-                        {p.isOverBudget ? "-" : "+"}₹{Math.abs(p.remainingBudget).toLocaleString()}
+                        {p.isOverBudget ? "-" : "+"}{Math.abs(p.remainingBudget).toLocaleString()}
                       </td>
                     </tr>
                   );
@@ -201,7 +201,7 @@ export default function CostingPage() {
                         {exp.type}
                       </span>
                       <span className="font-bold text-slate-900 dark:text-white">
-                        ₹{exp.totalAmount.toLocaleString()}
+                        {exp.totalAmount.toLocaleString()}
                       </span>
                     </div>
                     <div className="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">

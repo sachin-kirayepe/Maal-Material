@@ -4,13 +4,15 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FileSignature, IndianRupee, Clock, ArrowUpRight, ShieldCheck, AlertCircle, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRentalsStore } from "@/stores/rentalsStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function RentalDashboard() {
+  const tenantId = useTenantId();
   const { bookings: activeRentals, meta, isLoading: loading, fetchBookings } = useRentalsStore();
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    fetchBookings("tenant-1", currentPage, 5);
+    fetchBookings(tenantId, currentPage, 5);
   }, [fetchBookings, currentPage]);
 
   return (
@@ -56,7 +58,7 @@ export default function RentalDashboard() {
               <th className="px-6 py-4">Equipment</th>
               <th className="px-6 py-4">Vendor</th>
               <th className="px-6 py-4">Rental Period</th>
-              <th className="px-6 py-4 text-right">Total Cost (₹)</th>
+              <th className="px-6 py-4 text-right">Total Cost ()</th>
               <th className="px-6 py-4">Status</th>
             </tr>
           </thead>

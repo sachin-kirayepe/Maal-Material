@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useDisputeStore } from "../../stores/disputeStore";
 import { Gavel as GavelIcon, MessageSquare as MessageSquareIcon } from "lucide-react";
+import { useTenantId } from "@/hooks/useTenantId";
 const Gavel = GavelIcon as any;
 const MessageSquare = MessageSquareIcon as any;
 
 export default function DisputeManagementCenter() {
   const { disputes: cases, fetchDisputes: fetchCases, updateCaseStatus, isLoading } = useDisputeStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchCases(tenantId);

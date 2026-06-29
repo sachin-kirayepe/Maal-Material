@@ -15,8 +15,8 @@ const AlertOctagon = AlertOctagonIcon as any;
 export default function SyncDashboard() {
   const { queue, syncStatus, lastSyncAt, processQueue, isOnline, clearQueue } = useSyncStore();
 
-  // Hardcoded for testing
-  const tenantId = "t-001";
+
+  const tenantId = useTenantId();
   const deviceId = "device-offline-123";
 
   return (

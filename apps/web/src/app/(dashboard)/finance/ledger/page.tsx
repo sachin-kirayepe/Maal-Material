@@ -6,12 +6,14 @@ import { BookOpen, Download, Search, Filter, TrendingUp, TrendingDown, ArrowUpRi
 import { toast } from "sonner";
 import { ApiClient } from "@/lib/api-client";
 import { useLedgerStore } from "@/stores/ledgerStore";
+import { useTenantId } from "@/hooks/useTenantId";
 
 export default function GeneralLedger() {
+  const tenantId = useTenantId();
   const { entries, meta, fetchLedgerEntries, createEntry, isLoading } = useLedgerStore();
   const [activeTab, setActiveTab] = useState("All Accounts");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({ ledgerAccountId: "ACC-TEST-1", description: "", amount: "", type: "DEBIT" });
+  const [formData, setFormData] = useState({ ledgerAccountId: "", description: "", amount: "", type: "DEBIT" });
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function GeneralLedger() {
   const handleExport = async () => {
     try {
       toast.info("Queueing ledger export...");
-      await ApiClient.post("/reports/generate", { templateId: "ledger-report", tenantId: "tenant-1" });
+      await ApiClient.post("/reports/generate", { templateId: "ledger-report", tenantId: tenantId });
       toast.success("Job Queued: You will be notified when the export is ready.");
     } catch (e) {
       toast.error("Failed to queue export job.");
@@ -32,7 +34,7 @@ export default function GeneralLedger() {
     try {
       await createEntry({ ...formData, amount: parseFloat(formData.amount) || 0 });
       setIsModalOpen(false);
-      setFormData({ ledgerAccountId: "ACC-TEST-1", description: "", amount: "", type: "DEBIT" });
+      setFormData({ ledgerAccountId: "", description: "", amount: "", type: "DEBIT" });
       fetchLedgerEntries(1, 10);
       setCurrentPage(1);
     } catch (e) {
@@ -64,10 +66,10 @@ export default function GeneralLedger() {
       {/* Financial Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         {[
-          { label: "Total Assets", value: "₹45,20,000", icon: <Building2 size={20} className="text-blue-400" />, trend: "+2.4%" },
-          { label: "Accounts Payable", value: "₹12,45,000", icon: <TrendingUp size={20} className="text-red-400" />, trend: "+15%" },
-          { label: "Accounts Receivable", value: "₹8,50,000", icon: <TrendingDown size={20} className="text-green-400" />, trend: "-5%" },
-          { label: "Bank Balance", value: "₹32,15,500", icon: <BookOpen size={20} className="text-purple-400" />, trend: "+1.2%" },
+          { label: "Total Assets", value: (entries.reduce((acc: number, e: any) => acc + (e.debit || 0), 0)).toLocaleString() || "-", icon: <Building2 size={20} className="text-blue-400" />, trend: "-" },
+          { label: "Accounts Payable", value: "-", icon: <TrendingUp size={20} className="text-red-400" />, trend: "-" },
+          { label: "Accounts Receivable", value: "-", icon: <TrendingDown size={20} className="text-green-400" />, trend: "-" },
+          { label: "Bank Balance", value: "-", icon: <BookOpen size={20} className="text-purple-400" />, trend: "-" },
         ].map((stat, i) => (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -81,7 +83,7 @@ export default function GeneralLedger() {
               <span className="text-xs font-medium text-zinc-500">{stat.trend}</span>
             </div>
             <p className="text-sm text-zinc-400 mb-1">{stat.label}</p>
-            <p className="text-2xl font-medium">{stat.value}</p>
+            <p className="text-2xl font-medium">{isLoading ? "—" : stat.value}</p>
           </motion.div>
         ))}
       </div>
@@ -105,7 +107,6 @@ export default function GeneralLedger() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" size={16} />
               <input 
                 type="text" 
-                placeholder="Search entries..." 
                 className="w-full bg-black border border-zinc-800 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-zinc-600 text-white"
               />
             </div>
@@ -150,18 +151,18 @@ export default function GeneralLedger() {
                     key={entry.id} 
                     className="hover:bg-zinc-800/30 transition-colors"
                   >
-                    <td className="px-6 py-4 whitespace-nowrap">{new Date(entry.createdAt).toLocaleString()}</td>
-                    <td className="px-6 py-4 font-medium text-white">{entry.ledgerAccount?.accountName || 'Unknown Account'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{entry.createdAt ? new Date(entry.createdAt).toLocaleString() : '-'}</td>
+                    <td className="px-6 py-4 font-medium text-white">{entry.ledgerAccount?.accountName || ''}</td>
                     <td className="px-6 py-4">{entry.description}</td>
                     <td className="px-6 py-4 font-mono text-xs text-zinc-500">{entry.referenceId || '-'}</td>
                     <td className="px-6 py-4 text-right">
                       {entry.debit > 0 ? (
-                        <span className="text-white flex items-center justify-end gap-1"><ArrowDownRight size={14} className="text-zinc-500"/> ₹{entry.debit.toLocaleString()}</span>
+                        <span className="text-white flex items-center justify-end gap-1"><ArrowDownRight size={14} className="text-zinc-500"/> {entry.debit.toLocaleString()}</span>
                       ) : '-'}
                     </td>
                     <td className="px-6 py-4 text-right">
                       {entry.credit > 0 ? (
-                        <span className="text-white flex items-center justify-end gap-1"><ArrowUpRight size={14} className="text-zinc-500"/> ₹{entry.credit.toLocaleString()}</span>
+                        <span className="text-white flex items-center justify-end gap-1"><ArrowUpRight size={14} className="text-zinc-500"/> {entry.credit.toLocaleString()}</span>
                       ) : '-'}
                     </td>
                   </motion.tr>
@@ -220,17 +221,17 @@ export default function GeneralLedger() {
                   type="text" 
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Payment received..." className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
+                  className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
               </div>
               
               <div className="grid grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm text-zinc-400 mb-2">Amount (₹)</label>
+                  <label className="block text-sm text-zinc-400 mb-2">Amount ()</label>
                   <input 
                     type="number" 
                     value={formData.amount}
                     onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                    placeholder="0" className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
+                    className="w-full bg-black border border-zinc-800 rounded-xl p-3 focus:outline-none focus:border-purple-500 text-white" />
                 </div>
                 <div>
                   <label className="block text-sm text-zinc-400 mb-2">Type</label>

@@ -187,22 +187,22 @@ export default function InvoiceBuilder() {
             <CardContent className="space-y-3 pt-4">
               <div className="flex justify-between text-slate-400">
                 <span>Subtotal</span>
-                <span>₹{subtotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
+                <span>{subtotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
               </div>
               <div className="flex justify-between text-slate-400">
                 <span>Discount</span>
                 <span className="text-emerald-400">
-                  - ₹{totalDiscount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+                  - {totalDiscount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
                 </span>
               </div>
               <div className="flex justify-between text-slate-400 border-b border-slate-700 pb-3">
                 <span>Total GST</span>
-                <span>+ ₹{totalTax.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
+                <span>+ {totalTax.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
               </div>
               <div className="flex justify-between items-center pt-2">
                 <span className="text-lg font-medium">Grand Total</span>
                 <span className="text-3xl font-bold text-indigo-400">
-                  ₹{grandTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+                  {grandTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
                 </span>
               </div>
             </CardContent>
@@ -239,10 +239,10 @@ export default function InvoiceBuilder() {
                   <tr>
                     <th className="px-4 py-3 font-medium">Product</th>
                     <th className="px-4 py-3 font-medium w-24">Qty</th>
-                    <th className="px-4 py-3 font-medium w-32">Rate (₹)</th>
+                    <th className="px-4 py-3 font-medium w-32">Rate ()</th>
                     <th className="px-4 py-3 font-medium w-24">Disc (%)</th>
                     <th className="px-4 py-3 font-medium w-24">GST (%)</th>
-                    <th className="px-4 py-3 font-medium w-32 text-right">Total (₹)</th>
+                    <th className="px-4 py-3 font-medium w-32 text-right">Total ()</th>
                     <th className="px-4 py-3 w-16"></th>
                   </tr>
                 </thead>
@@ -278,7 +278,7 @@ export default function InvoiceBuilder() {
                             </option>
                             {products.map((p) => (
                               <option key={p.id} value={p.id}>
-                                {p.name} - ₹{p.sellingPrice}
+                                {p.name} - {p.sellingPrice}
                               </option>
                             ))}
                           </select>

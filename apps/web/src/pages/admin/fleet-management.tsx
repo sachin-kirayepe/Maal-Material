@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useFleetStore } from "../../stores/fleetStore";
 import { Activity as ActivityIcon, Settings as SettingsIcon } from "lucide-react";
+import { useTenantId } from "@/hooks/useTenantId";
 const Activity = ActivityIcon as any;
 const Settings = SettingsIcon as any;
 
 export default function FleetManagementDashboard() {
   const { stats, fetchStats, isLoading } = useFleetStore();
-  const tenantId = "t-001";
+  const tenantId = useTenantId();
 
   useEffect(() => {
     fetchStats(tenantId);
