@@ -153,5 +153,7 @@ export const usePredictiveStore = create<PredictiveState>((set, get) => ({
     }),
 }));
 
-// Initialize the store immediately
-usePredictiveStore.getState().fetchForecastData();
+// Initialize the store only in the browser (skip during SSG/SSR build)
+if (typeof window !== "undefined") {
+  usePredictiveStore.getState().fetchForecastData();
+}
