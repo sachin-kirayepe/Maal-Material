@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useProcurementStore } from "../../../../../stores/procurementStore";
 import { useProductsStore } from "../../../../../stores/productsStore";
 import { useWarehouseStore } from "../../../../../stores/warehouseStore";
+import { toast } from "sonner";
 import {
   ArrowLeft as ArrowLeftIcon,
   Save as SaveIcon,
@@ -119,6 +120,7 @@ export default function NewPurchaseOrderPage() {
       }
     } catch (err) {
       console.error(err);
+      toast.error("Action failed", { description: err?.message || "An unexpected error occurred" });
       alert("An error occurred");
     }
     setLoading(false);

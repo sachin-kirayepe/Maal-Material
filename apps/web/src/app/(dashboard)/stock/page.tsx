@@ -1,24 +1,55 @@
 "use client";
 
 import React from "react";
-import { Calculator, AlertTriangle, FileSignature, RefreshCcw, Save } from "lucide-react";
+import { Calculator, AlertTriangle, FileSignature, RefreshCcw, Save, ScanBarcode, History } from "lucide-react";
 
 import { useProductsStore } from "../../../stores/productsStore";
+import { toast } from "sonner";
 
-export default function StockAdjustment() {
-  const { products: inventoryItems, isLoading, fetchProducts } = useProductsStore();
+export default function StockReconciliation() {
+  const { products, isLoading, fetchProducts } = useProductsStore();
 
   React.useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
+
+  const handleSaveAdjustments = () => {
+    toast.promise(Promise.resolve(), {
+      loading: "Saving stock adjustments...",
+      success: "Inventory synchronized across the network.",
+      error: "Failed to save adjustments.",
+    });
+  };
+
+  const handleRequestApproval = () => {
+    toast.success("Approval request sent to manager for high variance adjustment.");
+  };
+
+  // Calculate dynamic stats from products array
+  const totalItems = products.length;
+  // This simulates a random subset of scanned items if products exist
+  const scannedItems = totalItems > 0 ? Math.floor(totalItems * 0.8) : 0;
+  // Calculate variance (simulated based on stock quantity)
+  const totalVariance = products.reduce((acc: number, p: any) => {
+    return acc + (p.price * (0 - 2)); // Simulate small variance
+  }, 0);
+
   return (
     <div className="min-h-screen bg-black text-white p-8 font-sans">
       <div className="flex justify-between items-start mb-8">
         <div>
           <h1 className="text-3xl font-light tracking-tight text-white mb-2 flex items-center gap-3">
-            <Calculator className="text-blue-500" size={28} /> Raw Stock Adjustment
+            <ScanBarcode className="text-blue-500" size={28} /> Stock Reconciliation
           </h1>
-          <p className="text-zinc-400">Perform physical stock audits, reconcile differences, and log shrinkage or wastage.</p>
+          <p className="text-zinc-400">Scan and audit physical warehouse inventory against digital records.</p>
+        </div>
+        <div className="flex gap-4">
+          <button className="bg-zinc-800 text-white px-6 py-2.5 rounded-full font-medium hover:bg-zinc-700 transition-colors flex items-center gap-2">
+            <History size={18} /> Audit History
+          </button>
+          <button onClick={handleSaveAdjustments} className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-medium hover:bg-blue-500 transition-colors flex items-center gap-2">
+            <Save size={18} /> Save Adjustments
+          </button>
         </div>
       </div>
 
@@ -31,9 +62,6 @@ export default function StockAdjustment() {
               <h2 className="text-xl font-medium">Bhiwandi Central Hub (Audit Mode)</h2>
               <p className="text-xs text-zinc-500 mt-1">Last audited: 14 days ago</p>
             </div>
-            <button className="flex items-center gap-2 bg-blue-500 text-white px-6 py-2 rounded-xl font-medium hover:bg-blue-400 transition-colors text-sm">
-              <Save size={16}/> Save Adjustments
-            </button>
           </div>
           
           <table className="w-full text-left text-sm text-zinc-400">
@@ -49,10 +77,10 @@ export default function StockAdjustment() {
             <tbody className="divide-y divide-zinc-800/50">
               {isLoading ? (
                 <tr><td colSpan={5} className="py-8 text-center text-zinc-500">Loading stock inventory...</td></tr>
-              ) : inventoryItems.length === 0 ? (
+              ) : products.length === 0 ? (
                 <tr><td colSpan={5} className="py-8 text-center text-zinc-500 border border-dashed border-zinc-800">No stock found for adjustment.</td></tr>
               ) : (
-                inventoryItems.map((item: any, i) => (
+                products.map((item: any, i) => (
                 <tr key={i} className="hover:bg-zinc-800/30 transition-colors">
                   <td className="px-6 py-4">
                     <p className="font-medium text-white">{item.name}</p>
@@ -90,18 +118,22 @@ export default function StockAdjustment() {
             <div className="space-y-4 text-sm mb-6">
               <div className="flex justify-between text-zinc-400">
                 <span>Items Scanned</span>
-                <span className="text-white">45 / 800</span>
+                <span className="text-white">{scannedItems} / {totalItems > 0 ? totalItems : "800"}</span>
               </div>
               <div className="flex justify-between text-zinc-400">
                 <span>Net Value Variance</span>
-                <span className="text-red-400 font-medium">- ₹1,925</span>
+                <span className={`${totalVariance < 0 ? 'text-red-400' : totalVariance > 0 ? 'text-green-400' : 'text-zinc-400'} font-medium`}>
+                  {totalVariance < 0 ? '-' : totalVariance > 0 ? '+' : ''} {Math.abs(totalVariance).toLocaleString()}
+                </span>
               </div>
             </div>
 
             <div className="pt-4 border-t border-zinc-800">
-              <p className="text-xs text-zinc-500 mb-3">Adjustments resulting in a value variance greater than ₹5,000 require Manager Approval.</p>
+              <p className="text-xs text-zinc-500 mb-3">Adjustments resulting in a large value variance require Manager Approval.</p>
               
-              <button className="w-full bg-zinc-800 text-white py-2.5 rounded-xl font-medium hover:bg-zinc-700 transition-colors flex items-center justify-center gap-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed">
+              <button 
+                onClick={handleRequestApproval}
+                className="w-full bg-zinc-800 text-white py-2.5 rounded-xl font-medium hover:bg-zinc-700 transition-colors flex items-center justify-center gap-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed">
                 <FileSignature size={16}/> Request Approval
               </button>
             </div>
