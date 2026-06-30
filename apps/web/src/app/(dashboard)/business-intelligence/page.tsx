@@ -9,7 +9,7 @@ import { useTenantId } from "@/hooks/useTenantId";
 
 export default function BusinessIntelligence() {
   const tenantId = useTenantId();
-  const { isLoading, fetchInsights, fetchAnomalies } = useBIStore();
+  const { isLoading, fetchInsights, fetchAnomalies, insights } = useBIStore();
 
   useEffect(() => {
     fetchInsights(tenantId);

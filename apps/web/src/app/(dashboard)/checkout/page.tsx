@@ -117,7 +117,7 @@ export default function CheckoutPage() {
 
       setSuccess(true);
       router.push("/orders");
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       toast.error("Action failed", { description: error?.message || "An unexpected error occurred" });
       alert("Error during checkout. Please try again.");

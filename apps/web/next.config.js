@@ -25,6 +25,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/v1/:path*',
+        destination: 'https://maal-material.onrender.com/api/v1/:path*',
+      },
+    ];
+  },
 };
 
 module.exports = withSerwist(nextConfig);

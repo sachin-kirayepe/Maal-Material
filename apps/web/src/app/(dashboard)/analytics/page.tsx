@@ -109,7 +109,7 @@ export default function AnalyticsBuilder() {
               </div>
 
               {/* Bars */}
-              {[].map((h, i) => (
+              {([] as number[]).map((h, i) => (
                 <div key={i} className="w-full relative group z-10 flex justify-center">
                   <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} className="w-12 bg-indigo-500 rounded-t-sm opacity-80 group-hover:opacity-100 transition-opacity relative">
                     <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-black text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 font-medium">

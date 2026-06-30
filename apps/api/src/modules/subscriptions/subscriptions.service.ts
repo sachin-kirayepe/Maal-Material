@@ -11,7 +11,7 @@ export class SubscriptionsService {
 
   async subscribeTenant(tenantId: string, planName: string) {
     const plan = await this.prisma.saaSSubscriptionPlan.findFirst({
-      where: { name: planName }
+      where: { planCode: planName }
     });
 
     if (!plan) throw new NotFoundException('Plan not found');
@@ -46,13 +46,13 @@ export class SubscriptionsService {
     return this.prisma.tenantSubscription.upsert({
       where: { tenantId },
       update: {
-        planId: planId,
+        planName: plan ? plan.planCode : 'FREE',
         status: 'ACTIVE',
         currentPeriodEnd: expiresAt,
       },
       create: {
         tenantId,
-        planId: planId,
+        planName: plan ? plan.planCode : 'FREE',
         status: 'ACTIVE',
         currentPeriodStart: new Date(),
         currentPeriodEnd: expiresAt,
@@ -62,10 +62,7 @@ export class SubscriptionsService {
 
   async getActiveSubscription(tenantId: string) {
     return this.prisma.tenantSubscription.findUnique({
-      where: { tenantId },
-      include: {
-        saasSubscriptionPlan: true
-      }
+      where: { tenantId }
     });
   }
 }

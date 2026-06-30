@@ -52,7 +52,7 @@ export default function LoginPage() {
 
     try {
       // Connect to secure back-end authentication controller
-      const authData = await login(data.email, data.password);
+      await login(data.email, data.password);
       setServerSuccess(true);
 
       // Phase 1 & 2: Role-Based Routing

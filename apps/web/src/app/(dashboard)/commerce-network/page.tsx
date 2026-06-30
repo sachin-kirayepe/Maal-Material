@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+
 import { Network, Search, Link as LinkIcon, Building2, Store, Factory, ArrowRightLeft } from "lucide-react";
 import { useCommerceNetworkStore } from "@/stores/commerceNetworkStore";
 import { useTenantId } from "@/hooks/useTenantId";
